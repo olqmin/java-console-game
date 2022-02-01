@@ -8,6 +8,8 @@ public class Game {
 		System.out.println("Its Tisho commit!");
 		System.out.println("Its Dobrina");
 		System.out.println("Its Victor");
+		
+		System.out.println("Its Plamen")
 	}
 
 }
