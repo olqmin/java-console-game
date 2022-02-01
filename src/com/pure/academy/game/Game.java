@@ -9,7 +9,7 @@ public class Game {
 		System.out.println("Its Dobrina");
 		System.out.println("Its Victor");
 		
-		System.out.println("Its Plamen")
+		System.out.println("Its Plamen");
 	}
 
 }
