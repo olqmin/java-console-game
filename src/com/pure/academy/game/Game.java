@@ -22,7 +22,7 @@ public class Game {
 		dublin.playerSetup();
 
 		//dublin.townGate();
-        ;
+
 
 	}
 
@@ -37,6 +37,7 @@ public class Game {
 
 		playerName = scanner.nextLine();
 		// TODO: invalid input. Please enter alphabetic name of the character!
+		System.out.println("\n------------------------------------------------------------------\n");
 		System.out.println("Hello " + playerName + ", let's start the game!");
 
 		threeWayPath();
@@ -64,10 +65,8 @@ public class Game {
 
 	public void mountain() {
 		System.out.println("\n------------------------------------------------------------------\n");
-		System.out.println("You chose to go the mountain.You have two options to continue:You can go hunting or chopping trees.");
-
-
-		System.out.println("You are at a crossroad. Choose one of the following options:\n\n");
+		System.out.println("Welcome to the mountain. Choose one of the following options:\n\n");
+		// TODO: add description about options!
 		System.out.println("1: To the forrest");
 		System.out.println("2: To the river");
 		System.out.println("3: Return to the three-way-path");
@@ -76,9 +75,9 @@ public class Game {
 		choice = scanner.nextInt();
 
 		if (choice == 1) {
-			// TODO: implement forest.
+			forest();
 		} else if (choice == 2) {
-			// todo: implement river.
+			river();
 		} else if (choice == 3) {
 			threeWayPath();
 
@@ -87,4 +86,37 @@ public class Game {
 		}
 
 	}
+
+	public void forest() {
+		System.out.println("\n------------------------------------------------------------------\n");
+		System.out.println("Welcome to the forest. Choose one of the following options:\n\n");
+		// TODO: add description about options!
+		System.out.println("1: To get rabbit");
+		System.out.println("2: To chop a tree");
+		System.out.println("3: Return to the mountain");
+		System.out.println("\n------------------------------------------------------------------\n");
+
+		choice = scanner.nextInt();
+
+		if (choice == 1) {
+			// TODO: implement rabbit().
+		} else if (choice == 2) {
+			// todo: implement chopTree().
+		} else if (choice == 3) {
+			mountain();
+		} else {
+			forest();
+		}
+	}
+
+	public void river() {
+		System.out.println("\n------------------------------------------------------------------\n");
+		System.out.println("Welcome to the river. You get 10 HP.");
+		playerHP +=10;
+		mountain();
+	}
+
+
+
+
 }
