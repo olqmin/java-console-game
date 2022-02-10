@@ -19,6 +19,7 @@ public class Game {
 		Game dublin = new Game();
 
 		dublin.playerSetup();
+
 		//dublin.townGate();
 
 
@@ -37,8 +38,27 @@ public class Game {
         // TODO: invalid input. Please enter alphabetic name of the character!
 		System.out.println("Hello " + playerName + ", let's start the game!");
 
+		threeWayPath();
 	}
 
+	public void threeWayPath() {
+		System.out.println("\n------------------------------------------------------------------\n");
+		System.out.println("You are at a crossroad. Choose one of the following options:\n\n");
+		System.out.println("1: To the mountain");
+		System.out.println("2: To Pure City");
+		System.out.println("3: To the gambling area");
+		System.out.println("\n------------------------------------------------------------------\n");
+		choice = scanner.nextInt();
 
+		if (choice == 1) {
+			// TODO: implement mountain.
+		} else if (choice == 2) {
+			// todo: implement city.
+		} else if (choice == 3) {
+			// todo: implement gambling area.
+		} else {
+			threeWayPath();
+		}
+	}
 
 }
