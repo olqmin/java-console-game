@@ -126,7 +126,7 @@ public class Game {
 			numberOfRabbits++;
 			System.out.println("You got a rabbit. You have " + numberOfRabbits + " rabbits.");
 		} else {
-			System.out.println("You can't take more than 3 rabbits!");
+			System.err.println("You can't take more than 3 rabbits!");
 		}
 		forest();
 	}
@@ -137,7 +137,7 @@ public class Game {
 			numberOfTrees++;
 			System.out.println("You chopped a tree. You have " + numberOfTrees + " trees.");
 		} else {
-			System.out.println("You can't take more than 3 trees!");
+			System.err.println("You can't take more than 3 trees!");
 		}
 		forest();
 	}
