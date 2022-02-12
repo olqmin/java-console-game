@@ -100,7 +100,10 @@ public class Game {
 
 	public void forest() {
 		System.out.println("\n------------------------------------------------------------------\n");
-		System.out.println("Welcome to the forest! Choose one of the following options:\n\n");
+		
+		ASCIIArtHelper.drawForest();
+		
+		System.out.println("\nWelcome to the forest! Choose one of the following options:\n\n");
 		// TODO: add description about options!
 		System.out.println("1: Get a rabbit");
 		System.out.println("2: Chop a tree");
