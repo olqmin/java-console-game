@@ -152,7 +152,10 @@ public class Game {
 
 	public void city() {
 		System.out.println("\n------------------------------------------------------------------\n");
-		System.out.println("Welcome to Pure City! You are at a crossroad. Choose one of the following options:\n\n");
+		
+		ASCIIArtHelper.drawPureCity();
+		
+		System.out.println("\nWelcome to Pure City! You are at a crossroad. Choose one of the following options:\n\n");
 		System.out.println("1: To the shop");
 		System.out.println("2: To the Sorcerer");
 		System.out.println("3: To the cave");
