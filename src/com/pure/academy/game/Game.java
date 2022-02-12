@@ -71,7 +71,25 @@ public class Game {
 
 	public void mountain() {
 		System.out.println("\n------------------------------------------------------------------\n");
-		System.out.println("Welcome to the mountain! Choose one of the following options:\n\n");
+
+		System.out.println("                                   /\\");
+		System.out.println("                              /\\  //\\\\");
+		System.out.println("                       /\\    //\\\\///\\\\\\        /\\");
+		System.out.println("                      //\\\\  ///\\////\\\\\\\\  /\\  //\\\\");
+		System.out.println("         /\\          /  ^ \\/^ ^/^  ^  ^ \\/^ \\/  ^ \\");
+		System.out.println("        / ^\\    /\\  / ^   /  ^/ ^ ^ ^   ^\\ ^/  ^^  \\");
+		System.out.println("       /^   \\  / ^\\/ ^ ^   ^ / ^  ^    ^  \\/ ^   ^  \\       *");
+		System.out.println("      /  ^ ^ \\/^  ^\\ ^ ^ ^   ^  ^   ^   ____  ^   ^  \\     /|\\");
+		System.out.println("     / ^ ^  ^ \\ ^  _\\___________________|  |_____^ ^  \\   /||o\\");
+		System.out.println("    / ^^  ^ ^ ^\\  /______________________________\\ ^ ^ \\ /|o|||\\");
+		System.out.println("   /  ^  ^^ ^ ^  /________________________________\\  ^  /|||||o|\\");
+		System.out.println("  /^ ^  ^ ^^  ^    ||___|___||||||||||||___|__|||      /||o||||||\\       |");
+		System.out.println(" / ^   ^   ^    ^  ||___|___||||||||||||___|__|||          | |           |");
+		System.out.println("/ ^ ^ ^  ^  ^  ^   ||||||||||||||||||||||||||||||oooooooooo| |ooooooo  |");
+		System.out.println("ooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
+		
+		System.out.println("\nWelcome to the mountain! Choose one of the following options:\n\n");
+		
 		// TODO: add description about options!
 		System.out.println("1: To the forest");
 		System.out.println("2: To the river");
