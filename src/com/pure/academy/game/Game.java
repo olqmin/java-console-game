@@ -142,6 +142,32 @@ public class Game {
 		System.out.println("\n------------------------------------------------------------------\n");
 		if (numberOfRabbits < 3) {
 			numberOfRabbits++;
+			
+			
+			
+			System.out.println("     / \\");
+			System.out.println("    / _ \\");
+			System.out.println("   | / \\ |");
+			System.out.println("   ||   || _______");
+			System.out.println("   ||   || |\\     \\");
+			System.out.println("   ||   || ||\\     \\");
+			System.out.println("   ||   || || \\    |");
+			System.out.println("   ||   || ||  \\__/");
+			System.out.println("   ||   || ||   ||");
+			System.out.println("    \\\\_/ \\_/ \\_//");
+			System.out.println("   /   _     _   \\");
+			System.out.println("  /               \\");
+			System.out.println("  |    O     O    |");
+			System.out.println("  |   \\  ___  /   |");
+			System.out.println(" /     \\ \\_/ /     \\");
+			System.out.println("/  -----  |  -----  \\");
+			System.out.println("|     \\__/|\\__/     |");
+			System.out.println("\\       |_|_|       /");
+			System.out.println(" \\_____       _____/");
+			System.out.println("       \\     /");
+			System.out.println("       |     |");
+			System.out.println("Ну заец, ну погоди!\n");
+			
 			System.out.println("You got a rabbit. You have " + numberOfRabbits + " rabbits.");
 		} else {
 			System.err.println("You can't take more than 3 rabbits!");
