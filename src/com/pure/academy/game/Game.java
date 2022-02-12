@@ -1,6 +1,7 @@
 package com.pure.academy.game;
 
 import com.pure.academy.demo.DemoGame;
+import com.pure.academy.util.ASCIIArtHelper;
 
 import java.util.Scanner;
 
@@ -72,21 +73,7 @@ public class Game {
 	public void mountain() {
 		System.out.println("\n------------------------------------------------------------------\n");
 
-		System.out.println("                                   /\\");
-		System.out.println("                              /\\  //\\\\");
-		System.out.println("                       /\\    //\\\\///\\\\\\        /\\");
-		System.out.println("                      //\\\\  ///\\////\\\\\\\\  /\\  //\\\\");
-		System.out.println("         /\\          /  ^ \\/^ ^/^  ^  ^ \\/^ \\/  ^ \\");
-		System.out.println("        / ^\\    /\\  / ^   /  ^/ ^ ^ ^   ^\\ ^/  ^^  \\");
-		System.out.println("       /^   \\  / ^\\/ ^ ^   ^ / ^  ^    ^  \\/ ^   ^  \\       *");
-		System.out.println("      /  ^ ^ \\/^  ^\\ ^ ^ ^   ^  ^   ^   ____  ^   ^  \\     /|\\");
-		System.out.println("     / ^ ^  ^ \\ ^  _\\___________________|  |_____^ ^  \\   /||o\\");
-		System.out.println("    / ^^  ^ ^ ^\\  /______________________________\\ ^ ^ \\ /|o|||\\");
-		System.out.println("   /  ^  ^^ ^ ^  /________________________________\\  ^  /|||||o|\\");
-		System.out.println("  /^ ^  ^ ^^  ^    ||___|___||||||||||||___|__|||      /||o||||||\\       |");
-		System.out.println(" / ^   ^   ^    ^  ||___|___||||||||||||___|__|||          | |           |");
-		System.out.println("/ ^ ^ ^  ^  ^  ^   ||||||||||||||||||||||||||||||oooooooooo| |ooooooo  |");
-		System.out.println("ooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
+		ASCIIArtHelper.drawMountain();
 		
 		System.out.println("\nWelcome to the mountain! Choose one of the following options:\n\n");
 		
@@ -143,30 +130,7 @@ public class Game {
 		if (numberOfRabbits < 3) {
 			numberOfRabbits++;
 			
-			
-			
-			System.out.println("     / \\");
-			System.out.println("    / _ \\");
-			System.out.println("   | / \\ |");
-			System.out.println("   ||   || _______");
-			System.out.println("   ||   || |\\     \\");
-			System.out.println("   ||   || ||\\     \\");
-			System.out.println("   ||   || || \\    |");
-			System.out.println("   ||   || ||  \\__/");
-			System.out.println("   ||   || ||   ||");
-			System.out.println("    \\\\_/ \\_/ \\_//");
-			System.out.println("   /   _     _   \\");
-			System.out.println("  /               \\");
-			System.out.println("  |    O     O    |");
-			System.out.println("  |   \\  ___  /   |");
-			System.out.println(" /     \\ \\_/ /     \\");
-			System.out.println("/  -----  |  -----  \\");
-			System.out.println("|     \\__/|\\__/     |");
-			System.out.println("\\       |_|_|       /");
-			System.out.println(" \\_____       _____/");
-			System.out.println("       \\     /");
-			System.out.println("       |     |");
-			System.out.println("Ну заец, ну погоди!\n");
+			ASCIIArtHelper.drawRabbit();
 			
 			System.out.println("You got a rabbit. You have " + numberOfRabbits + " rabbits.");
 		} else {
