@@ -88,4 +88,39 @@ public class ASCIIArtHelper {
 		System.out.println("                                          `--...____,=\"_.'`-.____        fsc");
 	}
 	
+	public static void drawThreeWayPath() {
+		System.out.println("                    __,--'    _,           ,_    '--,__");
+		System.out.println("              __,--'      _,-' |           | '-,_      '--,__");
+		System.out.println("        __,--'        _,-'    |             |    '-,_        '--,__");
+		System.out.println("  __,--'          _,-'       |               |       '-,_          '--,__");
+		System.out.println("              _,-'          |                 |          '-,_");
+		System.out.println("          _,-'             |                   |             '-,_");
+		System.out.println("      _,-'                |                     |                '-,_");
+	}
+	
+	
+	public static void drawCharacter() {
+		System.out.println("      _,.");
+		System.out.println("    ,` -.)");
+		System.out.println("   ( _/-\\\\-._");
+		System.out.println("  /,|`--._,-^|            ,");
+		System.out.println("  \\_| |`-._/||          ,'|");
+		System.out.println("    |  `-, / |         /  /");
+		System.out.println("    |     || |        /  /");
+		System.out.println("     `r-._||/   __   /  /");
+		System.out.println(" __,-<_     )`-/  `./  /");
+		System.out.println("'  \\   `---'   \\   /  /");
+		System.out.println("    |           |./  /");
+		System.out.println("    /           //  /");
+		System.out.println("\\_/' \\         |/  /");
+		System.out.println(" |    |   _,^-'/  /");
+		System.out.println(" |    , ``  (\\/  /_");
+		System.out.println("  \\,.->._    \\X-=/^");
+		System.out.println("  (  /   `-._//^`");
+		System.out.println("   `Y-.____(__}");
+		System.out.println("    |     {__)");
+		System.out.println("          ()");
+		
+	}
+	
 }

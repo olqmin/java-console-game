@@ -1,6 +1,5 @@
 package com.pure.academy.game;
 
-import com.pure.academy.demo.DemoGame;
 import com.pure.academy.util.ASCIIArtHelper;
 
 import java.util.Scanner;
@@ -34,8 +33,10 @@ public class Game {
 		monsterHP = 15;
 
 		//playerWeapon = "Knife";
-
-		System.out.println("Your HP: " + playerHP);
+		
+		ASCIIArtHelper.drawCharacter();
+		
+		System.out.println("\nYour HP: " + playerHP);
 		System.out.println("Please enter your name:");
 
 		playerName = scanner.nextLine();
@@ -48,7 +49,8 @@ public class Game {
 
 	public void threeWayPath() {
 		System.out.println("\n------------------------------------------------------------------\n");
-		System.out.println("You are at a crossroad. Choose one of the following options:\n\n");
+		ASCIIArtHelper.drawThreeWayPath();
+		System.out.println("\nYou are at a crossroad. Choose one of the following options:\n\n");
 		System.out.println("1: To the mountain");
 		System.out.println("2: To Pure City");
 		System.out.println("3: To the gambling area");
