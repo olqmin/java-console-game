@@ -1,6 +1,7 @@
 package com.pure.academy.game;
 
 import com.pure.academy.util.ASCIIArtHelper;
+import com.pure.academy.util.SoundFXHelper;
 
 import java.util.Scanner;
 
@@ -48,6 +49,8 @@ public class Game {
 	}
 
 	public void threeWayPath() {
+		SoundFXHelper.playSound("resources/SoundFX/mixkit-arcade-game-opener-2222.wav");
+		
 		System.out.println("\n------------------------------------------------------------------\n");
 		ASCIIArtHelper.drawThreeWayPath();
 		System.out.println("\nYou are at a crossroad. Choose one of the following options:\n\n");
