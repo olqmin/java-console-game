@@ -45,12 +45,11 @@ public class Game {
 		System.out.println("\n------------------------------------------------------------------\n");
 		System.out.println("Hello " + playerName + ", let's start the game!");
 
+		SoundFXHelper.playSound("resources/SoundFX/mixkit-arcade-game-opener-2222.wav");
 		threeWayPath();
 	}
 
 	public void threeWayPath() {
-		SoundFXHelper.playSound("resources/SoundFX/mixkit-arcade-game-opener-2222.wav");
-		
 		System.out.println("\n------------------------------------------------------------------\n");
 		ASCIIArtHelper.drawThreeWayPath();
 		System.out.println("\nYou are at a crossroad. Choose one of the following options:\n\n");
