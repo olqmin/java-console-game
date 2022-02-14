@@ -10,7 +10,7 @@ public class DemoGame {
 	String playerName;
 	String playerWeapon;
 	int choice;
-	int monsterHP;
+	int monsterHP;   
 
 	int silverRing;
 
