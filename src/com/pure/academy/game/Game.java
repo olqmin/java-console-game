@@ -4,6 +4,7 @@ import com.pure.academy.util.ASCIIArtHelper;
 import com.pure.academy.util.SoundFXHelper;
 import com.pure.academy.util.TableHelper;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
@@ -217,8 +218,6 @@ public class Game {
 	}
 
 	public void gamblingArea() {
-
-
 		if (playerMoney >= 10) {
 			System.out.println("\n------------------------------------------------------------------\n");
 			System.out.println("\nYou entered the gambling area.\n");
@@ -226,8 +225,8 @@ public class Game {
 			System.out.println("You have to guess the number from 0-100. 5 times must be enough for you.");
 			System.out.println("If correct: Doubles the money\n" + "If 5 tries are over - your money will be devided by 2.\n");
 
+			guessTheNumber();
 		} else {
-
 			System.out.println("You dont have enough money to gamble.Go back to the threeway or to the forest.");
 			System.out.println("Choose 1 to go the threeway ot 2 to go to return to the gambling area");
 			choice = scanner.nextInt();
@@ -239,6 +238,28 @@ public class Game {
 		}
 	}
 
+	public void guessTheNumber() {
+		int random = new Random().nextInt(101);
+		System.out.print("Input a number from 0 to 100:");
+		for (int i = 0; i < 5; i++) {
+			choice = scanner.nextInt();
+
+			if (choice == random) {
+				playerMoney *= 2;
+				System.out.println("You guessed the number! You doubled your money!");
+				threeWayPath();
+			} else if (choice < random) {
+				System.out.println("The number is bigger!");
+			} else {
+				System.out.println("The number is smaller!");
+			}
+		}
+		playerMoney /= 2;
+		System.out.println("You didn't manage to guess the number!");
+		System.out.println("Your money were divided by 2!");
+		System.out.println("You have " + playerMoney + " gold.");
+		threeWayPath();
+	}
 
 		public void cityMarket() {
 			System.out.println("\n------------------------------------------------------------------\n");
