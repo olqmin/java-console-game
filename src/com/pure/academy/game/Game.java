@@ -125,11 +125,17 @@ public class Game {
 		}
 	}
 
-	public void river() {
+	public void river() {			
 		System.out.println("\n------------------------------------------------------------------\n");
+		if (playerHP < 150) {
 		playerHP += 10;
 		System.out.println("Welcome to the river! You get 10 HP. Now your HP are " + playerHP + ".");
 		mountain();
+		} else {
+			System.err.println("You can't take more 150 HP!");
+		}
+	forest();
+
 	}
 
 	public void rabbit() {
