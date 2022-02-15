@@ -34,9 +34,9 @@ public class Game {
 		monsterHP = 15;
 
 		//playerWeapon = "Knife";
-		
+
 		ASCIIArtHelper.drawCharacter();
-		
+
 		System.out.println("\nYour HP: " + playerHP);
 		System.out.println("Please enter your name:");
 
@@ -65,10 +65,7 @@ public class Game {
 		} else if (choice == 2) {
 			city();
 		} else if (choice == 3) {
-			// TODO: implement gambling area.
-			System.out.println("\n------------------------------------------------------------------\n");
-			System.out.println("Coming soon.");
-			threeWayPath();
+			gamblingArea();
 		} else {
 			threeWayPath();
 		}
@@ -78,9 +75,9 @@ public class Game {
 		System.out.println("\n------------------------------------------------------------------\n");
 
 		ASCIIArtHelper.drawMountain();
-		
+
 		System.out.println("\nWelcome to the mountain! Choose one of the following options:\n\n");
-		
+
 		// TODO: add description about options!
 		System.out.println("1: To the forest");
 		System.out.println("2: To the river");
@@ -102,9 +99,9 @@ public class Game {
 
 	public void forest() {
 		System.out.println("\n------------------------------------------------------------------\n");
-		
+
 		ASCIIArtHelper.drawForest();
-		
+
 		System.out.println("\nWelcome to the forest! Choose one of the following options:\n\n");
 		// TODO: add description about options!
 		System.out.println("1: Get a rabbit");
@@ -141,9 +138,9 @@ public class Game {
 		System.out.println("\n------------------------------------------------------------------\n");
 		if (numberOfRabbits < 3) {
 			numberOfRabbits++;
-			
+
 			ASCIIArtHelper.drawRabbit();
-			
+
 			System.out.println("You got a rabbit. You have " + numberOfRabbits + " rabbits.");
 		} else {
 			System.err.println("You can't take more than 3 rabbits!");
@@ -164,9 +161,9 @@ public class Game {
 
 	public void city() {
 		System.out.println("\n------------------------------------------------------------------\n");
-		
+
 		ASCIIArtHelper.drawPureCity();
-		
+
 		System.out.println("\nWelcome to Pure City! You are at a crossroad. Choose one of the following options:\n\n");
 		System.out.println("1: To the shop");
 		System.out.println("2: To the Sorcerer");
@@ -201,44 +198,68 @@ public class Game {
 		}
 	}
 
-	public void cityMarket() {
-		System.out.println("\n------------------------------------------------------------------\n");
-		System.out.println("You are in the city market. Choose one of the following options:\n\n");
-		System.out.println("1: Sell rabbits");
-		System.out.println("2: Sell trees");
-		System.out.println("3: Return to the city");
-		System.out.println("\n------------------------------------------------------------------\n");
+	public void gamblingArea() {
 
-		choice = scanner.nextInt();
 
-		if (choice == 1) {
-			if (numberOfRabbits > 0) {
-				numberOfRabbits--;
-				playerMoney += 100;
-				System.out.println("You sold a rabbit and got 100 gold. You have " + numberOfRabbits + " rabbits and " +
-						playerMoney + " gold.");
-				cityMarket();
-			} else {
-				System.out.println("\n------------------------------------------------------------------\n");
-				System.out.println("You don't have any rabbits!");
-				cityMarket();
-			}
-		} else if (choice == 2) {
-			if (numberOfTrees > 0) {
-				numberOfTrees--;
-				playerMoney += 100;
-				System.out.println("You sold a tree and got 100 gold. You have " + numberOfTrees + " trees and " +
-						playerMoney + " gold.");
-				cityMarket();
-			} else {
-				System.out.println("\n------------------------------------------------------------------\n");
-				System.out.println("You don't have any trees!");
-				cityMarket();
-			}
-		} else if (choice == 3) {
-			city();
+		if (playerMoney >= 10) {
+			System.out.println("\n------------------------------------------------------------------\n");
+			System.out.println("\nYou entered the gambling area.\n");
+			System.out.println("You can gamble your money in this section only if you have atleast 100hp.");
+			System.out.println("You have to guess the number from 0-100. 5 times must be enough for you.");
+			System.out.println("If correct: Doubles the money\n" + "If 5 tries are over - your money will be devided by 2.\n");
+
 		} else {
-			cityMarket();
+
+			System.out.println("You dont have enough money to gamble.Go back to the threeway or to the forest.");
+			System.out.println("Choose 1 to go the threeway ot 2 to go to return to the gambling area");
+			choice = scanner.nextInt();
+			if (choice == 1) {
+				threeWayPath();
+			} else {
+				gamblingArea();
+			}
 		}
 	}
-}
+
+
+		public void cityMarket () {
+			System.out.println("\n------------------------------------------------------------------\n");
+			System.out.println("You are in the city market. Choose one of the following options:\n\n");
+			System.out.println("1: Sell rabbits");
+			System.out.println("2: Sell trees");
+			System.out.println("3: Return to the city");
+			System.out.println("\n------------------------------------------------------------------\n");
+
+			choice = scanner.nextInt();
+
+			if (choice == 1) {
+				if (numberOfRabbits > 0) {
+					numberOfRabbits--;
+					playerMoney += 100;
+					System.out.println("You sold a rabbit and got 100 gold. You have " + numberOfRabbits + " rabbits and " +
+							playerMoney + " gold.");
+					cityMarket();
+				} else {
+					System.out.println("\n------------------------------------------------------------------\n");
+					System.out.println("You don't have any rabbits!");
+					cityMarket();
+				}
+			} else if (choice == 2) {
+				if (numberOfTrees > 0) {
+					numberOfTrees--;
+					playerMoney += 100;
+					System.out.println("You sold a tree and got 100 gold. You have " + numberOfTrees + " trees and " +
+							playerMoney + " gold.");
+					cityMarket();
+				} else {
+					System.out.println("\n------------------------------------------------------------------\n");
+					System.out.println("You don't have any trees!");
+					cityMarket();
+				}
+			} else if (choice == 3) {
+				city();
+			} else {
+				cityMarket();
+			}
+		}
+	}
