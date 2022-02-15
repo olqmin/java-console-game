@@ -87,6 +87,7 @@ public class Game {
 		System.out.println("1: To the forest");
 		System.out.println("2: To the river");
 		System.out.println("3: Return to the three-way-path");
+		System.out.println("4: Check inventory");
 		System.out.println("\n------------------------------------------------------------------\n");
 
 		choice = scanner.nextInt();
@@ -97,8 +98,11 @@ public class Game {
 			river();
 		} else if (choice == 3) {
 			threeWayPath();
-		} else {
+		} else if (choice == 4) {
+			TableHelper.showInformationTable(playerName, playerHP, numberOfRabbits, numberOfTrees, goldenKey, playerMoney);
 			mountain();
+		} else {
+			threeWayPath();
 		}
 	}
 
@@ -112,6 +116,8 @@ public class Game {
 		System.out.println("1: Get a rabbit");
 		System.out.println("2: Chop a tree");
 		System.out.println("3: Return to the mountain");
+		System.out.println("4: Check inventory");
+		
 		System.out.println("\n------------------------------------------------------------------\n");
 
 		choice = scanner.nextInt();
@@ -122,6 +128,9 @@ public class Game {
 			chopTree();
 		} else if (choice == 3) {
 			mountain();
+		} else if (choice == 4) {
+			TableHelper.showInformationTable(playerName, playerHP, numberOfRabbits, numberOfTrees, goldenKey, playerMoney);
+			forest();
 		} else {
 			forest();
 		}
@@ -175,6 +184,7 @@ public class Game {
 		System.out.println("3: To the cave");
 		System.out.println("4: To the monster");
 		System.out.println("5: Return to the three-way-path");
+		System.out.println("6: Check inventory");
 		System.out.println("\n------------------------------------------------------------------\n");
 
 		choice = scanner.nextInt();
@@ -198,6 +208,9 @@ public class Game {
 			city();
 		} else if (choice == 5) {
 			threeWayPath();
+		} else if (choice == 6) {
+			TableHelper.showInformationTable(playerName, playerHP, numberOfRabbits, numberOfTrees, goldenKey, playerMoney);
+			city();
 		} else {
 			city();
 		}
@@ -227,12 +240,13 @@ public class Game {
 	}
 
 
-		public void cityMarket () {
+		public void cityMarket() {
 			System.out.println("\n------------------------------------------------------------------\n");
 			System.out.println("You are in the city market. Choose one of the following options:\n\n");
 			System.out.println("1: Sell rabbits");
 			System.out.println("2: Sell trees");
 			System.out.println("3: Return to the city");
+			System.out.println("4: Check inventory");
 			System.out.println("\n------------------------------------------------------------------\n");
 
 			choice = scanner.nextInt();
@@ -263,6 +277,10 @@ public class Game {
 				}
 			} else if (choice == 3) {
 				city();
+				
+			} else if (choice == 4) {
+				TableHelper.showInformationTable(playerName, playerHP, numberOfRabbits, numberOfTrees, goldenKey, playerMoney);
+				cityMarket();
 			} else {
 				cityMarket();
 			}
