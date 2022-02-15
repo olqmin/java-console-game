@@ -2,6 +2,7 @@ package com.pure.academy.game;
 
 import com.pure.academy.util.ASCIIArtHelper;
 import com.pure.academy.util.SoundFXHelper;
+import com.pure.academy.util.TableHelper;
 
 import java.util.Scanner;
 
@@ -56,6 +57,7 @@ public class Game {
 		System.out.println("1: To the mountain");
 		System.out.println("2: To Pure City");
 		System.out.println("3: To the gambling area");
+		System.out.println("4: Check inventory");
 		System.out.println("\n------------------------------------------------------------------\n");
 
 		choice = scanner.nextInt();
@@ -66,7 +68,10 @@ public class Game {
 			city();
 		} else if (choice == 3) {
 			gamblingArea();
-		} else {
+		} else if (choice == 4) {
+			TableHelper.showInformationTable(playerName, playerHP, numberOfRabbits, numberOfTrees, goldenKey, playerMoney);
+			threeWayPath();
+		}else {
 			threeWayPath();
 		}
 	}
