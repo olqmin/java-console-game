@@ -221,20 +221,22 @@ public class Game {
 		if (playerMoney >= 10) {
 			System.out.println("\n------------------------------------------------------------------\n");
 			System.out.println("\nYou entered the gambling area.\n");
-			System.out.println("You can gamble your money in this section only if you have atleast 100hp.");
+			System.out.println("You can gamble your money in this section only if you have at least 100hp.");
 			System.out.println("You have to guess the number from 0-100. 5 times must be enough for you.");
-			System.out.println("If correct: Doubles the money\n" + "If 5 tries are over - your money will be devided by 2.\n");
-
+			System.out.println("If correct: Doubles the money\n" + "If 5 tries are over - your money will be divided by 2.\n");
 			guessTheNumber();
 		} else {
-			System.out.println("You dont have enough money to gamble.Go back to the threeway or to the forest.");
-			System.out.println("Choose 1 to go the threeway ot 2 to go to return to the gambling area");
+			System.out.println("\n------------------------------------------------------------------\n");
+			System.out.println("Hey, " + playerName + ", you don't have enough money to gamble. Choose one of the following options:");
+			System.out.println("1: Return to the three-way-path");
 			choice = scanner.nextInt();
-			if (choice == 1) {
-				threeWayPath();
-			} else {
-				gamblingArea();
+			while (choice != 1) {
+				System.out.println("\n------------------------------------------------------------------\n");
+				System.out.println("Hey, " + playerName + ", you don't have enough money to gamble. Choose one of the following options:");
+				System.out.println("1: Return to the three-way-path");
+				choice = scanner.nextInt();
 			}
+			threeWayPath();
 		}
 	}
 
