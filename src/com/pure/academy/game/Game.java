@@ -1,6 +1,8 @@
 package com.pure.academy.game;
 
+import com.pure.academy.model.QuestionModel;
 import com.pure.academy.util.ASCIIArtHelper;
+import com.pure.academy.util.QuestionGeneratorHelper;
 import com.pure.academy.util.SoundFXHelper;
 import com.pure.academy.util.TableHelper;
 
@@ -198,6 +200,14 @@ public class Game {
 			System.out.println("Coming soon.");
 			city();
 		} else if (choice == 3) {
+			System.out.println("You've entered a cave....................");
+			QuestionModel questin = QuestionGeneratorHelper.getRandomQuestion();
+			System.out.println(questin.getActualQuestion());
+			int iteration = 1;
+			for (String k: questin.getAnswerMap().keySet()) {
+				System.out.println(iteration + ". " + k);
+				iteration++;
+			}
 			// TODO: implement cave.
 			System.out.println("\n------------------------------------------------------------------\n");
 			System.out.println("Coming soon.");
