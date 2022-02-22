@@ -83,10 +83,9 @@ public class Game {
 		ASCIIArtHelper.drawMountain();
 
 		System.out.println("\nWelcome to the mountain! Choose one of the following options:\n\n");
-
-		// TODO: add description about options!
-		System.out.println("1: To the forest");
-		System.out.println("2: To the river");
+		
+		System.out.println("1: To the forest.Clicking here you earn money by chopping trees.");
+		System.out.println("2: To the river.Clicking here you gain hp.");
 		System.out.println("3: Return to the three-way-path");
 		System.out.println("4: Check inventory");
 		System.out.println("\n------------------------------------------------------------------\n");
@@ -221,14 +220,16 @@ public class Game {
 		if (playerMoney >= 10) {
 			System.out.println("\n------------------------------------------------------------------\n");
 			System.out.println("\nYou entered the gambling area.\n");
-			System.out.println("You can gamble your money in this section only if you have atleast 100hp.");
+			System.out.println("You can gamble your money in this section only if you have atleast 100 gold.");
 			System.out.println("You have to guess the number from 0-100. 5 times must be enough for you.");
 			System.out.println("If correct: Doubles the money\n" + "If 5 tries are over - your money will be devided by 2.\n");
 
 			guessTheNumber();
 		} else {
 			System.out.println("You dont have enough money to gamble.Go back to the threeway or to the forest.");
-			System.out.println("Choose 1 to go the threeway ot 2 to go to return to the gambling area");
+			System.out.println("You have two options to continue.");
+			System.out.println("1.Go to the threeway ");
+			System.out.println("2.Return to the gambling area");
 			choice = scanner.nextInt();
 			if (choice == 1) {
 				threeWayPath();
