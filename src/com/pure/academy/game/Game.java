@@ -215,14 +215,14 @@ public class Game {
                 }
                 System.out.println("\nInput your answer: 1/2/3 or 4");
                 choice = scanner.nextInt();
-//              проверяваме дали въпроса е firstQ и дали choice съвпада с верния отговор на firstQ.
-//                if () {
-//                    System.out.println("Your answer is correct! You get 100 money");
-//                    playerMoney += 100;
-//                } else {
-//                    System.out.println("Your answer is wrong. Good luck next time");
-//                    city();
-//                }
+              // map s vuprosite i otgovorite
+                if (question.getActualQuestion().contains("'H', 'Y', 'P', 'E', 'R'") && choice == 1) {
+                    System.out.println("Your answer is correct! You get 100 money");
+                    playerMoney += 100;
+                } else {
+                    System.out.println("Your answer is wrong. Good luck next time");
+                    city();
+                }
 
 
             } else {
