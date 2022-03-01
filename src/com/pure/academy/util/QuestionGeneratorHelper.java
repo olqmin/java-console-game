@@ -18,7 +18,7 @@ public class QuestionGeneratorHelper {
         QuestionModel firstQ = new QuestionModel();
         firstQ.setActualQuestion(
                 "\n1. What doest the strings[1] contain after executing the following code?\n"
-                        + "char[] chars = { 'H', 'Y', 'P', 'E', 'R','-','S','K','I','L','L'};\n"
+                        + "char[] chars = { 'H', 'Y', 'P', 'E', 'R','-','S','K','I','L','L' };\n"
                         + "String stringFromChars  = String.valueOf(chars);\n"
                         + "String[] strings = stringFromChars.split(\"-\")"
         );
