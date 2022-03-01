@@ -3,15 +3,21 @@ package com.pure.academy.util;
 import com.pure.academy.model.QuestionModel;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 public class QuestionGeneratorHelper {
 
     private static List<QuestionModel> questionsList = new ArrayList();
 
-    public static QuestionModel getRandomQuestion() {
+    public static List<QuestionModel> getThreeRandomQuestions() {
            prepareData();
-           return questionsList.get(0);
+           
+           List<QuestionModel> shuffeledList = ShuffelHelper.newShuffledList(questionsList);
+           
+           
+           return shuffeledList.subList(0, 2);
     }
 
     static void prepareData() {
@@ -37,7 +43,7 @@ public class QuestionGeneratorHelper {
         secondQ.addAnswer("charAt", false);
         secondQ.addAnswer("length", true);
         questionsList.add(secondQ);
-
+        
     }
 
 

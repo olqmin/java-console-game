@@ -1,13 +1,16 @@
 package com.pure.academy.game;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Scanner;
+
 import com.pure.academy.model.QuestionModel;
 import com.pure.academy.util.ASCIIArtHelper;
 import com.pure.academy.util.QuestionGeneratorHelper;
-import com.pure.academy.util.SoundFXHelper;
+import com.pure.academy.util.ShuffelHelper;
 import com.pure.academy.util.TableHelper;
-
-import java.util.Random;
-import java.util.Scanner;
 
 public class Game {
     Scanner scanner = new Scanner(System.in);
@@ -49,7 +52,7 @@ public class Game {
         System.out.println("\n------------------------------------------------------------------\n");
         System.out.println("Hello " + playerName + ", let's start the game!");
 
-        SoundFXHelper.playSound("resources/SoundFX/mixkit-arcade-game-opener-2222.wav");
+//        SoundFXHelper.playSound("resources/SoundFX/mixkit-arcade-game-opener-2222.wav");
         threeWayPath();
     }
 
@@ -200,32 +203,39 @@ public class Game {
             System.out.println("Coming soon.");
             city();
         } else if (choice == 3) {
-            if (playerMoney >= 10) {
+            if (playerMoney >= -10) {
                 System.out.println("\n------------------------------------------------------------------\n");
                 System.out.println("You entered the Quiz game area.");
                 System.out.println("In this game you have 3 questions, each of them with with 4 answers and only one of them is correct.");
                 System.out.println("For 1st, 2nd and 3rd question you will get 100, 500 or 1000 money and a key, but if you choose wrong answer your HP will be reduced by 20%, 50% or you will die.");
                 System.out.println("Let's play Quiz game!\n");
-                QuestionModel question = QuestionGeneratorHelper.getRandomQuestion();
-                System.out.println(question.getActualQuestion());
+                List<QuestionModel> questionList = QuestionGeneratorHelper.getThreeRandomQuestions();
+                System.out.println(questionList.get(0).getActualQuestion());
                 int iteration = 1;
-                for (String k : question.getAnswerMap().keySet()) {
+                
+                Map<Integer, String> questionVisualisedMap = new HashMap();
+                for (String k : ShuffelHelper.newShuffledSet(questionList.get(0).getAnswerMap().keySet())) {
                     System.out.println(iteration + ". " + k);
+                    questionVisualisedMap.put(iteration, k);
                     iteration++;
                 }
                 System.out.println("\nInput your answer: 1/2/3 or 4");
+
                 choice = scanner.nextInt();
-              // map s vuprosite i otgovorite
-                if (question.getActualQuestion().contains("'H', 'Y', 'P', 'E', 'R'") && choice == 1) {
+                String givenAnswer = questionVisualisedMap.get(choice);
+                
+                if (questionList.get(0).getAnswerMap().get(givenAnswer) == true) {
                     System.out.println("Your answer is correct! You get 100 money");
                     playerMoney += 100;
+                    city();
                 } else {
                     System.out.println("Your answer is wrong. Good luck next time");
                     city();
                 }
 
 
-            } else {
+            }
+            else {
                 System.out.println("\n------------------------------------------------------------------\n");
                 System.out.println("Hey, " + playerName + ", you don't have enough money to play Quiz game. Choose one of the following options:");
                 System.out.println("1: Return to Pure City");
