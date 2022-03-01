@@ -210,24 +210,22 @@ public class Game {
                 System.out.println("For 1st, 2nd and 3rd question you will get 100, 500 or 1000 money and a key, but if you choose wrong answer your HP will be reduced by 20%, 50% or you will die.");
                 System.out.println("Let's play Quiz game!\n");
                 List<QuestionModel> questionList = QuestionGeneratorHelper.getThreeRandomQuestions();
-                System.out.println(questionList.get(0).getActualQuestion());
-                int iteration = 1;
-                
-                Map<Integer, String> questionVisualisedMap = new HashMap();
-                for (String k : ShuffelHelper.newShuffledSet(questionList.get(0).getAnswerMap().keySet())) {
-                    System.out.println(iteration + ". " + k);
-                    questionVisualisedMap.put(iteration, k);
-                    iteration++;
-                }
-                System.out.println("\nInput your answer: 1/2/3 or 4");
+                QuestionModel firstQuestion = questionList.get(0);
+                String givenAnswer = askQuestion(firstQuestion, 1);
 
-                choice = scanner.nextInt();
-                String givenAnswer = questionVisualisedMap.get(choice);
-                
-                if (questionList.get(0).getAnswerMap().get(givenAnswer) == true) {
+                if (firstQuestion.getAnswerMap().get(givenAnswer) == true) {
                     System.out.println("Your answer is correct! You get 100 money");
                     playerMoney += 100;
-                    city();
+                    QuestionModel secondQuestion = questionList.get(1);
+                    givenAnswer = askQuestion(secondQuestion, 2);
+                    if (secondQuestion.getAnswerMap().get(givenAnswer) == true) {
+                        System.out.println("Your answer is correct! You get 500 money");
+                        playerMoney += 500;
+                        city();
+                    } else {
+                        System.out.println("Your answer is wrong. Good luck next time");
+                        city();
+                    }
                 } else {
                     System.out.println("Your answer is wrong. Good luck next time");
                     city();
@@ -262,6 +260,23 @@ public class Game {
         } else {
             city();
         }
+    }
+
+    private String askQuestion(QuestionModel firstQuestion, int numberOfQuestion) {
+        System.out.println("\n" + numberOfQuestion + ". " + firstQuestion.getActualQuestion());
+        int iteration = 1;
+
+        Map<Integer, String> questionVisualisedMap = new HashMap();
+        for (String k : ShuffelHelper.newShuffledSet(firstQuestion.getAnswerMap().keySet())) {
+            System.out.println(iteration + ". " + k);
+            questionVisualisedMap.put(iteration, k);
+            iteration++;
+        }
+        System.out.println("\nInput your answer: 1/2/3 or 4");
+
+        choice = scanner.nextInt();
+        String givenAnswer = questionVisualisedMap.get(choice);
+        return givenAnswer;
     }
 
     public void gamblingArea() {
