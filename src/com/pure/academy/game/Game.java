@@ -79,7 +79,7 @@ public class Game {
         } else if (choice == 3) {
             gamblingArea();
         } else if (choice == 4) {
-            TableHelper.showInformationTable(playerName, playerHP, playerWeapon, medicine, numberOfRabbits, numberOfTrees, goldenKey, playerMoney);
+            inventory();
             threeWayPath();
         } else {
             threeWayPath();
@@ -109,7 +109,7 @@ public class Game {
         } else if (choice == 3) {
             threeWayPath();
         } else if (choice == 4) {
-            TableHelper.showInformationTable(playerName, playerHP, playerWeapon, medicine, numberOfRabbits, numberOfTrees, goldenKey, playerMoney);
+            inventory();
             mountain();
         } else {
             threeWayPath();
@@ -138,7 +138,7 @@ public class Game {
         } else if (choice == 3) {
             mountain();
         } else if (choice == 4) {
-            TableHelper.showInformationTable(playerName, playerHP, playerWeapon, medicine, numberOfRabbits, numberOfTrees, goldenKey, playerMoney);
+            inventory();
             forest();
         } else {
             forest();
@@ -190,7 +190,7 @@ public class Game {
         System.out.println("1: To the shop");
         System.out.println("2: To the Sorcerer");
         System.out.println("3: To the cave");
-        System.out.println("4: To the monster");
+        System.out.println("4: To the castle");
         System.out.println("5: Return to the three-way-path");
         System.out.println("6: Check inventory");
         System.out.println("\n------------------------------------------------------------------\n");
@@ -202,22 +202,22 @@ public class Game {
         } else if (choice == 2) {
             sorcerer();
         } else if (choice == 3) {
-            cave();
-//            if (caveKey) {
-//                cave();
-//            } else {
-//                System.out.println("The cave is locked! You have to kill the monster and get the key.");
-//                city();
-//            }
+            if (caveKey) {
+                cave();
+            } else {
+                System.out.println("The cave is locked! You have to kill the monster and get the key.");
+                city();
+            }
         } else if (choice == 4) {
-            // TODO: implement monster.
-            System.out.println("\n------------------------------------------------------------------\n");
-            System.out.println("Coming soon.");
-            city();
+            if (monsterHP < 1) {
+                castle();
+            } else {
+                monster();
+            }
         } else if (choice == 5) {
             threeWayPath();
         } else if (choice == 6) {
-            TableHelper.showInformationTable(playerName, playerHP, playerWeapon, medicine, numberOfRabbits, numberOfTrees, goldenKey, playerMoney);
+            inventory();
             city();
         } else {
             city();
@@ -326,7 +326,7 @@ public class Game {
         } else if (choice == 3) {
             city();
         } else if (choice == 4) {
-            TableHelper.showInformationTable(playerName, playerHP, playerWeapon, medicine, numberOfRabbits, numberOfTrees, goldenKey, playerMoney);
+            inventory();
             cityMarket();
         } else {
             cityMarket();
@@ -345,23 +345,24 @@ public class Game {
             String givenAnswer = askQuestion(firstQuestion, 1);
 
             if (firstQuestion.getAnswerMap().get(givenAnswer) == true) {
-                System.out.println("Your answer is correct! You get 100 money");
+                System.out.println("Your answer is correct! You won 100 money.");
                 playerMoney += 100;
                 QuestionModel secondQuestion = questionList.get(1);
                 givenAnswer = askQuestion(secondQuestion, 2);
                 if (secondQuestion.getAnswerMap().get(givenAnswer) == true) {
-                    System.out.println("Your answer is correct! You get 500 money");
+                    System.out.println("Your answer is correct! You won 500 money.");
                     playerMoney += 500;
                     QuestionModel thirdQuestion = questionList.get(2);
                     givenAnswer = askQuestion(thirdQuestion, 3);
                     if (thirdQuestion.getAnswerMap().get(givenAnswer) == true) {
-                        System.out.println("Your answer is correct! You get 1000 money");
+                        System.out.println("Your answer is correct! You won 1000 money.");
                         playerMoney += 1000;
                         if (goldenKey) {
                             city();
                         }
                         goldenKey = true;
-                        System.out.println("You get the golden key! You can save the princess!");
+                        System.out.println("You get the golden key!");
+                        System.out.println("You can save the princess!");
                         city();
                     }
                     else {
@@ -419,7 +420,7 @@ public class Game {
         } else if (choice == 5) {
             city();
         } else if (choice == 6) {
-            TableHelper.showInformationTable(playerName, playerHP, playerWeapon, medicine, numberOfRabbits, numberOfTrees, goldenKey, playerMoney);
+            inventory();
             sorcerer();
         } else {
             sorcerer();
@@ -433,7 +434,6 @@ public class Game {
         } else if (playerMoney >= 100) {
             playerMoney -= 100;
             playerWeapon = "Knife";
-            playerDamage = new Random().nextInt(3);
             System.out.println("You have a " + playerWeapon + " and " + playerMoney + " gold.");
             sorcerer();
         } else {
@@ -449,7 +449,6 @@ public class Game {
         } else if (playerMoney >= 500) {
             playerMoney -= 500;
             playerWeapon = "Sword";
-            playerDamage = new Random().nextInt(6);
             System.out.println("You have a " + playerWeapon + " and " + playerMoney + " gold.");
             sorcerer();
         } else {
@@ -465,7 +464,6 @@ public class Game {
         } else if (playerMoney >= 1000) {
             playerMoney -= 1000;
             playerWeapon = "Crossbow";
-            playerDamage = new Random().nextInt(9);
             System.out.println("You have a " + playerWeapon + " and " + playerMoney + " gold.");
             sorcerer();
         } else {
@@ -488,9 +486,118 @@ public class Game {
         }
     }
 
+    public void monster() {
+        System.out.println("\n------------------------------------------------------------------\n");
+        System.out.println("Your HP: " + playerHP);
+        System.out.println("Monster HP: " + monsterHP);
+        System.out.println("\n1: Fight");
+        System.out.println("2: Drink medicine");
+        System.out.println("3: Run");
+        System.out.println("\n------------------------------------------------------------------\n");
+
+        choice = scanner.nextInt();
+
+        if (choice == 1) {
+            fight();
+        } else if (choice == 2) {
+            if (medicine > 0) {
+                medicine--;
+                playerHP += 10;
+                System.out.println("Your HP are " + playerHP + ".");
+                monster();
+            } else {
+                System.out.println("You don't have any medicine!");
+                monster();
+            }
+        } else if (choice == 3) {
+            city();
+        } else {
+            monster();
+        }
+    }
+
+    public void fight() {
+        switch (playerWeapon) {
+            case "Knife": playerDamage = new Random().nextInt(3); break;
+            case "Sword": playerDamage = new Random().nextInt(6); break;
+            case "Crossbow": playerDamage = new Random().nextInt(9); break;
+        }
+        System.out.println("You attacked the monster and gave " + playerDamage + " damage!");
+        monsterHP = monsterHP - playerDamage;
+        if (monsterHP < 0) {
+            monsterHP = 0;
+        }
+        System.out.println("Monster HP: " + monsterHP);
+
+        if (monsterHP < 1) {
+            caveKey = true;
+            System.out.println("You killed the monster and got the key for the cave! Choose one of the following options:");
+            System.out.println("1. Go to the castle");
+            System.out.println("2. Return to the city");
+
+            choice = scanner.nextInt();
+
+            if (choice == 1) {
+                castle();
+            } else if (choice == 2) {
+                city();
+            } else {
+                fight();
+            }
+        } else {
+            int monsterDamage = 0;
+
+            monsterDamage = new Random().nextInt(4);
+
+            System.out.println("The monster attacked you and gave " + monsterDamage + " damage!");
+            playerHP = playerHP - monsterDamage;
+            System.out.println("Player HP: " + playerHP);
+
+            if (playerHP < 1) {
+                dead();
+            } else {
+                monster();
+            }
+        }
+    }
+
+    public void castle() {
+        if (goldenKey) {
+            System.out.println("\n------------------------------------------------------------------\n");
+            System.out.println("\nYou are in the castle. Choose one of the following options:\n\n");
+            System.out.println("1. Save the princess");
+            System.out.println("2. Return to the city");
+            System.out.println("\n------------------------------------------------------------------\n");
+
+            choice = scanner.nextInt();
+
+            if (choice == 1) {
+                princess();
+            } else if (choice == 2) {
+                city();
+            } else {
+                castle();
+            }
+        } else {
+            System.out.println("Get the golden key first!");
+            city();
+        }
+    }
+
+    public void princess() {
+        System.out.println("\n------------------------------------------------------------------\n");
+        System.out.println("You saved the princess!");
+        System.out.println("THE END");
+        System.out.println("\n------------------------------------------------------------------\n");
+    }
+
     public void dead() {
         System.out.println("\n------------------------------------------------------------------\n");
         System.out.println("You are dead! The game is over!");
         System.out.println("\n------------------------------------------------------------------\n");
+    }
+
+    public void inventory() {
+        TableHelper.showInformationTable(playerName, playerHP, playerWeapon, medicine, numberOfRabbits, numberOfTrees, goldenKey, caveKey, playerMoney);
     }
 }
