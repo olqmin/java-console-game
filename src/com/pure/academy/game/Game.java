@@ -23,6 +23,9 @@ public class Game {
     int playerMoney;
     int numberOfRabbits;
     int numberOfTrees;
+    String playerWeapon = "-";
+    int playerDamage;
+    int medicine;
 
 
     public static void main(String[] args) {
@@ -76,7 +79,7 @@ public class Game {
         } else if (choice == 3) {
             gamblingArea();
         } else if (choice == 4) {
-            TableHelper.showInformationTable(playerName, playerHP, numberOfRabbits, numberOfTrees, goldenKey, playerMoney);
+            TableHelper.showInformationTable(playerName, playerHP, playerWeapon, medicine, numberOfRabbits, numberOfTrees, goldenKey, playerMoney);
             threeWayPath();
         } else {
             threeWayPath();
@@ -106,7 +109,7 @@ public class Game {
         } else if (choice == 3) {
             threeWayPath();
         } else if (choice == 4) {
-            TableHelper.showInformationTable(playerName, playerHP, numberOfRabbits, numberOfTrees, goldenKey, playerMoney);
+            TableHelper.showInformationTable(playerName, playerHP, playerWeapon, medicine, numberOfRabbits, numberOfTrees, goldenKey, playerMoney);
             mountain();
         } else {
             threeWayPath();
@@ -124,7 +127,6 @@ public class Game {
         System.out.println("2: Chop a tree");
         System.out.println("3: Return to the mountain");
         System.out.println("4: Check inventory");
-
         System.out.println("\n------------------------------------------------------------------\n");
 
         choice = scanner.nextInt();
@@ -136,7 +138,7 @@ public class Game {
         } else if (choice == 3) {
             mountain();
         } else if (choice == 4) {
-            TableHelper.showInformationTable(playerName, playerHP, numberOfRabbits, numberOfTrees, goldenKey, playerMoney);
+            TableHelper.showInformationTable(playerName, playerHP, playerWeapon, medicine, numberOfRabbits, numberOfTrees, goldenKey, playerMoney);
             forest();
         } else {
             forest();
@@ -198,10 +200,7 @@ public class Game {
         if (choice == 1) {
             cityMarket();
         } else if (choice == 2) {
-            // TODO: implement Sorcerer.
-            System.out.println("\n------------------------------------------------------------------\n");
-            System.out.println("Coming soon.");
-            city();
+            sorcerer();
         } else if (choice == 3) {
             cave();
 //            if (caveKey) {
@@ -218,7 +217,7 @@ public class Game {
         } else if (choice == 5) {
             threeWayPath();
         } else if (choice == 6) {
-            TableHelper.showInformationTable(playerName, playerHP, numberOfRabbits, numberOfTrees, goldenKey, playerMoney);
+            TableHelper.showInformationTable(playerName, playerHP, playerWeapon, medicine, numberOfRabbits, numberOfTrees, goldenKey, playerMoney);
             city();
         } else {
             city();
@@ -327,7 +326,7 @@ public class Game {
         } else if (choice == 3) {
             city();
         } else if (choice == 4) {
-            TableHelper.showInformationTable(playerName, playerHP, numberOfRabbits, numberOfTrees, goldenKey, playerMoney);
+            TableHelper.showInformationTable(playerName, playerHP, playerWeapon, medicine, numberOfRabbits, numberOfTrees, goldenKey, playerMoney);
             cityMarket();
         } else {
             cityMarket();
@@ -393,6 +392,99 @@ public class Game {
                 choice = scanner.nextInt();
             }
             city();
+        }
+    }
+
+    public void sorcerer() {
+        System.out.println("\n------------------------------------------------------------------\n");
+        System.out.println("The Sorcerer is here. Choose one of the following options:\n\n");
+        System.out.println("1: Buy a knife - 100 gold");
+        System.out.println("2: Buy a sword - 500 gold");
+        System.out.println("3: Buy a crossbow - 1000 gold");
+        System.out.println("4: Buy medicine - 10 gold");
+        System.out.println("5: Return to the city");
+        System.out.println("6: Check inventory");
+        System.out.println("\n------------------------------------------------------------------\n");
+
+        choice = scanner.nextInt();
+
+        if (choice == 1) {
+            knife();
+        } else if (choice == 2) {
+            sword();
+        } else if (choice == 3) {
+            crossbow();
+        } else if (choice == 4) {
+            medicine();
+        } else if (choice == 5) {
+            city();
+        } else if (choice == 6) {
+            TableHelper.showInformationTable(playerName, playerHP, playerWeapon, medicine, numberOfRabbits, numberOfTrees, goldenKey, playerMoney);
+            sorcerer();
+        } else {
+            sorcerer();
+        }
+    }
+
+    public void knife() {
+        if (playerWeapon.equals("Knife")) {
+            System.out.println("You already have a knife.");
+            sorcerer();
+        } else if (playerMoney >= 100) {
+            playerMoney -= 100;
+            playerWeapon = "Knife";
+            playerDamage = new Random().nextInt(3);
+            System.out.println("You have a " + playerWeapon + " and " + playerMoney + " gold.");
+            sorcerer();
+        } else {
+            System.out.println("You don't have enough money!");
+            sorcerer();
+        }
+    }
+
+    public void sword() {
+        if (playerWeapon.equals("Sword")) {
+            System.out.println("You already have a sword.");
+            sorcerer();
+        } else if (playerMoney >= 500) {
+            playerMoney -= 500;
+            playerWeapon = "Sword";
+            playerDamage = new Random().nextInt(6);
+            System.out.println("You have a " + playerWeapon + " and " + playerMoney + " gold.");
+            sorcerer();
+        } else {
+            System.out.println("You don't have enough money!");
+            sorcerer();
+        }
+    }
+
+    public void crossbow() {
+        if (playerWeapon.equals("Crossbow")) {
+            System.out.println("You already have a crossbow.");
+            sorcerer();
+        } else if (playerMoney >= 1000) {
+            playerMoney -= 1000;
+            playerWeapon = "Crossbow";
+            playerDamage = new Random().nextInt(9);
+            System.out.println("You have a " + playerWeapon + " and " + playerMoney + " gold.");
+            sorcerer();
+        } else {
+            System.out.println("You don't have enough money!");
+            sorcerer();
+        }
+    }
+
+    public void medicine() {
+        if (medicine >= 5) {
+            System.out.println("You can't take more than 5 medicine");
+        } else if (playerMoney >= 10) {
+            playerMoney -= 10;
+            medicine++;
+            System.out.println("You have " + medicine + " medicine and " + playerMoney + " gold.");
+            sorcerer();
+        } else {
+            System.out.println("You don't have enough money!");
+            sorcerer();
         }
     }
 

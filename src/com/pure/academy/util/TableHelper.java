@@ -4,11 +4,11 @@ import com.github.freva.asciitable.AsciiTable;
 
 public class TableHelper {
 	
-	public static void showInformationTable(String playerName, int playerHP, int numberOfRabbits, int numberOfTrees, boolean goldenKey, int playerMoney) {
+	public static void showInformationTable(String playerName, int playerHP, String playerWeapon, int medicine, int numberOfRabbits, int numberOfTrees, boolean goldenKey, int playerMoney) {
 		
-String[] headers = {"", "Name", "HP", "Bunnies", "Trees", "Golden Key", "Money"};
+String[] headers = {"", "Name", "HP", "Weapon", "Medicine", "Bunnies", "Trees", "Golden Key", "Money"};
 	String[][] data = {
-	        {"1", playerName, String.valueOf(playerHP), String.valueOf(numberOfRabbits), String.valueOf(numberOfTrees), String.valueOf(goldenKey), String.valueOf(playerMoney)}};
+	        {"1", playerName, String.valueOf(playerHP), playerWeapon, String.valueOf(medicine), String.valueOf(numberOfRabbits), String.valueOf(numberOfTrees), String.valueOf(goldenKey), String.valueOf(playerMoney)}};
 
 	System.out.println(AsciiTable.getTable(headers, data));
 	}
