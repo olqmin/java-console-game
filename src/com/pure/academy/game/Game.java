@@ -18,7 +18,8 @@ public class Game {
     String playerName;
     int choice;
     int monsterHP;
-    int goldenKey;
+    boolean goldenKey = false;
+    boolean caveKey = false;
     int playerMoney;
     int numberOfRabbits;
     int numberOfTrees;
@@ -151,7 +152,6 @@ public class Game {
             System.err.println("You can't take more 150 HP!");
         }
         mountain();
-
     }
 
     public void rabbit() {
@@ -203,50 +203,13 @@ public class Game {
             System.out.println("Coming soon.");
             city();
         } else if (choice == 3) {
-            if (playerMoney >= -10) {
-                System.out.println("\n------------------------------------------------------------------\n");
-                System.out.println("You entered the Quiz game area.");
-                System.out.println("In this game you have 3 questions, each of them with with 4 answers and only one of them is correct.");
-                System.out.println("For 1st, 2nd and 3rd question you will get 100, 500 or 1000 money and a key, but if you choose wrong answer your HP will be reduced by 20%, 50% or you will die.");
-                System.out.println("Let's play Quiz game!\n");
-                List<QuestionModel> questionList = QuestionGeneratorHelper.getThreeRandomQuestions();
-                QuestionModel firstQuestion = questionList.get(0);
-                String givenAnswer = askQuestion(firstQuestion, 1);
-
-                if (firstQuestion.getAnswerMap().get(givenAnswer) == true) {
-                    System.out.println("Your answer is correct! You get 100 money");
-                    playerMoney += 100;
-                    QuestionModel secondQuestion = questionList.get(1);
-                    givenAnswer = askQuestion(secondQuestion, 2);
-                    if (secondQuestion.getAnswerMap().get(givenAnswer) == true) {
-                        System.out.println("Your answer is correct! You get 500 money");
-                        playerMoney += 500;
-                        city();
-                    } else {
-                        System.out.println("Your answer is wrong. Good luck next time");
-                        city();
-                    }
-                } else {
-                    System.out.println("Your answer is wrong. Good luck next time");
-                    city();
-                }
-
-
-            }
-            else {
-                System.out.println("\n------------------------------------------------------------------\n");
-                System.out.println("Hey, " + playerName + ", you don't have enough money to play Quiz game. Choose one of the following options:");
-                System.out.println("1: Return to Pure City");
-                choice = scanner.nextInt();
-                while (choice != 1) {
-                    System.out.println("\n------------------------------------------------------------------\n");
-                    System.out.println("Hey, " + playerName + ", you don't have enough money to play Quiz game. Choose one of the following options:");
-                    System.out.println("1: Return to Pure City");
-                    choice = scanner.nextInt();
-                }
-                city();
-            }
-
+            cave();
+//            if (caveKey) {
+//                cave();
+//            } else {
+//                System.out.println("The cave is locked! You have to kill the monster and get the key.");
+//                city();
+//            }
         } else if (choice == 4) {
             // TODO: implement monster.
             System.out.println("\n------------------------------------------------------------------\n");
@@ -283,7 +246,7 @@ public class Game {
         if (playerMoney >= 10) {
             System.out.println("\n------------------------------------------------------------------\n");
             System.out.println("\nYou entered the gambling area.\n");
-            System.out.println("You can gamble your money in this section only if you have at least 100hp.");
+            System.out.println("You can gamble your money in this section only if you have at least 100 gold.");
             System.out.println("You have to guess the number from 0-100. 5 times must be enough for you.");
             System.out.println("If correct: Doubles the money\n" + "If 5 tries are over - your money will be divided by 2.\n");
             guessTheNumber();
@@ -320,6 +283,7 @@ public class Game {
         }
         playerMoney /= 2;
         System.out.println("You didn't manage to guess the number!");
+        System.out.println("The number is " + random + ".");
         System.out.println("Your money were divided by 2!");
         System.out.println("You have " + playerMoney + " gold.");
         threeWayPath();
@@ -362,12 +326,79 @@ public class Game {
             }
         } else if (choice == 3) {
             city();
-
         } else if (choice == 4) {
             TableHelper.showInformationTable(playerName, playerHP, numberOfRabbits, numberOfTrees, goldenKey, playerMoney);
             cityMarket();
         } else {
             cityMarket();
         }
+    }
+
+    public void cave() {
+        if (playerMoney >= -10) {
+            System.out.println("\n------------------------------------------------------------------\n");
+            System.out.println("You entered the Quiz game area.");
+            System.out.println("In this game you have 3 questions, each of them with with 4 answers and only one of them is correct.");
+            System.out.println("For 1st, 2nd and 3rd question you will get 100, 500 or 1000 money and a key, but if you choose wrong answer your HP will be reduced by 20%, 50% or you will die.");
+            System.out.println("Let's play Quiz game!\n");
+            List<QuestionModel> questionList = QuestionGeneratorHelper.getThreeRandomQuestions();
+            QuestionModel firstQuestion = questionList.get(0);
+            String givenAnswer = askQuestion(firstQuestion, 1);
+
+            if (firstQuestion.getAnswerMap().get(givenAnswer) == true) {
+                System.out.println("Your answer is correct! You get 100 money");
+                playerMoney += 100;
+                QuestionModel secondQuestion = questionList.get(1);
+                givenAnswer = askQuestion(secondQuestion, 2);
+                if (secondQuestion.getAnswerMap().get(givenAnswer) == true) {
+                    System.out.println("Your answer is correct! You get 500 money");
+                    playerMoney += 500;
+                    QuestionModel thirdQuestion = questionList.get(2);
+                    givenAnswer = askQuestion(thirdQuestion, 3);
+                    if (thirdQuestion.getAnswerMap().get(givenAnswer) == true) {
+                        System.out.println("Your answer is correct! You get 1000 money");
+                        playerMoney += 1000;
+                        if (goldenKey) {
+                            city();
+                        }
+                        goldenKey = true;
+                        System.out.println("You get the golden key! You can save the princess!");
+                        city();
+                    }
+                    else {
+                        dead();
+                    }
+                } else {
+                    playerHP /= 2;
+                    System.out.println("Your answer is wrong. Your HP are reduced by 50%. Good luck next time");
+                    System.out.println("You have " + playerHP + " HP.");
+                    city();
+                }
+            } else {
+                playerHP -= playerHP / 5;
+                System.out.println("Your answer is wrong. Your HP are reduced by 20%. Good luck next time");
+                System.out.println("You have " + playerHP + " HP.");
+                city();
+            }
+        }
+        else {
+            System.out.println("\n------------------------------------------------------------------\n");
+            System.out.println("Hey, " + playerName + ", you don't have enough money to play Quiz game. Choose one of the following options:");
+            System.out.println("1: Return to Pure City");
+            choice = scanner.nextInt();
+            while (choice != 1) {
+                System.out.println("\n------------------------------------------------------------------\n");
+                System.out.println("Hey, " + playerName + ", you don't have enough money to play Quiz game. Choose one of the following options:");
+                System.out.println("1: Return to Pure City");
+                choice = scanner.nextInt();
+            }
+            city();
+        }
+    }
+
+    public void dead() {
+        System.out.println("\n------------------------------------------------------------------\n");
+        System.out.println("You are dead! The game is over!");
+        System.out.println("\n------------------------------------------------------------------\n");
     }
 }
