@@ -12,7 +12,9 @@ public class QuestionGeneratorHelper {
     private static List<QuestionModel> questionsList = new ArrayList();
 
     public static List<QuestionModel> getThreeRandomQuestions() {
-           prepareData();
+        if(questionsList.isEmpty()) {
+            prepareData();
+        }
            
            List<QuestionModel> shuffeledList = ShuffelHelper.newShuffledList(questionsList);
            
