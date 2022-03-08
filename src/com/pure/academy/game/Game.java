@@ -18,7 +18,7 @@ public class Game {
     String playerName;
     int choice;
     int monsterHP;
-    boolean goldenKey = false;
+    boolean quizKey = false;
     boolean caveKey = false;
     int playerMoney;
     int numberOfRabbits;
@@ -357,12 +357,11 @@ public class Game {
                     if (thirdQuestion.getAnswerMap().get(givenAnswer) == true) {
                         System.out.println("Your answer is correct! You won 1000 money.");
                         playerMoney += 1000;
-                        if (goldenKey) {
-                            city();
+                        if (!quizKey) {
+                            System.out.println("You get the golden key!");
+                            System.out.println("You can save the princess!");
                         }
-                        goldenKey = true;
-                        System.out.println("You get the golden key!");
-                        System.out.println("You can save the princess!");
+                        quizKey = true;
                         city();
                     }
                     else {
@@ -562,7 +561,7 @@ public class Game {
     }
 
     public void castle() {
-        if (goldenKey) {
+        if (quizKey) {
             System.out.println("\n------------------------------------------------------------------\n");
             System.out.println("\nYou are in the castle. Choose one of the following options:\n\n");
             System.out.println("1. Save the princess");
@@ -579,15 +578,15 @@ public class Game {
                 castle();
             }
         } else {
-            System.out.println("Get the golden key first!");
+            System.out.println("Get the Quiz key first!");
             city();
         }
     }
 
     public void princess() {
         System.out.println("\n------------------------------------------------------------------\n");
-        System.out.println("You saved the princess!");
-        System.out.println("THE END");
+        System.out.println("Hey " + playerName + ", " + "I was prisoned here too long, but you saved me. Thank you, my dear!");
+        System.out.println("\nTHE END");
         System.out.println("\n------------------------------------------------------------------\n");
     }
 
@@ -598,6 +597,6 @@ public class Game {
     }
 
     public void inventory() {
-        TableHelper.showInformationTable(playerName, playerHP, playerWeapon, medicine, numberOfRabbits, numberOfTrees, goldenKey, caveKey, playerMoney);
+        TableHelper.showInformationTable(playerName, playerHP, playerWeapon, medicine, numberOfRabbits, numberOfTrees, quizKey, caveKey, playerMoney);
     }
 }
