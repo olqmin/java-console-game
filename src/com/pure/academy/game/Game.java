@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 import com.pure.academy.model.QuestionModel;
 import com.pure.academy.util.ASCIIArtHelper;
@@ -23,7 +24,7 @@ public class Game {
     int playerMoney;
     int numberOfRabbits;
     int numberOfTrees;
-    String playerWeapon = "-";
+    String playerWeapon = "Fist";
     int playerDamage;
     int medicine;
 
@@ -42,7 +43,7 @@ public class Game {
 
     public void playerSetup() {
         playerHP = 100;
-        monsterHP = 15;
+        monsterHP = 50;
 
         //playerWeapon = "Knife";
 
@@ -397,7 +398,7 @@ public class Game {
 
     public void sorcerer() {
         System.out.println("\n------------------------------------------------------------------\n");
-        System.out.println("The Sorcerer is here. Choose one of the following options:\n\n");
+        System.out.println("The Sorcerer is here.You have " + playerMoney + " gold and " + playerWeapon + ".  Choose one of the following options:\n\n");
         System.out.println("1: Buy a knife - 100 gold");
         System.out.println("2: Buy a sword - 500 gold");
         System.out.println("3: Buy a crossbow - 1000 gold");
@@ -517,9 +518,11 @@ public class Game {
 
     public void fight() {
         switch (playerWeapon) {
-            case "Knife": playerDamage = new Random().nextInt(3); break;
-            case "Sword": playerDamage = new Random().nextInt(6); break;
-            case "Crossbow": playerDamage = new Random().nextInt(9); break;
+            //int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
+            case "Fist" : playerDamage = ThreadLocalRandom.current().nextInt(0,2); break ;
+            case "Knife": playerDamage = ThreadLocalRandom.current().nextInt(2,7); break;
+            case "Sword": playerDamage = ThreadLocalRandom.current().nextInt(7,12); break;
+            case "Crossbow": playerDamage = ThreadLocalRandom.current().nextInt(12,20); break;
         }
         System.out.println("You attacked the monster and gave " + playerDamage + " damage!");
         monsterHP = monsterHP - playerDamage;
@@ -546,7 +549,7 @@ public class Game {
         } else {
             int monsterDamage = 0;
 
-            monsterDamage = new Random().nextInt(4);
+            monsterDamage = ThreadLocalRandom.current().nextInt(0,20);
 
             System.out.println("The monster attacked you and gave " + monsterDamage + " damage!");
             playerHP = playerHP - monsterDamage;
