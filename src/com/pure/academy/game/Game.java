@@ -19,8 +19,8 @@ public class Game {
     String playerName;
     int choice;
     int monsterHP;
-    boolean quizKey = false;
-    boolean caveKey = false;
+    boolean quizKey;
+    boolean caveKey;
     int playerMoney;
     int numberOfRabbits;
     int numberOfTrees;
@@ -31,21 +31,14 @@ public class Game {
 
     public static void main(String[] args) {
 
-        //numberOfRabbits and numberOfTrees
-        Game dublin = new Game();
-
-        dublin.playerSetup();
-
-        //dublin.townGate();
-
+        Game pureAcademy = new Game();
+        pureAcademy.playerSetup();
 
     }
 
     public void playerSetup() {
         playerHP = 100;
-        monsterHP = 50;
-
-        //playerWeapon = "Knife";
+        monsterHP = 5;
 
         ASCIIArtHelper.drawCharacter();
 
@@ -206,7 +199,7 @@ public class Game {
             if (caveKey) {
                 cave();
             } else {
-                System.out.println("The cave is locked! You have to kill the monster and get the key.");
+                System.err.println("The cave is locked! You have to kill the monster and get the key.");
                 city();
             }
         } else if (choice == 4) {
@@ -252,13 +245,13 @@ public class Game {
             guessTheNumber();
         } else {
             System.out.println("\n------------------------------------------------------------------\n");
-            System.out.println("Hey, " + playerName + ", you don't have enough money to gamble. Choose one of the following options:");
-            System.out.println("1: Return to the three-way-path");
+            System.err.println("Hey, " + playerName + ", you don't have enough money to gamble. Choose one of the following options:");
+            System.err.println("1: Return to the three-way-path");
             choice = scanner.nextInt();
             while (choice != 1) {
                 System.out.println("\n------------------------------------------------------------------\n");
-                System.out.println("Hey, " + playerName + ", you don't have enough money to gamble. Choose one of the following options:");
-                System.out.println("1: Return to the three-way-path");
+                System.err.println("Hey, " + playerName + ", you don't have enough money to gamble. Choose one of the following options:");
+                System.err.println("1: Return to the three-way-path");
                 choice = scanner.nextInt();
             }
             threeWayPath();
@@ -304,24 +297,24 @@ public class Game {
             if (numberOfRabbits > 0) {
                 numberOfRabbits--;
                 playerMoney += 100;
-                System.out.println("You sold a rabbit and got 100 gold. You have " + numberOfRabbits + " rabbits and " +
-                        playerMoney + " gold.");
+                System.out.println("You sold a rabbit and received 100 gold. You have " + numberOfRabbits + " rabbits and your amount of gold is " +
+                         playerMoney + ".");
                 cityMarket();
             } else {
                 System.out.println("\n------------------------------------------------------------------\n");
-                System.out.println("You don't have any rabbits!");
+                System.err.println("You don't have any rabbits!");
                 cityMarket();
             }
         } else if (choice == 2) {
             if (numberOfTrees > 0) {
                 numberOfTrees--;
                 playerMoney += 100;
-                System.out.println("You sold a tree and got 100 gold. You have " + numberOfTrees + " trees and " +
-                        playerMoney + " gold.");
+                System.out.println("You sold a tree and received 100 gold. You have " + numberOfTrees + " trees and your amount of gold is " +
+                        playerMoney + ".");
                 cityMarket();
             } else {
                 System.out.println("\n------------------------------------------------------------------\n");
-                System.out.println("You don't have any trees!");
+                System.err.println("You don't have any trees!");
                 cityMarket();
             }
         } else if (choice == 3) {
@@ -370,21 +363,21 @@ public class Game {
                     }
                 } else {
                     playerHP /= 2;
-                    System.out.println("Your answer is wrong. Your HP are reduced by 50%. Good luck next time");
-                    System.out.println("You have " + playerHP + " HP.");
+                    System.err.println("Your answer is wrong. Your HP are reduced by 50%. Good luck next time");
+                    System.err.println("You have " + playerHP + " HP.");
                     city();
                 }
             } else {
                 playerHP -= playerHP / 5;
-                System.out.println("Your answer is wrong. Your HP are reduced by 20%. Good luck next time");
-                System.out.println("You have " + playerHP + " HP.");
+                System.err.println("Your answer is wrong. Your HP are reduced by 20%. Good luck next time");
+                System.err.println("You have " + playerHP + " HP.");
                 city();
             }
         }
         else {
             System.out.println("\n------------------------------------------------------------------\n");
-            System.out.println("Hey, " + playerName + ", you don't have enough money to play Quiz game. Choose one of the following options:");
-            System.out.println("1: Return to Pure City");
+            System.err.println("Hey, " + playerName + ", you don't have enough money to play Quiz game. Choose one of the following options:");
+            System.err.println("1: Return to Pure City");
             choice = scanner.nextInt();
             while (choice != 1) {
                 System.out.println("\n------------------------------------------------------------------\n");
@@ -429,7 +422,7 @@ public class Game {
 
     public void knife() {
         if (playerWeapon.equals("Knife")) {
-            System.out.println("You already have a knife.");
+            System.err.println("You already have a knife.");
             sorcerer();
         } else if (playerMoney >= 100) {
             playerMoney -= 100;
@@ -437,14 +430,14 @@ public class Game {
             System.out.println("You have a " + playerWeapon + " and " + playerMoney + " gold.");
             sorcerer();
         } else {
-            System.out.println("You don't have enough money!");
+            System.err.println("You don't have enough money!");
             sorcerer();
         }
     }
 
     public void sword() {
         if (playerWeapon.equals("Sword")) {
-            System.out.println("You already have a sword.");
+            System.err.println("You already have a sword.");
             sorcerer();
         } else if (playerMoney >= 500) {
             playerMoney -= 500;
@@ -452,14 +445,14 @@ public class Game {
             System.out.println("You have a " + playerWeapon + " and " + playerMoney + " gold.");
             sorcerer();
         } else {
-            System.out.println("You don't have enough money!");
+            System.err.println("You don't have enough money!");
             sorcerer();
         }
     }
 
     public void crossbow() {
         if (playerWeapon.equals("Crossbow")) {
-            System.out.println("You already have a crossbow.");
+            System.err.println("You already have a crossbow.");
             sorcerer();
         } else if (playerMoney >= 1000) {
             playerMoney -= 1000;
@@ -467,21 +460,21 @@ public class Game {
             System.out.println("You have a " + playerWeapon + " and " + playerMoney + " gold.");
             sorcerer();
         } else {
-            System.out.println("You don't have enough money!");
+            System.err.println("You don't have enough money!");
             sorcerer();
         }
     }
 
     public void medicine() {
         if (medicine >= 5) {
-            System.out.println("You can't take more than 5 medicine");
+            System.err.println("You can't take more than 5 medicine");
         } else if (playerMoney >= 10) {
             playerMoney -= 10;
             medicine++;
             System.out.println("You have " + medicine + " medicine and " + playerMoney + " gold.");
             sorcerer();
         } else {
-            System.out.println("You don't have enough money!");
+            System.err.println("You don't have enough money!");
             sorcerer();
         }
     }
@@ -506,7 +499,7 @@ public class Game {
                 System.out.println("Your HP are " + playerHP + ".");
                 monster();
             } else {
-                System.out.println("You don't have any medicine!");
+                System.err.println("You don't have any medicine!");
                 monster();
             }
         } else if (choice == 3) {
@@ -517,8 +510,8 @@ public class Game {
     }
 
     public void fight() {
+        int monsterDamage = 0;
         switch (playerWeapon) {
-            //int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
             case "Fist" : playerDamage = ThreadLocalRandom.current().nextInt(0,2); break ;
             case "Knife": playerDamage = ThreadLocalRandom.current().nextInt(2,7); break;
             case "Sword": playerDamage = ThreadLocalRandom.current().nextInt(7,12); break;
@@ -531,7 +524,25 @@ public class Game {
         }
         System.out.println("Monster HP: " + monsterHP);
 
-        if (monsterHP < 1) {
+        if (monsterHP > 0) {
+            switch (playerWeapon) {
+                case "Fist" : monsterDamage = ThreadLocalRandom.current().nextInt(0,4); break ;
+                case "Knife": monsterDamage = ThreadLocalRandom.current().nextInt(4,15); break;
+                case "Sword": monsterDamage = ThreadLocalRandom.current().nextInt(15,25); break;
+                case "Crossbow": monsterDamage = ThreadLocalRandom.current().nextInt(25,50); break;
+            }
+
+
+            System.out.println("The monster attacked you and gave " + monsterDamage + " damage!");
+            playerHP = playerHP - monsterDamage;
+            System.out.println("Player HP: " + playerHP);
+
+            if (playerHP < 1) {
+                dead();
+            } else {
+                monster();
+            }
+        } else {
             caveKey = true;
             System.out.println("You killed the monster and got the key for the cave! Choose one of the following options:");
             System.out.println("1. Go to the castle");
@@ -546,20 +557,7 @@ public class Game {
             } else {
                 fight();
             }
-        } else {
-            int monsterDamage = 0;
 
-            monsterDamage = ThreadLocalRandom.current().nextInt(0,20);
-
-            System.out.println("The monster attacked you and gave " + monsterDamage + " damage!");
-            playerHP = playerHP - monsterDamage;
-            System.out.println("Player HP: " + playerHP);
-
-            if (playerHP < 1) {
-                dead();
-            } else {
-                monster();
-            }
         }
     }
 
@@ -581,7 +579,7 @@ public class Game {
                 castle();
             }
         } else {
-            System.out.println("Get the Quiz key first!");
+            System.err.println("Get the Quiz key first!");
             city();
         }
     }
@@ -594,9 +592,9 @@ public class Game {
     }
 
     public void dead() {
-        System.out.println("\n------------------------------------------------------------------\n");
-        System.out.println("You are dead! The game is over!");
-        System.out.println("\n------------------------------------------------------------------\n");
+        System.err.println("\n------------------------------------------------------------------\n");
+        System.err.println("You are dead! The game is over!");
+        System.err.println("\n------------------------------------------------------------------\n");
     }
 
     public void inventory() {
