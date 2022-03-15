@@ -50,4 +50,64 @@ public class InstructionHelper {
         System.out.println("4: Check inventory");
         System.out.println("\n------------------------------------------------------------------\n");
     }
+
+    public static void forestInstruction() {
+        System.out.println("\n------------------------------------------------------------------\n");
+        ASCIIArtHelper.drawForest();
+        System.out.println("\nWelcome to the forest! Choose one of the following options:\n\n");
+        // TODO: add description about options!
+        System.out.println("1: Get a rabbit");
+        System.out.println("2: Chop a tree");
+        System.out.println("3: Return to the mountain");
+        System.out.println("4: Check inventory");
+        System.out.println("\n------------------------------------------------------------------\n");
+    }
+
+    public static void cityInstruction() {
+        System.out.println("\n------------------------------------------------------------------\n");
+        ASCIIArtHelper.drawPureCity();
+        System.out.println("\nWelcome to Pure City! You are at a crossroad. Choose one of the following options:\n\n");
+        System.out.println("1: To the shop");
+        System.out.println("2: To the Sorcerer");
+        System.out.println("3: To the cave");
+        System.out.println("4: To the castle");
+        System.out.println("5: Return to the three-way-path");
+        System.out.println("6: Check inventory");
+        System.out.println("\n------------------------------------------------------------------\n");
+    }
+
+    public static void cityShopInstruction() {
+        System.out.println("\n------------------------------------------------------------------\n");
+        System.out.println("You are in the city market. Choose one of the following options:\n\n");
+        System.out.println("1: Sell rabbits");
+        System.out.println("2: Sell trees");
+        System.out.println("3: Return to the city");
+        System.out.println("4: Check inventory");
+        System.out.println("\n------------------------------------------------------------------\n");
+    }
+
+
+    public static void gamblingAreaWarning(String playerName) {
+        System.out.println("\n------------------------------------------------------------------\n");
+        System.err.println("Hey, " + playerName + ", you don't have enough money to gamble. Choose one of the following options:");
+        System.err.println("1: Return to the three-way-path");
+    }
+
+    public static void guessTheNumberLose(int random, int playerMoney) {
+        System.out.println("You didn't manage to guess the number!");
+        System.out.println("The number is " + random + ".");
+        System.out.println("Your money were divided by 2!");
+        System.out.println("You have " + playerMoney + " gold.");
+    }
+
+    public static void caveWrongAnswer(int playerHP, int percentage) {
+        System.err.println("Your answer is wrong. Your HP are reduced by " + percentage + "%. Good luck next time");
+        System.err.println("You have " + playerHP + " HP.");
+    }
+
+    public static void quizWarning(String playerName) {
+        System.out.println("\n------------------------------------------------------------------\n");
+        System.err.println("Hey, " + playerName + ", you don't have enough money to play Quiz game. Choose one of the following options:");
+        System.err.println("1: Return to Pure City");
+    }
 }
