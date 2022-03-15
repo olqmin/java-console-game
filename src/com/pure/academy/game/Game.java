@@ -301,7 +301,6 @@ public class Game {
                          playerMoney + ".");
                 cityMarket();
             } else {
-                System.out.println("\n------------------------------------------------------------------\n");
                 System.err.println("You don't have any rabbits!");
                 cityMarket();
             }
@@ -313,7 +312,6 @@ public class Game {
                         playerMoney + ".");
                 cityMarket();
             } else {
-                System.out.println("\n------------------------------------------------------------------\n");
                 System.err.println("You don't have any trees!");
                 cityMarket();
             }
