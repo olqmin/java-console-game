@@ -1,12 +1,14 @@
 package com.pure.academy.util;
 
+import com.pure.academy.model.Weapon;
+
 public class InstructionHelper {
     public static void sorcererMenu(int playerMoney, String playerWeapon) {
         System.out.println("\n------------------------------------------------------------------\n");
         System.out.println("The Sorcerer is here.You have " + playerMoney + " gold and " + playerWeapon + ".  Choose one of the following options:\n\n");
-        System.out.println("1: Buy a knife - 100 gold");
-        System.out.println("2: Buy a sword - 500 gold");
-        System.out.println("3: Buy a crossbow - 1000 gold");
+        System.out.println("1: Buy a knife - " + Weapon.KNIFE.price + " gold.");
+        System.out.println("2: Buy a sword - " + Weapon.SWORD.price + " gold.");
+        System.out.println("3: Buy a crossbow - " + Weapon.CROSSBOW.price + " gold.");
         System.out.println("4: Buy medicine - 10 gold");
         System.out.println("5: Return to the city");
         System.out.println("6: Check inventory");
@@ -109,5 +111,42 @@ public class InstructionHelper {
         System.out.println("\n------------------------------------------------------------------\n");
         System.err.println("Hey, " + playerName + ", you don't have enough money to play Quiz game. Choose one of the following options:");
         System.err.println("1: Return to Pure City");
+    }
+
+    public static void monsterInstruction(int playerHP, int monsterHP) {
+        System.out.println("\n------------------------------------------------------------------\n");
+        System.out.println("Your HP: " + playerHP);
+        System.out.println("Monster HP: " + monsterHP);
+        System.out.println("\n1: Fight");
+        System.out.println("2: Drink medicine");
+        System.out.println("3: Run");
+        System.out.println("\n------------------------------------------------------------------\n");
+    }
+
+    public static void monsterKilled() {
+        System.out.println("You killed the monster and got the key for the cave! Choose one of the following options:");
+        System.out.println("1. Go to the castle");
+        System.out.println("2. Return to the city");
+    }
+
+    public static void castleInstruction() {
+        System.out.println("\n------------------------------------------------------------------\n");
+        System.out.println("\nYou are in the castle. Choose one of the following options:\n\n");
+        System.out.println("1. Save the princess");
+        System.out.println("2. Return to the city");
+        System.out.println("\n------------------------------------------------------------------\n");
+    }
+
+    public static void princess(String playerName) {
+        System.out.println("\n------------------------------------------------------------------\n");
+        System.out.println("Hey " + playerName + ", " + "I was prisoned here too long, but you saved me. Thank you, my dear!");
+        System.out.println("\nTHE END");
+        System.out.println("\n------------------------------------------------------------------\n");
+    }
+
+    public static void dead() {
+        System.err.println("\n------------------------------------------------------------------\n");
+        System.err.println("You are dead! The game is over!");
+        System.err.println("\n------------------------------------------------------------------\n");
     }
 }

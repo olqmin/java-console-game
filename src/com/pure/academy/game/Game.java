@@ -1,13 +1,10 @@
 package com.pure.academy.game;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.pure.academy.model.QuestionModel;
+import com.pure.academy.model.Weapon;
 import com.pure.academy.util.*;
 
 public class Game {
@@ -21,7 +18,7 @@ public class Game {
     int playerMoney;
     int numberOfRabbits;
     int numberOfTrees;
-    String playerWeapon = "Fist";
+    Weapon playerWeapon = Weapon.FIST;
     int playerDamage;
     int medicine;
 
@@ -295,7 +292,7 @@ public class Game {
                         quizKey = true;
                         city();
                     } else {
-                        dead();
+                        InstructionHelper.dead();
                     }
                 } else {
                     playerHP /= 2;
@@ -319,7 +316,7 @@ public class Game {
     }
 
     public void sorcerer() {
-        InstructionHelper.sorcererMenu(playerMoney, playerWeapon);
+        InstructionHelper.sorcererMenu(playerMoney, playerWeapon.name().toLowerCase());
 
         choice = scanner.nextInt();
 // TODO: Switch
@@ -341,14 +338,14 @@ public class Game {
         }
     }
 
-    private void buyWeapon(String weapon, int weaponPrice) {
+    private void buyWeapon(Weapon weapon) {
         if (playerWeapon.equals(weapon)) {
-            System.err.println("You already have a " + weapon + ".");
+            System.err.println("You already have a " + weapon.name().toLowerCase() + ".");
             sorcerer();
-        } else if (playerMoney >= weaponPrice) {
-            playerMoney -= weaponPrice;
+        } else if (playerMoney >= weapon.price) {
+            playerMoney -= weapon.price;
             playerWeapon = weapon;
-            System.out.println("You have a " + playerWeapon + " and " + playerMoney + " gold.");
+            System.out.println("You have a " + weapon.name().toLowerCase() + " and " + playerMoney + " gold.");
             sorcerer();
         } else {
             System.err.println("You don't have enough money!");
@@ -357,15 +354,15 @@ public class Game {
     }
 
     public void knife() {
-        buyWeapon("Knife", 100);
+        buyWeapon(Weapon.KNIFE);
     }
 
     public void sword() {
-        buyWeapon("Sword", 500);
+        buyWeapon(Weapon.SWORD);
     }
 
     public void crossbow() {
-        buyWeapon("Crossbow", 1000);
+        buyWeapon(Weapon.CROSSBOW);
     }
 
     public void medicine() {
@@ -383,13 +380,7 @@ public class Game {
     }
 
     public void monster() {
-        System.out.println("\n------------------------------------------------------------------\n");
-        System.out.println("Your HP: " + playerHP);
-        System.out.println("Monster HP: " + monsterHP);
-        System.out.println("\n1: Fight");
-        System.out.println("2: Drink medicine");
-        System.out.println("3: Run");
-        System.out.println("\n------------------------------------------------------------------\n");
+        InstructionHelper.monsterInstruction(playerHP, monsterHP);
 
         choice = scanner.nextInt();
 
@@ -415,16 +406,16 @@ public class Game {
     public void fight() {
         int monsterDamage = 0;
         switch (playerWeapon) {
-            case "Fist":
+            case FIST:
                 playerDamage = ThreadLocalRandom.current().nextInt(0, 2);
                 break;
-            case "Knife":
+            case KNIFE:
                 playerDamage = ThreadLocalRandom.current().nextInt(2, 7);
                 break;
-            case "Sword":
+            case SWORD:
                 playerDamage = ThreadLocalRandom.current().nextInt(7, 12);
                 break;
-            case "Crossbow":
+            case CROSSBOW:
                 playerDamage = ThreadLocalRandom.current().nextInt(12, 20);
                 break;
         }
@@ -437,16 +428,16 @@ public class Game {
 
         if (monsterHP > 0) {
             switch (playerWeapon) {
-                case "Fist":
+                case FIST:
                     monsterDamage = ThreadLocalRandom.current().nextInt(0, 4);
                     break;
-                case "Knife":
+                case KNIFE:
                     monsterDamage = ThreadLocalRandom.current().nextInt(4, 15);
                     break;
-                case "Sword":
+                case SWORD:
                     monsterDamage = ThreadLocalRandom.current().nextInt(15, 25);
                     break;
-                case "Crossbow":
+                case CROSSBOW:
                     monsterDamage = ThreadLocalRandom.current().nextInt(25, 50);
                     break;
             }
@@ -457,16 +448,14 @@ public class Game {
             if (playerHP < 1) {
                 playerHP = 0;
                 System.out.println("Player HP: " + playerHP);
-                dead();
+                InstructionHelper.dead();
             } else {
                 System.out.println("Player HP: " + playerHP);
                 monster();
             }
         } else {
             caveKey = true;
-            System.out.println("You killed the monster and got the key for the cave! Choose one of the following options:");
-            System.out.println("1. Go to the castle");
-            System.out.println("2. Return to the city");
+            InstructionHelper.monsterKilled();
 
             choice = scanner.nextInt();
 
@@ -483,16 +472,12 @@ public class Game {
 
     public void castle() {
         if (quizKey) {
-            System.out.println("\n------------------------------------------------------------------\n");
-            System.out.println("\nYou are in the castle. Choose one of the following options:\n\n");
-            System.out.println("1. Save the princess");
-            System.out.println("2. Return to the city");
-            System.out.println("\n------------------------------------------------------------------\n");
+            InstructionHelper.castleInstruction();
 
             choice = scanner.nextInt();
 
             if (choice == 1) {
-                princess();
+                InstructionHelper.princess(playerName);
             } else if (choice == 2) {
                 city();
             } else {
@@ -504,20 +489,7 @@ public class Game {
         }
     }
 
-    public void princess() {
-        System.out.println("\n------------------------------------------------------------------\n");
-        System.out.println("Hey " + playerName + ", " + "I was prisoned here too long, but you saved me. Thank you, my dear!");
-        System.out.println("\nTHE END");
-        System.out.println("\n------------------------------------------------------------------\n");
-    }
-
-    public void dead() {
-        System.err.println("\n------------------------------------------------------------------\n");
-        System.err.println("You are dead! The game is over!");
-        System.err.println("\n------------------------------------------------------------------\n");
-    }
-
     public void inventory() {
-        TableHelper.showInformationTable(playerName, playerHP, playerWeapon, medicine, numberOfRabbits, numberOfTrees, quizKey, caveKey, playerMoney);
+        TableHelper.showInformationTable(playerName, playerHP, playerWeapon.name().toLowerCase(), medicine, numberOfRabbits, numberOfTrees, quizKey, caveKey, playerMoney);
     }
 }
