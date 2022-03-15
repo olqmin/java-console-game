@@ -8,10 +8,7 @@ import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.pure.academy.model.QuestionModel;
-import com.pure.academy.util.ASCIIArtHelper;
-import com.pure.academy.util.QuestionGeneratorHelper;
-import com.pure.academy.util.ShuffelHelper;
-import com.pure.academy.util.TableHelper;
+import com.pure.academy.util.*;
 
 public class Game {
     Scanner scanner = new Scanner(System.in);
@@ -55,14 +52,7 @@ public class Game {
     }
 
     public void threeWayPath() {
-        System.out.println("\n------------------------------------------------------------------\n");
-        ASCIIArtHelper.drawThreeWayPath();
-        System.out.println("\nYou are at a crossroad. Choose one of the following options:\n\n");
-        System.out.println("1: To the mountain");
-        System.out.println("2: To Pure City");
-        System.out.println("3: To the gambling area");
-        System.out.println("4: Check inventory");
-        System.out.println("\n------------------------------------------------------------------\n");
+        InstructionHelper.threeWayPathInstruction();
 
         choice = scanner.nextInt();
 
@@ -81,18 +71,7 @@ public class Game {
     }
 
     public void mountain() {
-        System.out.println("\n------------------------------------------------------------------\n");
-
-        ASCIIArtHelper.drawMountain();
-
-        System.out.println("\nWelcome to the mountain! Choose one of the following options:\n\n");
-
-        // TODO: add description about options!
-        System.out.println("1: To the forest");
-        System.out.println("2: To the river");
-        System.out.println("3: Return to the three-way-path");
-        System.out.println("4: Check inventory");
-        System.out.println("\n------------------------------------------------------------------\n");
+        InstructionHelper.mountainInstruction();
 
         choice = scanner.nextInt();
 
@@ -238,10 +217,7 @@ public class Game {
     public void gamblingArea() {
         if (playerMoney >= 10) {
             System.out.println("\n------------------------------------------------------------------\n");
-            System.out.println("\nYou entered the gambling area.\n");
-            System.out.println("You can gamble your money in this section only if you have at least 100 gold.");
-            System.out.println("You have to guess the number from 0-100. 5 times must be enough for you.");
-            System.out.println("If correct: Doubles the money\n" + "If 5 tries are over - your money will be divided by 2.\n");
+            InstructionHelper.gamblingAreaRules();
             guessTheNumber();
         } else {
             System.out.println("\n------------------------------------------------------------------\n");
@@ -269,9 +245,9 @@ public class Game {
                 System.out.println("You guessed the number! You doubled your money!");
                 threeWayPath();
             } else if (choice < random) {
-                System.out.println("The number is bigger!");
+                System.out.println("The number is bigger! Try again!");
             } else {
-                System.out.println("The number is smaller!");
+                System.out.println("The number is smaller! Try again!");
             }
         }
         playerMoney /= 2;
@@ -328,10 +304,7 @@ public class Game {
     public void cave() {
         if (playerMoney >= -10) {
             System.out.println("\n------------------------------------------------------------------\n");
-            System.out.println("You entered the Quiz game area.");
-            System.out.println("In this game you have 3 questions, each of them with with 4 answers and only one of them is correct.");
-            System.out.println("For 1st, 2nd and 3rd question you will get 100, 500 or 1000 money and a key, but if you choose wrong answer your HP will be reduced by 20%, 50% or you will die.");
-            System.out.println("Let's play Quiz game!\n");
+            InstructionHelper.quizGameRules();
             List<QuestionModel> questionList = QuestionGeneratorHelper.getThreeRandomQuestions();
             QuestionModel firstQuestion = questionList.get(0);
             String givenAnswer = askQuestion(firstQuestion, 1);
@@ -388,15 +361,7 @@ public class Game {
     }
 
     public void sorcerer() {
-        System.out.println("\n------------------------------------------------------------------\n");
-        System.out.println("The Sorcerer is here.You have " + playerMoney + " gold and " + playerWeapon + ".  Choose one of the following options:\n\n");
-        System.out.println("1: Buy a knife - 100 gold");
-        System.out.println("2: Buy a sword - 500 gold");
-        System.out.println("3: Buy a crossbow - 1000 gold");
-        System.out.println("4: Buy medicine - 10 gold");
-        System.out.println("5: Return to the city");
-        System.out.println("6: Check inventory");
-        System.out.println("\n------------------------------------------------------------------\n");
+        InstructionHelper.sorcererMenu(playerMoney, playerWeapon);
 
         choice = scanner.nextInt();
 
