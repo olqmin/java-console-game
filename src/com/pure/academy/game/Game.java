@@ -38,7 +38,7 @@ public class Game {
 
     public void playerSetup() {
         playerHP = 100;
-        monsterHP = 5;
+        monsterHP = 50;
 
         ASCIIArtHelper.drawCharacter();
 
@@ -535,11 +535,12 @@ public class Game {
 
             System.out.println("The monster attacked you and gave " + monsterDamage + " damage!");
             playerHP = playerHP - monsterDamage;
-            System.out.println("Player HP: " + playerHP);
-
             if (playerHP < 1) {
+                playerHP = 0;
+                System.out.println("Player HP: " + playerHP);
                 dead();
             } else {
+                System.out.println("Player HP: " + playerHP);
                 monster();
             }
         } else {
