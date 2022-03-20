@@ -1,6 +1,6 @@
 package com.pure.academy.util;
 
-import com.pure.academy.model.QuestionModel;
+import model.QuestionModel;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -3,8 +3,8 @@ package com.pure.academy.game;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
-import com.pure.academy.model.QuestionModel;
-import com.pure.academy.model.Weapon;
+import model.QuestionModel;
+import model.Weapon;
 import com.pure.academy.util.*;
 
 public class Game {
@@ -145,31 +145,37 @@ public class Game {
         InstructionHelper.cityInstruction();
 
         choice = scanner.nextInt();
-        // TODO: SWITCH
-        if (choice == 1) {
-            cityShop();
-        } else if (choice == 2) {
-            sorcerer();
-        } else if (choice == 3) {
-            if (caveKey) {
-                cave();
-            } else {
-                System.err.println("The cave is locked! You have to kill the monster and get the key.");
+        switch (choice) {
+            case 1:
+                cityShop();
+                break;
+            case 2:
+                sorcerer();
+                break;
+            case 3:
+                if (caveKey) {
+                    cave();
+                } else {
+                    System.err.println("The cave is locked! You have to kill the monster and get the key.");
+                    city();
+                }
+                break;
+            case 4:
+                if (monsterHP < 1) {
+                    castle();
+                } else {
+                    monster();
+                }
+                break;
+            case 5:
+                threeWayPath();
+                break;
+            case 6:
+                inventory();
                 city();
-            }
-        } else if (choice == 4) {
-            if (monsterHP < 1) {
-                castle();
-            } else {
-                monster();
-            }
-        } else if (choice == 5) {
-            threeWayPath();
-        } else if (choice == 6) {
-            inventory();
-            city();
-        } else {
-            city();
+                break;
+            default:
+                city();
         }
     }
 
@@ -231,36 +237,40 @@ public class Game {
         InstructionHelper.cityShopInstruction();
 
         choice = scanner.nextInt();
-// TODO: Switch
-        if (choice == 1) {
-            if (numberOfRabbits > 0) {
-                numberOfRabbits--;
-                playerMoney += 100;
-                System.out.println("You sold a rabbit and received 100 gold. You have " + numberOfRabbits + " rabbits and your amount of gold is " +
-                        playerMoney + ".");
+        switch (choice) {
+            case 1:
+                if (numberOfRabbits > 0) {
+                    numberOfRabbits--;
+                    playerMoney += 100;
+                    System.out.println("You sold a rabbit and received 100 gold. You have " + numberOfRabbits + " rabbits and your amount of gold is " +
+                            playerMoney + ".");
+                    cityShop();
+                } else {
+                    System.err.println("You don't have any rabbits!");
+                    cityShop();
+                }
+                break;
+            case 2:
+                if (numberOfTrees > 0) {
+                    numberOfTrees--;
+                    playerMoney += 100;
+                    System.out.println("You sold a tree and received 100 gold. You have " + numberOfTrees + " trees and your amount of gold is " +
+                            playerMoney + ".");
+                    cityShop();
+                } else {
+                    System.err.println("You don't have any trees!");
+                    cityShop();
+                }
+                break;
+            case 3:
+                city();
+                break;
+            case 4:
+                inventory();
                 cityShop();
-            } else {
-                System.err.println("You don't have any rabbits!");
+                break;
+            default:
                 cityShop();
-            }
-        } else if (choice == 2) {
-            if (numberOfTrees > 0) {
-                numberOfTrees--;
-                playerMoney += 100;
-                System.out.println("You sold a tree and received 100 gold. You have " + numberOfTrees + " trees and your amount of gold is " +
-                        playerMoney + ".");
-                cityShop();
-            } else {
-                System.err.println("You don't have any trees!");
-                cityShop();
-            }
-        } else if (choice == 3) {
-            city();
-        } else if (choice == 4) {
-            inventory();
-            cityShop();
-        } else {
-            cityShop();
         }
     }
 
@@ -319,22 +329,28 @@ public class Game {
         InstructionHelper.sorcererMenu(playerMoney, playerWeapon.name().toLowerCase());
 
         choice = scanner.nextInt();
-// TODO: Switch
-        if (choice == 1) {
-            knife();
-        } else if (choice == 2) {
-            sword();
-        } else if (choice == 3) {
-            crossbow();
-        } else if (choice == 4) {
-            medicine();
-        } else if (choice == 5) {
-            city();
-        } else if (choice == 6) {
-            inventory();
-            sorcerer();
-        } else {
-            sorcerer();
+        switch (choice) {
+            case 1:
+                knife();
+                break;
+            case 2:
+                sword();
+                break;
+            case 3:
+                crossbow();
+                break;
+            case 4:
+                medicine();
+                break;
+            case 5:
+                city();
+                break;
+            case 6:
+                inventory();
+                sorcerer();
+                break;
+            default:
+                sorcerer();
         }
     }
 

@@ -1,4 +1,4 @@
-package com.pure.academy.model;
+package model;
 
 public enum Weapon {
     FIST(0), KNIFE(100), SWORD(500), CROSSBOW(1000);
