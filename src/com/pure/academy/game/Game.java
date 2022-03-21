@@ -53,17 +53,22 @@ public class Game {
 
         choice = scanner.nextInt();
 
-        if (choice == 1) {
-            mountain();
-        } else if (choice == 2) {
-            city();
-        } else if (choice == 3) {
-            gamblingArea();
-        } else if (choice == 4) {
-            inventory();
-            threeWayPath();
-        } else {
-            threeWayPath();
+        switch (choice) {
+            case 1:
+                mountain();
+                break;
+            case 2:
+                city();
+                break;
+            case 3:
+                gamblingArea();
+                break;
+            case 4:
+                inventory();
+                threeWayPath();
+                break;
+            default:
+                threeWayPath();
         }
     }
 
@@ -72,17 +77,22 @@ public class Game {
 
         choice = scanner.nextInt();
 
-        if (choice == 1) {
-            forest();
-        } else if (choice == 2) {
-            river();
-        } else if (choice == 3) {
-            threeWayPath();
-        } else if (choice == 4) {
-            inventory();
-            mountain();
-        } else {
-            threeWayPath();
+        switch (choice) {
+            case 1:
+                forest();
+                break;
+            case 2:
+                river();
+                break;
+            case 3:
+                threeWayPath();
+                break;
+            case 4:
+                inventory();
+                mountain();
+                break;
+            default:
+                threeWayPath();
         }
     }
 
@@ -91,17 +101,22 @@ public class Game {
 
         choice = scanner.nextInt();
 
-        if (choice == 1) {
-            rabbit();
-        } else if (choice == 2) {
-            chopTree();
-        } else if (choice == 3) {
-            mountain();
-        } else if (choice == 4) {
-            inventory();
-            forest();
-        } else {
-            forest();
+        switch (choice) {
+            case 1:
+                rabbit();
+                break;
+            case 2:
+                chopTree();
+                break;
+            case 3:
+                mountain();
+                break;
+            case 4:
+                inventory();
+                forest();
+                break;
+            default:
+                forest();
         }
     }
 
@@ -400,22 +415,26 @@ public class Game {
 
         choice = scanner.nextInt();
 
-        if (choice == 1) {
-            fight();
-        } else if (choice == 2) {
-            if (medicine > 0) {
-                medicine--;
-                playerHP += 10;
-                System.out.println("Your HP are " + playerHP + ".");
+        switch (choice) {
+            case 1:
+                fight();
+                break;
+            case 2:
+                if (medicine > 0) {
+                    medicine--;
+                    playerHP += 10;
+                    System.out.println("Your HP are " + playerHP + ".");
+                    monster();
+                } else {
+                    System.err.println("You don't have any medicine!");
+                    monster();
+                }
+                break;
+            case 3:
+                city();
+                break;
+            default:
                 monster();
-            } else {
-                System.err.println("You don't have any medicine!");
-                monster();
-            }
-        } else if (choice == 3) {
-            city();
-        } else {
-            monster();
         }
     }
 
@@ -475,12 +494,15 @@ public class Game {
 
             choice = scanner.nextInt();
 
-            if (choice == 1) {
-                castle();
-            } else if (choice == 2) {
-                city();
-            } else {
-                fight();
+            switch (choice) {
+                case 1:
+                    castle();
+                    break;
+                case 2:
+                    city();
+                    break;
+                default:
+                    fight();
             }
 
         }
@@ -492,13 +514,17 @@ public class Game {
 
             choice = scanner.nextInt();
 
-            if (choice == 1) {
-                InstructionHelper.princess(playerName);
-            } else if (choice == 2) {
-                city();
-            } else {
-                castle();
+            switch (choice) {
+                case 1:
+                    InstructionHelper.princess(playerName);
+                    break;
+                case 2:
+                    city();
+                    break;
+                default:
+                    castle();
             }
+
         } else {
             System.err.println("Get the Quiz key first!");
             city();
