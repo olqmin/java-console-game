@@ -87,7 +87,7 @@ public class Game {
     public void mountain() {
         InstructionHelper.mountainInstruction();
 
-        choice = scanner.nextInt();
+        checkInput(() -> mountain());
 
         switch (choice) {
             case 1:
@@ -104,14 +104,14 @@ public class Game {
                 mountain();
                 break;
             default:
-                threeWayPath();
+                mountain();
         }
     }
 
     public void forest() {
         InstructionHelper.forestInstruction();
 
-        choice = scanner.nextInt();
+        checkInput(() -> forest());
 
         switch (choice) {
             case 1:
@@ -171,7 +171,7 @@ public class Game {
     public void city() {
         InstructionHelper.cityInstruction();
 
-        choice = scanner.nextInt();
+        checkInput(() -> city());
         switch (choice) {
             case 1:
                 cityShop();
@@ -263,7 +263,7 @@ public class Game {
     public void cityShop() {
         InstructionHelper.cityShopInstruction();
 
-        choice = scanner.nextInt();
+        checkInput(() -> cityShop());
         switch (choice) {
             case 1:
                 if (numberOfRabbits > 0) {
@@ -358,7 +358,7 @@ public class Game {
     public void sorcerer() {
         InstructionHelper.sorcererMenu(playerMoney, playerWeapon.name().toLowerCase());
 
-        choice = scanner.nextInt();
+        checkInput(() -> sorcerer());
         switch (choice) {
             case 1:
                 knife();
@@ -428,7 +428,7 @@ public class Game {
     public void monster() {
         InstructionHelper.monsterInstruction(playerHP, monsterHP);
 
-        choice = scanner.nextInt();
+        checkInput(() -> monster());
 
         switch (choice) {
             case 1:
@@ -507,7 +507,7 @@ public class Game {
             caveKey = true;
             InstructionHelper.monsterKilled();
 
-            choice = scanner.nextInt();
+            checkInput(() -> fight());
 
             switch (choice) {
                 case 1:
@@ -527,7 +527,7 @@ public class Game {
         if (quizKey) {
             InstructionHelper.castleInstruction();
 
-            choice = scanner.nextInt();
+            checkInput(() -> castle());
 
             switch (choice) {
                 case 1:
