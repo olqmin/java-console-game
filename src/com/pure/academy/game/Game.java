@@ -51,14 +51,7 @@ public class Game {
     public void threeWayPath() {
         InstructionHelper.threeWayPathInstruction();
 
-        String input = scanner.nextLine();
-        try {
-            choice = Integer.valueOf(input);
-        } catch (NumberFormatException e) {
-            System.err.println("Please enter only numbers!");
-            threeWayPath();
-            return;
-        }
+        checkInput(() -> threeWayPath());
 
         switch (choice) {
             case 1:
@@ -79,6 +72,16 @@ public class Game {
         }
 
 
+    }
+    
+    private void checkInput(Runnable function) {
+    	String input = scanner.next();
+        try {
+            choice = Integer.valueOf(input);
+        } catch (NumberFormatException e) {
+            System.err.println("Please enter only numbers!");
+            function.run();
+        }
     }
 
     public void mountain() {
