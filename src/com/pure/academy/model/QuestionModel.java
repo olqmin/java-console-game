@@ -1,4 +1,4 @@
-package model;
+package com.pure.academy.model;
 
 import java.util.HashMap;
 import java.util.Map;

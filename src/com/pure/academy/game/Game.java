@@ -3,8 +3,8 @@ package com.pure.academy.game;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
-import model.QuestionModel;
-import model.Weapon;
+import com.pure.academy.model.QuestionModel;
+import com.pure.academy.model.Weapon;
 import com.pure.academy.util.*;
 
 public class Game {

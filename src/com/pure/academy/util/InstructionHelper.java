@@ -1,6 +1,6 @@
 package com.pure.academy.util;
 
-import model.Weapon;
+import com.pure.academy.model.Weapon;
 
 public class InstructionHelper {
     public static void sorcererMenu(int playerMoney, String playerWeapon) {
