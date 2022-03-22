@@ -266,28 +266,10 @@ public class Game {
         checkInput(() -> cityShop());
         switch (choice) {
             case 1:
-                if (numberOfRabbits > 0) {
-                    numberOfRabbits--;
-                    playerMoney += 100;
-                    System.out.println("You sold a rabbit and received 100 gold. You have " + numberOfRabbits + " rabbits and your amount of gold is " +
-                            playerMoney + ".");
-                    cityShop();
-                } else {
-                    System.err.println("You don't have any rabbits!");
-                    cityShop();
-                }
+                sellingItems(numberOfRabbits,"rabbit");
                 break;
             case 2:
-                if (numberOfTrees > 0) {
-                    numberOfTrees--;
-                    playerMoney += 100;
-                    System.out.println("You sold a tree and received 100 gold. You have " + numberOfTrees + " trees and your amount of gold is " +
-                            playerMoney + ".");
-                    cityShop();
-                } else {
-                    System.err.println("You don't have any trees!");
-                    cityShop();
-                }
+                sellingItems(numberOfTrees,"tree");
                 break;
             case 3:
                 city();
@@ -300,6 +282,21 @@ public class Game {
                 cityShop();
         }
     }
+//ne namalq numberOfItems sled vtoro povikvane na metoda
+    private void sellingItems(int numberOfItems,String item) {
+        if (numberOfItems > 0) {
+            numberOfItems--;
+            playerMoney += 100;
+            System.out.println("You sold a " + item + " and received 100 gold. You have " + numberOfItems + " " + item + "s and your amount of gold is " +
+                    playerMoney + ".");
+            cityShop();
+        } else {
+            System.err.println("You don't have any " + item + "s!");
+            cityShop();
+        }
+
+    }
+
 
     public void cave() {
         if (playerMoney >= -10) {

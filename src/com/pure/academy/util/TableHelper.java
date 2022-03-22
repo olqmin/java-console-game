@@ -8,7 +8,7 @@ public class TableHelper {
 		
 String[] headers = {"", "Name", "HP", "Weapon", "Medicine", "Bunnies", "Trees", "Golden Key", "Cave Key", "Money"};
 	String[][] data = {
-	        {"1", playerName, String.valueOf(playerHP), playerWeapon, String.valueOf(medicine), String.valueOf(numberOfRabbits), String.valueOf(numberOfTrees), String.valueOf(goldenKey), String.valueOf(caveKey), String.valueOf(playerMoney)}};
+	        {"1", playerName, String.valueOf(playerHP), playerWeapon, String.valueOf(medicine), String.valueOf(numberOfRabbits), String.valueOf(numberOfTrees), goldenKey ? "yes" : "no", caveKey ? "yes" : "no", String.valueOf(playerMoney)}};
 
 	System.out.println(AsciiTable.getTable(headers, data));
 	}

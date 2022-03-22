@@ -44,8 +44,7 @@ public class InstructionHelper {
     public static void mountainInstruction() {
         System.out.println("\n------------------------------------------------------------------\n");
         ASCIIArtHelper.drawMountain();
-        System.out.println("\nWelcome to the mountain! Choose one of the following options:\n\n");
-        // TODO: add description about options!
+        System.out.println("\nWelcome to the mountain! Here you can find tradable resources which can help you further in the game. Choose one of the following options:\n\n");
         System.out.println("1: To the forest");
         System.out.println("2: To the river");
         System.out.println("3: Return to the three-way-path");
@@ -56,8 +55,7 @@ public class InstructionHelper {
     public static void forestInstruction() {
         System.out.println("\n------------------------------------------------------------------\n");
         ASCIIArtHelper.drawForest();
-        System.out.println("\nWelcome to the forest! Choose one of the following options:\n\n");
-        // TODO: add description about options!
+        System.out.println("\nWelcome to the forest!Here you can add rabbits or trees to your inventory. Choose one of the following options:\n\n");
         System.out.println("1: Get a rabbit");
         System.out.println("2: Chop a tree");
         System.out.println("3: Return to the mountain");
