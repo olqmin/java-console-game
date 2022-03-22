@@ -149,4 +149,14 @@ public class InstructionHelper {
         System.err.println("You are dead! The game is over!");
         System.err.println("\n------------------------------------------------------------------\n");
     }
+    
+    public static void correctAnswerOnQuiz(int moneyWon) {
+    	System.out.println("Your answer is correct! You won " + moneyWon + " money.");
+        
+    }
+    
+    public static void princessSaved() {
+    	System.out.println("You get the golden key!");
+        System.out.println("You can save the princess!");
+    }
 }

@@ -306,22 +306,25 @@ public class Game {
             QuestionModel firstQuestion = questionList.get(0);
             String givenAnswer = askQuestion(firstQuestion, 1);
 
+            int moneyWon;
             if (firstQuestion.getAnswerMap().get(givenAnswer) == true) {
-                System.out.println("Your answer is correct! You won 100 money.");
-                playerMoney += 100;
+            	moneyWon = 100;
+            	InstructionHelper.correctAnswerOnQuiz(moneyWon);
+                playerMoney += moneyWon;
                 QuestionModel secondQuestion = questionList.get(1);
                 givenAnswer = askQuestion(secondQuestion, 2);
                 if (secondQuestion.getAnswerMap().get(givenAnswer) == true) {
-                    System.out.println("Your answer is correct! You won 500 money.");
-                    playerMoney += 500;
+                	moneyWon = 500;
+                	InstructionHelper.correctAnswerOnQuiz(moneyWon);
+                    playerMoney += moneyWon;
                     QuestionModel thirdQuestion = questionList.get(2);
                     givenAnswer = askQuestion(thirdQuestion, 3);
                     if (thirdQuestion.getAnswerMap().get(givenAnswer) == true) {
-                        System.out.println("Your answer is correct! You won 1000 money.");
-                        playerMoney += 1000;
+                    	moneyWon = 1000;
+                    	InstructionHelper.correctAnswerOnQuiz(moneyWon);
+                        playerMoney += moneyWon;
                         if (!quizKey) {
-                            System.out.println("You get the golden key!");
-                            System.out.println("You can save the princess!");
+                        	InstructionHelper.princessSaved();
                         }
                         quizKey = true;
                         city();
