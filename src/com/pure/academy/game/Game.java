@@ -2,6 +2,7 @@ package com.pure.academy.game;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.pure.academy.model.QuestionModel;
 import com.pure.academy.model.Weapon;
@@ -73,9 +74,9 @@ public class Game {
 
 
     }
-    
+
     private void checkInput(Runnable function) {
-    	String input = scanner.next();
+        String input = scanner.next();
         try {
             choice = Integer.valueOf(input);
         } catch (NumberFormatException e) {
@@ -266,10 +267,12 @@ public class Game {
         checkInput(() -> cityShop());
         switch (choice) {
             case 1:
-                sellingItems(numberOfRabbits,"rabbit");
+                numberOfRabbits = sellingItems(numberOfRabbits, "rabbit");
+                cityShop();
                 break;
             case 2:
-                sellingItems(numberOfTrees,"tree");
+                numberOfTrees = sellingItems(numberOfTrees, "tree");
+                cityShop();
                 break;
             case 3:
                 city();
@@ -282,19 +285,17 @@ public class Game {
                 cityShop();
         }
     }
-//ne namalq numberOfItems sled vtoro povikvane na metoda
-    private void sellingItems(int numberOfItems,String item) {
+
+    private int sellingItems(int numberOfItems, String item) {
         if (numberOfItems > 0) {
             numberOfItems--;
             playerMoney += 100;
             System.out.println("You sold a " + item + " and received 100 gold. You have " + numberOfItems + " " + item + "s and your amount of gold is " +
                     playerMoney + ".");
-            cityShop();
         } else {
             System.err.println("You don't have any " + item + "s!");
-            cityShop();
         }
-
+        return numberOfItems;
     }
 
 
@@ -308,23 +309,23 @@ public class Game {
 
             int moneyWon;
             if (firstQuestion.getAnswerMap().get(givenAnswer) == true) {
-            	moneyWon = 100;
-            	InstructionHelper.correctAnswerOnQuiz(moneyWon);
+                moneyWon = 100;
+                InstructionHelper.correctAnswerOnQuiz(moneyWon);
                 playerMoney += moneyWon;
                 QuestionModel secondQuestion = questionList.get(1);
                 givenAnswer = askQuestion(secondQuestion, 2);
                 if (secondQuestion.getAnswerMap().get(givenAnswer) == true) {
-                	moneyWon = 500;
-                	InstructionHelper.correctAnswerOnQuiz(moneyWon);
+                    moneyWon = 500;
+                    InstructionHelper.correctAnswerOnQuiz(moneyWon);
                     playerMoney += moneyWon;
                     QuestionModel thirdQuestion = questionList.get(2);
                     givenAnswer = askQuestion(thirdQuestion, 3);
                     if (thirdQuestion.getAnswerMap().get(givenAnswer) == true) {
-                    	moneyWon = 1000;
-                    	InstructionHelper.correctAnswerOnQuiz(moneyWon);
+                        moneyWon = 1000;
+                        InstructionHelper.correctAnswerOnQuiz(moneyWon);
                         playerMoney += moneyWon;
                         if (!quizKey) {
-                        	InstructionHelper.princessSaved();
+                            InstructionHelper.princessSaved();
                         }
                         quizKey = true;
                         city();
