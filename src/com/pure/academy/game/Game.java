@@ -2,7 +2,6 @@ package com.pure.academy.game;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import com.pure.academy.model.QuestionModel;
 import com.pure.academy.model.Weapon;
@@ -10,19 +9,7 @@ import com.pure.academy.util.*;
 
 public class Game {
     Scanner scanner = new Scanner(System.in);
-    int playerHP;
-    String playerName;
-    int choice;
-    int monsterHP;
-    boolean quizKey;
-    boolean caveKey;
-    int playerMoney;
-    int numberOfRabbits;
-    int numberOfTrees;
-    Weapon playerWeapon = Weapon.FIST;
-    int playerDamage;
-    int medicine;
-
+    GameDataHelper gameData = new GameDataHelper();
 
     public static void main(String[] args) {
 
@@ -32,18 +19,18 @@ public class Game {
     }
 
     public void playerSetup() {
-        playerHP = 100;
-        monsterHP = 50;
+        gameData.setPlayerHP(100);
+        gameData.setMonsterHP(50);
 
         ASCIIArtHelper.drawCharacter();
 
-        System.out.println("\nYour HP: " + playerHP);
+        System.out.println("\nYour HP: " + gameData.getPlayerHP());
         System.out.println("Please enter your name:");
 
-        playerName = scanner.nextLine();
+        gameData.setPlayerName(scanner.nextLine());
         // TODO: invalid input. Please enter alphabetic name of the character!
         System.out.println("\n------------------------------------------------------------------\n");
-        System.out.println("Hello " + playerName + ", let's start the game!");
+        System.out.println("Hello " + gameData.getPlayerName() + ", let's start the game!");
 
 //        SoundFXHelper.playSound("resources/SoundFX/mixkit-arcade-game-opener-2222.wav");
         threeWayPath();
@@ -54,7 +41,7 @@ public class Game {
 
         checkInput(() -> threeWayPath());
 
-        switch (choice) {
+        switch (gameData.getChoice()) {
             case 1:
                 mountain();
                 break;
@@ -78,7 +65,7 @@ public class Game {
     private void checkInput(Runnable function) {
         String input = scanner.next();
         try {
-            choice = Integer.valueOf(input);
+            gameData.setChoice(Integer.valueOf(input));
         } catch (NumberFormatException e) {
             System.err.println("Please enter only numbers!");
             function.run();
@@ -90,7 +77,7 @@ public class Game {
 
         checkInput(() -> mountain());
 
-        switch (choice) {
+        switch (gameData.getChoice()) {
             case 1:
                 forest();
                 break;
@@ -114,7 +101,7 @@ public class Game {
 
         checkInput(() -> forest());
 
-        switch (choice) {
+        switch (gameData.getChoice()) {
             case 1:
                 rabbit();
                 break;
@@ -135,23 +122,23 @@ public class Game {
 
     public void river() {
         System.out.println("\n------------------------------------------------------------------\n");
-        if (playerHP < 150) {
-            playerHP += 10;
-            System.out.println("Welcome to the river! You get 10 HP. Now your HP are " + playerHP + ".");
+        if (gameData.getPlayerHP() < 150) {
+            gameData.setPlayerHP(gameData.getPlayerHP() + 10);
+            System.out.println("Welcome to the river! You get 10 HP. Now your HP are " + gameData.getPlayerHP() + ".");
         } else {
-            System.err.println("You can't take more 150 HP!");
+            System.err.println("You can't take more than 150 HP!");
         }
         mountain();
     }
 
     public void rabbit() {
         System.out.println("\n------------------------------------------------------------------\n");
-        if (numberOfRabbits < 3) {
-            numberOfRabbits++;
+        if (gameData.getNumberOfRabbits() < 3) {
+            gameData.setNumberOfRabbits(gameData.getNumberOfRabbits() + 1);
 
             ASCIIArtHelper.drawRabbit();
 
-            System.out.println("You got a rabbit. You have " + numberOfRabbits + " rabbits.");
+            System.out.println("You got a rabbit. You have " + gameData.getNumberOfRabbits() + " rabbit" + item(gameData.getNumberOfRabbits()) + ".");
         } else {
             System.err.println("You can't take more than 3 rabbits!");
         }
@@ -160,20 +147,28 @@ public class Game {
 
     public void chopTree() {
         System.out.println("\n------------------------------------------------------------------\n");
-        if (numberOfTrees < 3) {
-            numberOfTrees++;
-            System.out.println("You chopped a tree. You have " + numberOfTrees + " trees.");
+        if (gameData.getNumberOfTrees() < 3) {
+            gameData.setNumberOfTrees(gameData.getNumberOfTrees() + 1);
+            System.out.println("You chopped a tree. You have " + gameData.getNumberOfTrees() + " tree" + item(gameData.getNumberOfTrees()) + ".");
         } else {
             System.err.println("You can't take more than 3 trees!");
         }
         forest();
     }
 
+    private String item(int numberOfItems) {
+        if (numberOfItems > 1) {
+            return "s";
+        } else {
+            return "";
+        }
+    }
+
     public void city() {
         InstructionHelper.cityInstruction();
 
         checkInput(() -> city());
-        switch (choice) {
+        switch (gameData.getChoice()) {
             case 1:
                 cityShop();
                 break;
@@ -181,7 +176,7 @@ public class Game {
                 sorcerer();
                 break;
             case 3:
-                if (caveKey) {
+                if (gameData.isCaveKey()) {
                     cave();
                 } else {
                     System.err.println("The cave is locked! You have to kill the monster and get the key.");
@@ -189,7 +184,7 @@ public class Game {
                 }
                 break;
             case 4:
-                if (monsterHP < 1) {
+                if (gameData.getMonsterHP() < 1) {
                     castle();
                 } else {
                     monster();
@@ -219,22 +214,22 @@ public class Game {
         }
         System.out.println("\nInput your answer: 1/2/3 or 4");
 
-        choice = scanner.nextInt();
-        String givenAnswer = questionVisualisedMap.get(choice);
+        gameData.setChoice(scanner.nextInt());
+        String givenAnswer = questionVisualisedMap.get(gameData.getChoice());
         return givenAnswer;
     }
 
     public void gamblingArea() {
-        if (playerMoney >= 10) {
+        if (gameData.getPlayerMoney() >= 10) {
             System.out.println("\n------------------------------------------------------------------\n");
             InstructionHelper.gamblingAreaRules();
             guessTheNumber();
         } else {
-            InstructionHelper.gamblingAreaWarning(playerName);
-            choice = scanner.nextInt();
-            while (choice != 1) {
-                InstructionHelper.gamblingAreaWarning(playerName);
-                choice = scanner.nextInt();
+            InstructionHelper.gamblingAreaWarning(gameData.getPlayerName());
+            gameData.setChoice(scanner.nextInt());
+            while (gameData.getChoice() != 1) {
+                InstructionHelper.gamblingAreaWarning(gameData.getPlayerName());
+                gameData.setChoice(scanner.nextInt());
             }
             threeWayPath();
         }
@@ -244,20 +239,20 @@ public class Game {
         int random = new Random().nextInt(101);
         System.out.print("Input a number from 0 to 100:");
         for (int i = 0; i < 5; i++) {
-            choice = scanner.nextInt();
+            gameData.setChoice(scanner.nextInt());
 
-            if (choice == random) {
-                playerMoney *= 2;
+            if (gameData.getChoice() == random) {
+                gameData.setPlayerMoney(gameData.getPlayerMoney() * 2);
                 System.out.println("You guessed the number! You doubled your money!");
                 threeWayPath();
-            } else if (choice < random) {
+            } else if (gameData.getChoice() < random) {
                 System.out.println("The number is bigger! Try again!");
             } else {
                 System.out.println("The number is smaller! Try again!");
             }
         }
-        playerMoney /= 2;
-        InstructionHelper.guessTheNumberLose(random, playerMoney);
+        gameData.setPlayerMoney(gameData.getPlayerMoney() / 2);
+        InstructionHelper.guessTheNumberLose(random, gameData.getPlayerMoney());
         threeWayPath();
     }
 
@@ -265,13 +260,13 @@ public class Game {
         InstructionHelper.cityShopInstruction();
 
         checkInput(() -> cityShop());
-        switch (choice) {
+        switch (gameData.getChoice()) {
             case 1:
-                numberOfRabbits = sellingItems(numberOfRabbits, "rabbit");
+                gameData.setNumberOfRabbits(sellingItems(gameData.getNumberOfRabbits(), "rabbit"));
                 cityShop();
                 break;
             case 2:
-                numberOfTrees = sellingItems(numberOfTrees, "tree");
+                gameData.setNumberOfTrees(sellingItems(gameData.getNumberOfTrees(), "tree"));
                 cityShop();
                 break;
             case 3:
@@ -289,9 +284,9 @@ public class Game {
     private int sellingItems(int numberOfItems, String item) {
         if (numberOfItems > 0) {
             numberOfItems--;
-            playerMoney += 100;
+            gameData.setPlayerMoney(gameData.getPlayerMoney() + 100);
             System.out.println("You sold a " + item + " and received 100 gold. You have " + numberOfItems + " " + item + "s and your amount of gold is " +
-                    playerMoney + ".");
+                    gameData.getPlayerMoney() + ".");
         } else {
             System.err.println("You don't have any " + item + "s!");
         }
@@ -300,7 +295,7 @@ public class Game {
 
 
     public void cave() {
-        if (playerMoney >= -10) {
+        if (gameData.getPlayerMoney() >= -10) {
             System.out.println("\n------------------------------------------------------------------\n");
             InstructionHelper.quizGameRules();
             List<QuestionModel> questionList = QuestionGeneratorHelper.getThreeRandomQuestions();
@@ -311,53 +306,53 @@ public class Game {
             if (firstQuestion.getAnswerMap().get(givenAnswer) == true) {
                 moneyWon = 100;
                 InstructionHelper.correctAnswerOnQuiz(moneyWon);
-                playerMoney += moneyWon;
+                gameData.setPlayerMoney(gameData.getPlayerMoney() + moneyWon);
                 QuestionModel secondQuestion = questionList.get(1);
                 givenAnswer = askQuestion(secondQuestion, 2);
                 if (secondQuestion.getAnswerMap().get(givenAnswer) == true) {
                     moneyWon = 500;
                     InstructionHelper.correctAnswerOnQuiz(moneyWon);
-                    playerMoney += moneyWon;
+                    gameData.setPlayerMoney(gameData.getPlayerMoney() + moneyWon);
                     QuestionModel thirdQuestion = questionList.get(2);
                     givenAnswer = askQuestion(thirdQuestion, 3);
                     if (thirdQuestion.getAnswerMap().get(givenAnswer) == true) {
                         moneyWon = 1000;
                         InstructionHelper.correctAnswerOnQuiz(moneyWon);
-                        playerMoney += moneyWon;
-                        if (!quizKey) {
+                        gameData.setPlayerMoney(gameData.getPlayerMoney() + moneyWon);
+                        if (!gameData.isQuizKey()) {
                             InstructionHelper.princessSaved();
                         }
-                        quizKey = true;
+                        gameData.setQuizKey(true);
                         city();
                     } else {
                         InstructionHelper.dead();
                     }
                 } else {
-                    playerHP /= 2;
-                    InstructionHelper.caveWrongAnswer(playerHP, 50);
+                    gameData.setPlayerHP(gameData.getPlayerHP() / 2);
+                    InstructionHelper.caveWrongAnswer(gameData.getPlayerHP(), 50);
                     city();
                 }
             } else {
-                playerHP -= playerHP / 5;
-                InstructionHelper.caveWrongAnswer(playerHP, 20);
+                gameData.setPlayerHP(gameData.getPlayerHP() / 5);
+                InstructionHelper.caveWrongAnswer(gameData.getPlayerHP(), 20);
                 city();
             }
         } else {
-            InstructionHelper.quizWarning(playerName);
-            choice = scanner.nextInt();
-            while (choice != 1) {
-                InstructionHelper.quizWarning(playerName);
-                choice = scanner.nextInt();
+            InstructionHelper.quizWarning(gameData.getPlayerName());
+            gameData.setChoice(scanner.nextInt());
+            while (gameData.getChoice() != 1) {
+                InstructionHelper.quizWarning(gameData.getPlayerName());
+                gameData.setChoice(scanner.nextInt());
             }
             city();
         }
     }
 
     public void sorcerer() {
-        InstructionHelper.sorcererMenu(playerMoney, playerWeapon.name().toLowerCase());
+        InstructionHelper.sorcererMenu(gameData.getPlayerMoney(), gameData.getPlayerWeapon().name().toLowerCase());
 
         checkInput(() -> sorcerer());
-        switch (choice) {
+        switch (gameData.getChoice()) {
             case 1:
                 knife();
                 break;
@@ -383,13 +378,13 @@ public class Game {
     }
 
     private void buyWeapon(Weapon weapon) {
-        if (playerWeapon.equals(weapon)) {
+        if (gameData.getPlayerWeapon().equals(weapon)) {
             System.err.println("You already have a " + weapon.name().toLowerCase() + ".");
             sorcerer();
-        } else if (playerMoney >= weapon.price) {
-            playerMoney -= weapon.price;
-            playerWeapon = weapon;
-            System.out.println("You have a " + weapon.name().toLowerCase() + " and " + playerMoney + " gold.");
+        } else if (gameData.getPlayerMoney() >= weapon.price) {
+            gameData.setPlayerMoney(gameData.getPlayerMoney() + weapon.price);
+            gameData.setPlayerWeapon(weapon);
+            System.out.println("You have a " + weapon.name().toLowerCase() + " and " + gameData.getPlayerMoney() + " gold.");
             sorcerer();
         } else {
             System.err.println("You don't have enough money!");
@@ -410,12 +405,12 @@ public class Game {
     }
 
     public void medicine() {
-        if (medicine >= 5) {
+        if (gameData.getMedicine() >= 5) {
             System.err.println("You can't take more than 5 medicine");
-        } else if (playerMoney >= 10) {
-            playerMoney -= 10;
-            medicine++;
-            System.out.println("You have " + medicine + " medicine and " + playerMoney + " gold.");
+        } else if (gameData.getPlayerMoney() >= 10) {
+            gameData.setPlayerMoney(gameData.getPlayerMoney() - 10);
+            gameData.setMedicine(gameData.getMedicine() + 1);
+            System.out.println("You have " + gameData.getMedicine() + " medicine and " + gameData.getPlayerMoney() + " gold.");
             sorcerer();
         } else {
             System.err.println("You don't have enough money!");
@@ -424,19 +419,19 @@ public class Game {
     }
 
     public void monster() {
-        InstructionHelper.monsterInstruction(playerHP, monsterHP);
+        InstructionHelper.monsterInstruction(gameData.getPlayerHP(), gameData.getMonsterHP());
 
         checkInput(() -> monster());
 
-        switch (choice) {
+        switch (gameData.getChoice()) {
             case 1:
                 fight();
                 break;
             case 2:
-                if (medicine > 0) {
-                    medicine--;
-                    playerHP += 10;
-                    System.out.println("Your HP are " + playerHP + ".");
+                if (gameData.getMedicine() > 0) {
+                    gameData.setMedicine(gameData.getMedicine() - 1);
+                    gameData.setPlayerHP(gameData.getPlayerHP() + 10);
+                    System.out.println("Your HP are " + gameData.getPlayerHP() + ".");
                     monster();
                 } else {
                     System.err.println("You don't have any medicine!");
@@ -453,29 +448,29 @@ public class Game {
 
     public void fight() {
         int monsterDamage = 0;
-        switch (playerWeapon) {
+        switch (gameData.getPlayerWeapon()) {
             case FIST:
-                playerDamage = ThreadLocalRandom.current().nextInt(0, 2);
+                gameData.setPlayerDamage(ThreadLocalRandom.current().nextInt(0, 2));
                 break;
             case KNIFE:
-                playerDamage = ThreadLocalRandom.current().nextInt(2, 7);
+                gameData.setPlayerDamage(ThreadLocalRandom.current().nextInt(2, 7));
                 break;
             case SWORD:
-                playerDamage = ThreadLocalRandom.current().nextInt(7, 12);
+                gameData.setPlayerDamage(ThreadLocalRandom.current().nextInt(7, 12));
                 break;
             case CROSSBOW:
-                playerDamage = ThreadLocalRandom.current().nextInt(12, 20);
+                gameData.setPlayerDamage(ThreadLocalRandom.current().nextInt(12, 20));
                 break;
         }
-        System.out.println("You attacked the monster and gave " + playerDamage + " damage!");
-        monsterHP = monsterHP - playerDamage;
-        if (monsterHP < 0) {
-            monsterHP = 0;
+        System.out.println("You attacked the monster and gave " + gameData.getPlayerDamage() + " damage!");
+        gameData.setMonsterHP(gameData.getMonsterHP() - gameData.getPlayerDamage());
+        if (gameData.getMonsterHP() < 0) {
+            gameData.setMonsterHP(0);
         }
-        System.out.println("Monster HP: " + monsterHP);
+        System.out.println("Monster HP: " + gameData.getMonsterHP());
 
-        if (monsterHP > 0) {
-            switch (playerWeapon) {
+        if (gameData.getMonsterHP() > 0) {
+            switch (gameData.getPlayerWeapon()) {
                 case FIST:
                     monsterDamage = ThreadLocalRandom.current().nextInt(0, 4);
                     break;
@@ -492,22 +487,22 @@ public class Game {
 
 
             System.out.println("The monster attacked you and gave " + monsterDamage + " damage!");
-            playerHP = playerHP - monsterDamage;
-            if (playerHP < 1) {
-                playerHP = 0;
-                System.out.println("Player HP: " + playerHP);
+            gameData.setPlayerHP(gameData.getPlayerHP() - monsterDamage);
+            if (gameData.getPlayerHP() < 1) {
+                gameData.setPlayerHP(0);
+                System.out.println("Player HP: " + gameData.getPlayerHP());
                 InstructionHelper.dead();
             } else {
-                System.out.println("Player HP: " + playerHP);
+                System.out.println("Player HP: " + gameData.getPlayerHP());
                 monster();
             }
         } else {
-            caveKey = true;
+            gameData.setCaveKey(true);
             InstructionHelper.monsterKilled();
 
             checkInput(() -> fight());
 
-            switch (choice) {
+            switch (gameData.getChoice()) {
                 case 1:
                     castle();
                     break;
@@ -522,14 +517,14 @@ public class Game {
     }
 
     public void castle() {
-        if (quizKey) {
+        if (gameData.isQuizKey()) {
             InstructionHelper.castleInstruction();
 
             checkInput(() -> castle());
 
-            switch (choice) {
+            switch (gameData.getChoice()) {
                 case 1:
-                    InstructionHelper.princess(playerName);
+                    InstructionHelper.princess(gameData.getPlayerName());
                     break;
                 case 2:
                     city();
@@ -545,6 +540,6 @@ public class Game {
     }
 
     public void inventory() {
-        TableHelper.showInformationTable(playerName, playerHP, playerWeapon.name().toLowerCase(), medicine, numberOfRabbits, numberOfTrees, quizKey, caveKey, playerMoney);
+        TableHelper.showInformationTable(gameData.getPlayerName(), gameData.getPlayerHP(), gameData.getPlayerWeapon().name().toLowerCase(), gameData.getMedicine(), gameData.getNumberOfRabbits(), gameData.getNumberOfTrees(), gameData.isQuizKey(), gameData.isCaveKey(), gameData.getPlayerMoney());
     }
 }
