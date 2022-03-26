@@ -138,7 +138,7 @@ public class Game {
 
             ASCIIArtHelper.drawRabbit();
 
-            System.out.println("You got a rabbit. You have " + gameData.getNumberOfRabbits() + " rabbit" + item(gameData.getNumberOfRabbits()) + ".");
+            System.out.println("You got a rabbit. You have " + gameData.getNumberOfRabbits() + " rabbit" + itemPlural(gameData.getNumberOfRabbits()) + ".");
         } else {
             System.err.println("You can't take more than 3 rabbits!");
         }
@@ -149,14 +149,14 @@ public class Game {
         System.out.println("\n------------------------------------------------------------------\n");
         if (gameData.getNumberOfTrees() < 3) {
             gameData.setNumberOfTrees(gameData.getNumberOfTrees() + 1);
-            System.out.println("You chopped a tree. You have " + gameData.getNumberOfTrees() + " tree" + item(gameData.getNumberOfTrees()) + ".");
+            System.out.println("You chopped a tree. You have " + gameData.getNumberOfTrees() + " tree" + itemPlural(gameData.getNumberOfTrees()) + ".");
         } else {
             System.err.println("You can't take more than 3 trees!");
         }
         forest();
     }
 
-    private String item(int numberOfItems) {
+    private String itemPlural(int numberOfItems) {
         if (numberOfItems > 1) {
             return "s";
         } else {
@@ -168,6 +168,7 @@ public class Game {
         InstructionHelper.cityInstruction();
 
         checkInput(() -> city());
+
         switch (gameData.getChoice()) {
             case 1:
                 cityShop();
@@ -260,6 +261,7 @@ public class Game {
         InstructionHelper.cityShopInstruction();
 
         checkInput(() -> cityShop());
+
         switch (gameData.getChoice()) {
             case 1:
                 gameData.setNumberOfRabbits(sellingItems(gameData.getNumberOfRabbits(), "rabbit"));
@@ -285,7 +287,7 @@ public class Game {
         if (numberOfItems > 0) {
             numberOfItems--;
             gameData.setPlayerMoney(gameData.getPlayerMoney() + 100);
-            System.out.println("You sold a " + item + " and received 100 gold. You have " + numberOfItems + " " + item + "s and your amount of gold is " +
+            System.out.println("You sold a " + item + " and received 100 gold. You have " + numberOfItems + " " + item + itemPlural(numberOfItems) + " and your amount of gold is " +
                     gameData.getPlayerMoney() + ".");
         } else {
             System.err.println("You don't have any " + item + "s!");
@@ -352,6 +354,7 @@ public class Game {
         InstructionHelper.sorcererMenu(gameData.getPlayerMoney(), gameData.getPlayerWeapon().name().toLowerCase());
 
         checkInput(() -> sorcerer());
+
         switch (gameData.getChoice()) {
             case 1:
                 knife();
@@ -448,6 +451,7 @@ public class Game {
 
     public void fight() {
         int monsterDamage = 0;
+
         switch (gameData.getPlayerWeapon()) {
             case FIST:
                 gameData.setPlayerDamage(ThreadLocalRandom.current().nextInt(0, 2));
@@ -485,7 +489,6 @@ public class Game {
                     break;
             }
 
-
             System.out.println("The monster attacked you and gave " + monsterDamage + " damage!");
             gameData.setPlayerHP(gameData.getPlayerHP() - monsterDamage);
             if (gameData.getPlayerHP() < 1) {
@@ -512,7 +515,6 @@ public class Game {
                 default:
                     fight();
             }
-
         }
     }
 
@@ -532,7 +534,6 @@ public class Game {
                 default:
                     castle();
             }
-
         } else {
             System.err.println("Get the Quiz key first!");
             city();
