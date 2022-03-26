@@ -357,13 +357,13 @@ public class Game {
 
         switch (gameData.getChoice()) {
             case 1:
-                knife();
+            	buyWeapon(Weapon.KNIFE);
                 break;
             case 2:
-                sword();
+            	buyWeapon(Weapon.SWORD);
                 break;
             case 3:
-                crossbow();
+            	buyWeapon(Weapon.CROSSBOW);
                 break;
             case 4:
                 medicine();
@@ -393,18 +393,6 @@ public class Game {
             System.err.println("You don't have enough money!");
             sorcerer();
         }
-    }
-
-    public void knife() {
-        buyWeapon(Weapon.KNIFE);
-    }
-
-    public void sword() {
-        buyWeapon(Weapon.SWORD);
-    }
-
-    public void crossbow() {
-        buyWeapon(Weapon.CROSSBOW);
     }
 
     public void medicine() {
