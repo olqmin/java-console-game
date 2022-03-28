@@ -157,11 +157,7 @@ public class Game {
     }
 
     private String itemPlural(int numberOfItems) {
-        if (numberOfItems > 1) {
-            return "s";
-        } else {
-            return "";
-        }
+        return numberOfItems > 1 ? "s" : "";
     }
 
     public void city() {
@@ -357,13 +353,13 @@ public class Game {
 
         switch (gameData.getChoice()) {
             case 1:
-            	buyWeapon(Weapon.KNIFE);
+                buyWeapon(Weapon.KNIFE);
                 break;
             case 2:
-            	buyWeapon(Weapon.SWORD);
+                buyWeapon(Weapon.SWORD);
                 break;
             case 3:
-            	buyWeapon(Weapon.CROSSBOW);
+                buyWeapon(Weapon.CROSSBOW);
                 break;
             case 4:
                 medicine();
