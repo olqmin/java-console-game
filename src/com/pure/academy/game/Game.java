@@ -32,7 +32,7 @@ public class Game {
         System.out.println("\n------------------------------------------------------------------\n");
         System.out.println("Hello " + gameData.getPlayerName() + ", let's start the game!");
 
-//        SoundFXHelper.playSound("resources/SoundFX/mixkit-arcade-game-opener-2222.wav");
+//
         threeWayPath();
     }
 
