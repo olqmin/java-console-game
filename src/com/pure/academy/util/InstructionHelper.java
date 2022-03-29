@@ -157,4 +157,12 @@ public class InstructionHelper {
     	System.out.println("You get the golden key!");
         System.out.println("You can save the princess!");
     }
+    
+    public static void notEnoughMoney() {
+        System.err.println("You don't have enough money!");
+    }
+    
+    public static void noMedicine() {
+    	System.err.println("You don't have any medicine!");
+    }
 }

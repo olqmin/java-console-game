@@ -386,7 +386,7 @@ public class Game {
             System.out.println("You have a " + weapon.name().toLowerCase() + " and " + gameData.getPlayerMoney() + " gold.");
             sorcerer();
         } else {
-            System.err.println("You don't have enough money!");
+        	InstructionHelper.notEnoughMoney();
             sorcerer();
         }
     }
@@ -400,7 +400,7 @@ public class Game {
             System.out.println("You have " + gameData.getMedicine() + " medicine and " + gameData.getPlayerMoney() + " gold.");
             sorcerer();
         } else {
-            System.err.println("You don't have enough money!");
+        	InstructionHelper.notEnoughMoney();
             sorcerer();
         }
     }
@@ -421,7 +421,7 @@ public class Game {
                     System.out.println("Your HP are " + gameData.getPlayerHP() + ".");
                     monster();
                 } else {
-                    System.err.println("You don't have any medicine!");
+                    InstructionHelper.noMedicine();
                     monster();
                 }
                 break;
