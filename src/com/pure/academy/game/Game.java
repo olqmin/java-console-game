@@ -36,7 +36,6 @@ public class Game {
         System.out.println("Hello " + gameData.getPlayerName() + ", let's start the game!");
 
         chooseKingdom();
-        greetingFromTheKing();
         threeWayPath();
     }
 
@@ -72,9 +71,9 @@ public class Game {
             default:
                 chooseKingdom();
         }
-
+        greetingFromTheKing();
     }
-    
+
     public void threeWayPath() {
         InstructionHelper.threeWayPathInstruction();
 
