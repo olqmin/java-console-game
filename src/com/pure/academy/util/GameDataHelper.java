@@ -1,5 +1,6 @@
 package com.pure.academy.util;
 
+import com.pure.academy.model.KingdomModel;
 import com.pure.academy.model.Weapon;
 
 public class GameDataHelper {
@@ -15,6 +16,7 @@ public class GameDataHelper {
     private Weapon playerWeapon = Weapon.FIST;
     private int playerDamage;
     private int medicine;
+    private KingdomModel chosenHero;
 
     public int getPlayerHP() {
         return playerHP;
@@ -110,5 +112,13 @@ public class GameDataHelper {
 
     public void setMedicine(int medicine) {
         this.medicine = medicine;
+    }
+
+    public KingdomModel getChosenHero() {
+        return chosenHero;
+    }
+
+    public void setChosenHero(KingdomModel chosenHero) {
+        this.chosenHero = chosenHero;
     }
 }

@@ -165,4 +165,15 @@ public class InstructionHelper {
     public static void noMedicine() {
     	System.err.println("You don't have any medicine!");
     }
+
+    public static void choseKingdomInstruction() {
+        System.out.println("\n------------------------------------------------------------------\n");
+        System.out.println("Please choose a kingdom in which you want to play: ");
+        System.out.println("1. Ottoman land");
+        System.out.println("2. Scandinavia");
+        System.out.println("3. Persia");
+        System.out.println("\n------------------------------------------------------------------\n");
+    }
+
+
 }

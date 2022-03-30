@@ -3,9 +3,11 @@ package com.pure.academy.game;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.pure.academy.model.KingdomModel;
 import com.pure.academy.model.QuestionModel;
 import com.pure.academy.model.Weapon;
 import com.pure.academy.util.*;
+import org.w3c.dom.ls.LSOutput;
 
 public class Game {
     Scanner scanner = new Scanner(System.in);
@@ -15,6 +17,7 @@ public class Game {
 
         Game pureAcademy = new Game();
         pureAcademy.playerSetup();
+
 
     }
 
@@ -28,14 +31,50 @@ public class Game {
         System.out.println("Please enter your name:");
 
         gameData.setPlayerName(scanner.nextLine());
-        // TODO: invalid input. Please enter alphabetic name of the character!
+
         System.out.println("\n------------------------------------------------------------------\n");
         System.out.println("Hello " + gameData.getPlayerName() + ", let's start the game!");
 
-//
+        chooseKingdom();
+        greetingFromTheKing();
         threeWayPath();
     }
 
+
+    public void greetingFromTheKing() {
+        System.out.println("\n------------------------------------------------------------------\n");
+        System.out.println(gameData.getChosenHero().getKingName() + ":");
+        System.out.println("Thank goodness you've arrived into my kingdom! All was peaceful until this terrible monster " + gameData.getChosenHero().getMonsterName() + " came. \n" +
+                "Our homes are destroyed, the children and women are frightened. The screams that echo in the night are inhuman.\n" +
+                "Even my best men and soldiers are incapable to overcome his strength. \n" +
+                "Follow the path and keep in mind that " + gameData.getChosenHero().getMonsterName() + " is strong and it would be easier to kill it with weapons, which you can find in the city. \n" +
+                "Last but not least, defeating the monster will save my imprisoned daughter - " + gameData.getChosenHero().getPrincesName() + ". Perhaps I can tell you more if we speak again. Good luck.");
+    }
+
+    public void chooseKingdom() {
+        InstructionHelper.choseKingdomInstruction();
+        checkInput(() -> chooseKingdom());
+
+
+        switch (gameData.getChoice()) {
+            case 1:
+                KingdomModel ottoman = new KingdomModel("Abdul Hamid II", "Zeynep", "Ubir", "Ararat", "Seydisuyu", "Ottoman land");
+                gameData.setChosenHero(ottoman);
+                break;
+            case 2:
+                KingdomModel scandinavian = new KingdomModel("Ragnar Lothbrok", "Aslaug", "Fenrir", "Uppsala", "Klar?lven", "Scandinavia");
+                gameData.setChosenHero(scandinavian);
+                break;
+            case 3:
+                KingdomModel persian = new KingdomModel("Artaxerxes I", "Damaspia", "Manticore", "Siah-Kaman", "Karkheh", "Persia");
+                gameData.setChosenHero(persian);
+                break;
+            default:
+                chooseKingdom();
+        }
+
+    }
+    
     public void threeWayPath() {
         InstructionHelper.threeWayPathInstruction();
 
@@ -155,6 +194,7 @@ public class Game {
         }
         forest();
     }
+
 
     private String itemPlural(int numberOfItems) {
         return numberOfItems > 1 ? "s" : "";
@@ -386,7 +426,7 @@ public class Game {
             System.out.println("You have a " + weapon.name().toLowerCase() + " and " + gameData.getPlayerMoney() + " gold.");
             sorcerer();
         } else {
-        	InstructionHelper.notEnoughMoney();
+            InstructionHelper.notEnoughMoney();
             sorcerer();
         }
     }
@@ -400,7 +440,7 @@ public class Game {
             System.out.println("You have " + gameData.getMedicine() + " medicine and " + gameData.getPlayerMoney() + " gold.");
             sorcerer();
         } else {
-        	InstructionHelper.notEnoughMoney();
+            InstructionHelper.notEnoughMoney();
             sorcerer();
         }
     }
