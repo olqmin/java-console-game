@@ -1,7 +1,7 @@
 package com.pure.academy.util;
 
 import com.pure.academy.model.KingdomModel;
-import com.pure.academy.model.Weapon;
+import com.pure.academy.model.WeaponInterface;
 
 public class GameDataHelper {
     private int playerHP;
@@ -13,7 +13,9 @@ public class GameDataHelper {
     private int playerMoney;
     private int numberOfRabbits;
     private int numberOfTrees;
-    private Weapon playerWeapon = Weapon.FIST;
+
+
+    private WeaponInterface playerWeapon;
     private int playerDamage;
     private int medicine;
     private KingdomModel chosenHero;
@@ -90,11 +92,11 @@ public class GameDataHelper {
         this.numberOfTrees = numberOfTrees;
     }
 
-    public Weapon getPlayerWeapon() {
+    public WeaponInterface getPlayerWeapon() {
         return playerWeapon;
     }
 
-    public void setPlayerWeapon(Weapon playerWeapon) {
+    public void setPlayerWeapon(WeaponInterface playerWeapon) {
         this.playerWeapon = playerWeapon;
     }
 

@@ -1,14 +1,17 @@
 package com.pure.academy.util;
 
-import com.pure.academy.model.Weapon;
+import com.pure.academy.model.PersianWeapon;
+import com.pure.academy.model.enums.Weapon;
+
+import java.util.List;
 
 public class InstructionHelper {
-    public static void sorcererMenu(int playerMoney, String playerWeapon) {
+    public static void sorcererMenu(int playerMoney, String playerWeapon, List<Weapon> purchasableWeapons) {
         System.out.println("\n------------------------------------------------------------------\n");
         System.out.println("The Sorcerer is here.You have " + playerMoney + " gold and " + playerWeapon + ".  Choose one of the following options:\n\n");
-        System.out.println("1: Buy a knife - " + Weapon.KNIFE.price + " gold.");
-        System.out.println("2: Buy a sword - " + Weapon.SWORD.price + " gold.");
-        System.out.println("3: Buy a crossbow - " + Weapon.CROSSBOW.price + " gold.");
+        System.out.println("1: Buy a " + purchasableWeapons.get(0).name + " - " + purchasableWeapons.get(0).price + " gold.");
+        System.out.println("2: Buy a " + purchasableWeapons.get(1).name + " - " + purchasableWeapons.get(1).price + " gold.");
+        System.out.println("3: Buy a " + purchasableWeapons.get(2).name + " - " + purchasableWeapons.get(2).price + " gold.");
         System.out.println("4: Buy medicine - 10 gold");
         System.out.println("5: Return to the city");
         System.out.println("6: Check inventory");
@@ -147,23 +150,23 @@ public class InstructionHelper {
         System.err.println("You are dead! The game is over!");
         System.err.println("\n------------------------------------------------------------------\n");
     }
-    
+
     public static void correctAnswerOnQuiz(int moneyWon) {
-    	System.out.println("Your answer is correct! You won " + moneyWon + " money.");
-        
+        System.out.println("Your answer is correct! You won " + moneyWon + " money.");
+
     }
-    
+
     public static void princessSaved() {
-    	System.out.println("You get the golden key!");
+        System.out.println("You get the golden key!");
         System.out.println("You can save the princess!");
     }
-    
+
     public static void notEnoughMoney() {
         System.err.println("You don't have enough money!");
     }
-    
+
     public static void noMedicine() {
-    	System.err.println("You don't have any medicine!");
+        System.err.println("You don't have any medicine!");
     }
 
     public static void choseKingdomInstruction() {

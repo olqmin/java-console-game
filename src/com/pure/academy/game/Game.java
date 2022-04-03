@@ -4,10 +4,10 @@ import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.pure.academy.model.KingdomModel;
+import com.pure.academy.model.PersianWeapon;
 import com.pure.academy.model.QuestionModel;
-import com.pure.academy.model.Weapon;
+import com.pure.academy.model.enums.Weapon;
 import com.pure.academy.util.*;
-import org.w3c.dom.ls.LSOutput;
 
 public class Game {
     Scanner scanner = new Scanner(System.in);
@@ -33,6 +33,7 @@ public class Game {
         gameData.setPlayerName(scanner.nextLine());
 
         System.out.println("\n------------------------------------------------------------------\n");
+
         System.out.println("Hello " + gameData.getPlayerName() + ", let's start the game!");
 
         chooseKingdom();
@@ -67,6 +68,7 @@ public class Game {
             case 3:
                 KingdomModel persian = new KingdomModel("Artaxerxes I", "Damaspia", "Manticore", "Siah-Kaman", "Karkheh", "Persia");
                 gameData.setChosenHero(persian);
+                gameData.setPlayerWeapon(new PersianWeapon());
                 break;
             default:
                 chooseKingdom();
@@ -386,19 +388,20 @@ public class Game {
     }
 
     public void sorcerer() {
-        InstructionHelper.sorcererMenu(gameData.getPlayerMoney(), gameData.getPlayerWeapon().name().toLowerCase());
+        // tova e napraveno!
+        InstructionHelper.sorcererMenu(gameData.getPlayerMoney(), gameData.getPlayerWeapon().getCurrentWeapon().name, gameData.getPlayerWeapon().getPurchasableWeapons());
 
         checkInput(() -> sorcerer());
 
         switch (gameData.getChoice()) {
             case 1:
-                buyWeapon(Weapon.KNIFE);
+                buyWeapon(gameData.getPlayerWeapon().getPurchasableWeapons().get(0));
                 break;
             case 2:
-                buyWeapon(Weapon.SWORD);
+                buyWeapon(gameData.getPlayerWeapon().getPurchasableWeapons().get(1));
                 break;
             case 3:
-                buyWeapon(Weapon.CROSSBOW);
+                buyWeapon(gameData.getPlayerWeapon().getPurchasableWeapons().get(2));
                 break;
             case 4:
                 medicine();
@@ -416,13 +419,13 @@ public class Game {
     }
 
     private void buyWeapon(Weapon weapon) {
-        if (gameData.getPlayerWeapon().equals(weapon)) {
-            System.err.println("You already have a " + weapon.name().toLowerCase() + ".");
+        if (gameData.getPlayerWeapon().getCurrentWeapon().equals(weapon)) {
+            System.err.println("You already have a " + weapon.name + ".");
             sorcerer();
         } else if (gameData.getPlayerMoney() >= weapon.price) {
             gameData.setPlayerMoney(gameData.getPlayerMoney() + weapon.price);
-            gameData.setPlayerWeapon(weapon);
-            System.out.println("You have a " + weapon.name().toLowerCase() + " and " + gameData.getPlayerMoney() + " gold.");
+            gameData.getPlayerWeapon().setCurrentWeapon(weapon);
+            System.out.println("You have a " + weapon.name + " and " + gameData.getPlayerMoney() + " gold.");
             sorcerer();
         } else {
             InstructionHelper.notEnoughMoney();
@@ -474,43 +477,37 @@ public class Game {
 
     public void fight() {
         int monsterDamage = 0;
+        gameData.setPlayerDamage(ThreadLocalRandom.current().nextInt(gameData.getPlayerWeapon().getCurrentWeapon().minDamage, gameData.getPlayerWeapon().getCurrentWeapon().maxDamage));
 
-        switch (gameData.getPlayerWeapon()) {
-            case FIST:
-                gameData.setPlayerDamage(ThreadLocalRandom.current().nextInt(0, 2));
-                break;
-            case KNIFE:
-                gameData.setPlayerDamage(ThreadLocalRandom.current().nextInt(2, 7));
-                break;
-            case SWORD:
-                gameData.setPlayerDamage(ThreadLocalRandom.current().nextInt(7, 12));
-                break;
-            case CROSSBOW:
-                gameData.setPlayerDamage(ThreadLocalRandom.current().nextInt(12, 20));
-                break;
-        }
         System.out.println("You attacked the monster and gave " + gameData.getPlayerDamage() + " damage!");
         gameData.setMonsterHP(gameData.getMonsterHP() - gameData.getPlayerDamage());
         if (gameData.getMonsterHP() < 0) {
             gameData.setMonsterHP(0);
         }
         System.out.println("Monster HP: " + gameData.getMonsterHP());
-
+// tova e gotovo!
         if (gameData.getMonsterHP() > 0) {
-            switch (gameData.getPlayerWeapon()) {
+            switch (gameData.getPlayerWeapon().getCurrentWeapon()) {
                 case FIST:
                     monsterDamage = ThreadLocalRandom.current().nextInt(0, 4);
                     break;
-                case KNIFE:
+                case SCANDINAVIAN_KNIFE:
+                case PERSIAN_KNIFE:
+                case OTTOMAN_AXE:
                     monsterDamage = ThreadLocalRandom.current().nextInt(4, 15);
                     break;
-                case SWORD:
+                case SCANDINAVIAN_AXE:
+                case PERSIAN_CROSSBOW:
+                case OTTOMAN_CROSSBOW:
                     monsterDamage = ThreadLocalRandom.current().nextInt(15, 25);
                     break;
-                case CROSSBOW:
+                case SCANDINAVIAN_CROSSBOW:
+                case PERSIAN_AXE:
+                case OTTOMAN_KNIFE:
                     monsterDamage = ThreadLocalRandom.current().nextInt(25, 50);
                     break;
             }
+
 
             System.out.println("The monster attacked you and gave " + monsterDamage + " damage!");
             gameData.setPlayerHP(gameData.getPlayerHP() - monsterDamage);
@@ -564,6 +561,6 @@ public class Game {
     }
 
     public void inventory() {
-        TableHelper.showInformationTable(gameData.getPlayerName(), gameData.getPlayerHP(), gameData.getPlayerWeapon().name().toLowerCase(), gameData.getMedicine(), gameData.getNumberOfRabbits(), gameData.getNumberOfTrees(), gameData.isQuizKey(), gameData.isCaveKey(), gameData.getPlayerMoney());
+        TableHelper.showInformationTable(gameData.getPlayerName(), gameData.getPlayerHP(), gameData.getPlayerWeapon().getCurrentWeapon().name, gameData.getMedicine(), gameData.getNumberOfRabbits(), gameData.getNumberOfTrees(), gameData.isQuizKey(), gameData.isCaveKey(), gameData.getPlayerMoney());
     }
 }

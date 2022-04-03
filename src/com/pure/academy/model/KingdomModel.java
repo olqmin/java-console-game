@@ -8,6 +8,7 @@ public class KingdomModel {
     private String mountainName;
     private String riverName;
     private String kingdomName;
+    
 
     public KingdomModel(String kingName, String princesName, String monsterName, String mountainName, String riverName, String kingdomName) {
         this.kingName = kingName;
