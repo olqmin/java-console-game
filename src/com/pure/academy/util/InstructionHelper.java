@@ -1,6 +1,6 @@
 package com.pure.academy.util;
 
-import com.pure.academy.model.PersianWeapon;
+import com.pure.academy.model.KingdomModel;
 import com.pure.academy.model.enums.Weapon;
 
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.List;
 public class InstructionHelper {
     public static void sorcererMenu(int playerMoney, String playerWeapon, List<Weapon> purchasableWeapons) {
         System.out.println("\n------------------------------------------------------------------\n");
-        System.out.println("The Sorcerer is here.You have " + playerMoney + " gold and " + playerWeapon + ".  Choose one of the following options:\n\n");
+        System.out.println("The Sorcerer is here. You have " + playerMoney + " gold and a " + playerWeapon + " weapon. Choose one of the following options:\n\n");
         System.out.println("1: Buy a " + purchasableWeapons.get(0).name + " - " + purchasableWeapons.get(0).price + " gold.");
         System.out.println("2: Buy a " + purchasableWeapons.get(1).name + " - " + purchasableWeapons.get(1).price + " gold.");
         System.out.println("3: Buy a " + purchasableWeapons.get(2).name + " - " + purchasableWeapons.get(2).price + " gold.");
@@ -123,6 +123,7 @@ public class InstructionHelper {
         System.out.println("3: Run");
         System.out.println("\n------------------------------------------------------------------\n");
     }
+
 
     public static void monsterKilled() {
         System.out.println("You killed the monster and got the key for the cave! Choose one of the following options:");

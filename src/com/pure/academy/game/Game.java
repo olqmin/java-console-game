@@ -3,10 +3,11 @@ package com.pure.academy.game;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
-import com.pure.academy.model.KingdomModel;
-import com.pure.academy.model.PersianWeapon;
-import com.pure.academy.model.QuestionModel;
+import com.pure.academy.model.*;
 import com.pure.academy.model.enums.Weapon;
+import com.pure.academy.model.weapons.OttomanWeapon;
+import com.pure.academy.model.weapons.PersianWeapon;
+import com.pure.academy.model.weapons.ScandinavianWeapon;
 import com.pure.academy.util.*;
 
 public class Game {
@@ -51,19 +52,28 @@ public class Game {
                 "Last but not least, defeating the monster will save my imprisoned daughter - " + gameData.getChosenHero().getPrincesName() + ". Perhaps I can tell you more if we speak again. Good luck.");
     }
 
+    public void bestWeaponForMonster() {
+        System.out.println("\n------------------------------------------------------------------\n");
+        System.out.println(gameData.getChosenHero().getKingName() + ":");
+        System.out.println("It is time to give you an important advice. " + gameData.getChosenHero().getMonsterName() + " as every monster has it's weakness.");
+        System.out.println("You'll definitely have a better chance in battle if you use a " + gameData.getPlayerWeapon().getPurchasableWeapons().get(2) + " against him.");
+    }
+
+
     public void chooseKingdom() {
         InstructionHelper.choseKingdomInstruction();
         checkInput(() -> chooseKingdom());
-
 
         switch (gameData.getChoice()) {
             case 1:
                 KingdomModel ottoman = new KingdomModel("Abdul Hamid II", "Zeynep", "Ubir", "Ararat", "Seydisuyu", "Ottoman land");
                 gameData.setChosenHero(ottoman);
+                gameData.setPlayerWeapon(new OttomanWeapon());
                 break;
             case 2:
                 KingdomModel scandinavian = new KingdomModel("Ragnar Lothbrok", "Aslaug", "Fenrir", "Uppsala", "Klar?lven", "Scandinavia");
                 gameData.setChosenHero(scandinavian);
+                gameData.setPlayerWeapon(new ScandinavianWeapon());
                 break;
             case 3:
                 KingdomModel persian = new KingdomModel("Artaxerxes I", "Damaspia", "Manticore", "Siah-Kaman", "Karkheh", "Persia");
@@ -561,6 +571,6 @@ public class Game {
     }
 
     public void inventory() {
-        TableHelper.showInformationTable(gameData.getPlayerName(), gameData.getPlayerHP(), gameData.getPlayerWeapon().getCurrentWeapon().name, gameData.getMedicine(), gameData.getNumberOfRabbits(), gameData.getNumberOfTrees(), gameData.isQuizKey(), gameData.isCaveKey(), gameData.getPlayerMoney());
+        TableHelper.showInformationTable(gameData.getPlayerName(), gameData.getPlayerHP(), gameData.getMonsterHP(), gameData.getPlayerWeapon().getCurrentWeapon().name, gameData.getMedicine(), gameData.getNumberOfRabbits(), gameData.getNumberOfTrees(), gameData.isQuizKey(), gameData.isCaveKey(), gameData.getPlayerMoney());
     }
 }

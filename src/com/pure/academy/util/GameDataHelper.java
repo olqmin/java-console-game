@@ -1,20 +1,18 @@
 package com.pure.academy.util;
 
 import com.pure.academy.model.KingdomModel;
-import com.pure.academy.model.WeaponInterface;
+import com.pure.academy.model.weapons.WeaponInterface;
 
 public class GameDataHelper {
     private int playerHP;
     private String playerName;
     private int choice;
-    private int monsterHP;
+    public int monsterHP;
     private boolean quizKey;
     private boolean caveKey;
     private int playerMoney;
     private int numberOfRabbits;
     private int numberOfTrees;
-
-
     private WeaponInterface playerWeapon;
     private int playerDamage;
     private int medicine;
