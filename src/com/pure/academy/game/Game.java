@@ -174,8 +174,9 @@ public class Game {
         System.out.println("\n------------------------------------------------------------------\n");
         if (gameData.getPlayerHP() < 150) {
             gameData.setPlayerHP(gameData.getPlayerHP() + 10);
-            System.out.println("Welcome to the river! You get 10 HP. Now your HP are " + gameData.getPlayerHP() + ".");
+            System.out.println("Welcome to " + gameData.getChosenHero().getRiverName() + " river! You get 10 HP. Now your HP are " + gameData.getPlayerHP() + ".");
         } else {
+            System.out.println(gameData.getChosenHero().getKingName() + ":");
             System.err.println("You can't take more than 150 HP!");
         }
         mountain();
@@ -190,6 +191,7 @@ public class Game {
 
             System.out.println("You got a rabbit. You have " + gameData.getNumberOfRabbits() + " rabbit" + itemPlural(gameData.getNumberOfRabbits()) + ".");
         } else {
+            System.out.println(gameData.getChosenHero().getKingName() + ":");
             System.err.println("You can't take more than 3 rabbits!");
         }
         forest();
@@ -201,6 +203,7 @@ public class Game {
             gameData.setNumberOfTrees(gameData.getNumberOfTrees() + 1);
             System.out.println("You chopped a tree. You have " + gameData.getNumberOfTrees() + " tree" + itemPlural(gameData.getNumberOfTrees()) + ".");
         } else {
+            System.out.println(gameData.getChosenHero().getKingName() + ":");
             System.err.println("You can't take more than 3 trees!");
         }
         forest();
@@ -227,6 +230,7 @@ public class Game {
                 if (gameData.isCaveKey()) {
                     cave();
                 } else {
+                    System.out.println(gameData.getChosenHero().getKingName() + ":");
                     System.err.println("The cave is locked! You have to kill the monster and get the key.");
                     city();
                 }
@@ -337,6 +341,7 @@ public class Game {
             System.out.println("You sold a " + item + " and received 100 gold. You have " + numberOfItems + " " + item + itemPlural(numberOfItems) + " and your amount of gold is " +
                     gameData.getPlayerMoney() + ".");
         } else {
+            System.out.println(gameData.getChosenHero().getKingName() + ":");
             System.err.println("You don't have any " + item + "s!");
         }
         return numberOfItems;
@@ -398,7 +403,7 @@ public class Game {
     }
 
     public void sorcerer() {
-        // tova e napraveno!
+
         InstructionHelper.sorcererMenu(gameData.getPlayerMoney(), gameData.getPlayerWeapon().getCurrentWeapon().name, gameData.getPlayerWeapon().getPurchasableWeapons());
 
         checkInput(() -> sorcerer());
@@ -430,6 +435,7 @@ public class Game {
 
     private void buyWeapon(Weapon weapon) {
         if (gameData.getPlayerWeapon().getCurrentWeapon().equals(weapon)) {
+            System.out.println(gameData.getChosenHero().getKingName() + ":");
             System.err.println("You already have a " + weapon.name + ".");
             sorcerer();
         } else if (gameData.getPlayerMoney() >= weapon.price) {
@@ -445,6 +451,7 @@ public class Game {
 
     public void medicine() {
         if (gameData.getMedicine() >= 5) {
+            System.out.println(gameData.getChosenHero().getKingName() + ":");
             System.err.println("You can't take more than 5 medicine");
         } else if (gameData.getPlayerMoney() >= 10) {
             gameData.setPlayerMoney(gameData.getPlayerMoney() - 10);
@@ -495,7 +502,7 @@ public class Game {
             gameData.setMonsterHP(0);
         }
         System.out.println("Monster HP: " + gameData.getMonsterHP());
-// tova e gotovo!
+
         if (gameData.getMonsterHP() > 0) {
             switch (gameData.getPlayerWeapon().getCurrentWeapon()) {
                 case FIST:
@@ -517,7 +524,6 @@ public class Game {
                     monsterDamage = ThreadLocalRandom.current().nextInt(25, 50);
                     break;
             }
-
 
             System.out.println("The monster attacked you and gave " + monsterDamage + " damage!");
             gameData.setPlayerHP(gameData.getPlayerHP() - monsterDamage);
@@ -565,6 +571,7 @@ public class Game {
                     castle();
             }
         } else {
+            System.out.println(gameData.getChosenHero().getKingName() + ":");
             System.err.println("Get the Quiz key first!");
             city();
         }

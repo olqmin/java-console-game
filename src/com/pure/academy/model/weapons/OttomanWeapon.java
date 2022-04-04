@@ -7,7 +7,6 @@ import java.util.List;
 
 public class OttomanWeapon implements WeaponInterface {
     Weapon weapon = Weapon.FIST;
-    Weapon ultimateWeapon = Weapon.OTTOMAN_KNIFE;
 
     @Override
     public Weapon getCurrentWeapon() {

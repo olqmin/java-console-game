@@ -16,10 +16,10 @@ public enum Weapon {
     PERSIAN_AXE("axe", 1000, 12, 20),
     PERSIAN_CROSSBOW("crossbow", 500, 7, 12);
 
-    public String name;
+    public final String name;
     public final int price;
-    public int minDamage;
-    public int maxDamage;
+    public final int minDamage;
+    public final int maxDamage;
 
     Weapon(String name, int price, int minDamage, int maxDamage) {
         this.name = name;
