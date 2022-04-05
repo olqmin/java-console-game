@@ -124,8 +124,8 @@ public class InstructionHelper {
     }
 
 
-    public static void monsterKilled() {
-        System.out.println("You killed the monster and got the key for the cave! Choose one of the following options:");
+    public static void monsterKilled(String kingName,String monsterName) {
+        System.out.println(kingName + ": You killed " + monsterName + " and got the key for the cave! Choose one of the following options:");
         System.out.println("1. Go to the castle");
         System.out.println("2. Return to the city");
     }

@@ -1,5 +1,6 @@
 package com.pure.academy.game;
 
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -9,7 +10,8 @@ import com.pure.academy.model.weapons.OttomanWeapon;
 import com.pure.academy.model.weapons.PersianWeapon;
 import com.pure.academy.model.weapons.ScandinavianWeapon;
 import com.pure.academy.util.*;
-
+import java.io.PrintStream;
+import static java.nio.charset.StandardCharsets.UTF_8;
 public class Game {
     Scanner scanner = new Scanner(System.in);
     GameDataHelper gameData = new GameDataHelper();
@@ -20,11 +22,12 @@ public class Game {
         pureAcademy.playerSetup();
 
 
+
     }
 
     public void playerSetup() {
         gameData.setPlayerHP(100);
-        gameData.setMonsterHP(50);
+        gameData.setMonsterHP(100);
 
         ASCIIArtHelper.drawCharacter();
 
@@ -45,7 +48,7 @@ public class Game {
     public void greetingFromTheKing() {
         System.out.println("\n------------------------------------------------------------------\n");
         System.out.println(gameData.getChosenHero().getKingName() + ":");
-        System.out.println("Thank goodness you've arrived into my kingdom! All was peaceful until this terrible monster " + gameData.getChosenHero().getMonsterName() + " came. \n" +
+        System.out.println("Thank goodness you've arrived in " + gameData.getChosenHero().getKingdomName() + "! All was peaceful until this terrible monster " + gameData.getChosenHero().getMonsterName() + " came. \n" +
                 "Our homes are destroyed, the children and women are frightened. The screams that echo in the night are inhuman.\n" +
                 "Even my best men and soldiers are incapable to overcome his strength. \n" +
                 "Follow the path and keep in mind that " + gameData.getChosenHero().getMonsterName() + " is strong and it would be easier to kill it with weapons, which you can find in the city. \n" +
@@ -71,7 +74,7 @@ public class Game {
                 gameData.setPlayerWeapon(new OttomanWeapon());
                 break;
             case 2:
-                KingdomModel scandinavian = new KingdomModel("Ragnar Lothbrok", "Aslaug", "Fenrir", "Uppsala", "Klar?lven", "Scandinavia");
+                KingdomModel scandinavian = new KingdomModel("Ragnar Lothbrok", "Aslaug", "Fenrir", "Uppsala", "Klaralven", "Scandinavia");
                 gameData.setChosenHero(scandinavian);
                 gameData.setPlayerWeapon(new ScandinavianWeapon());
                 break;
@@ -171,10 +174,13 @@ public class Game {
     }
 
     public void river() {
+
+        PrintStream out = new PrintStream(System.out, true, UTF_8); // true = autoflush
+
         System.out.println("\n------------------------------------------------------------------\n");
         if (gameData.getPlayerHP() < 150) {
             gameData.setPlayerHP(gameData.getPlayerHP() + 10);
-            System.out.println("Welcome to " + gameData.getChosenHero().getRiverName() + " river! You get 10 HP. Now your HP are " + gameData.getPlayerHP() + ".");
+            out.println("Welcome to " + gameData.getChosenHero().getRiverName() + " river! You get 10 HP. Now your HP are " + gameData.getPlayerHP() + ".");
         } else {
             System.out.println();
             System.err.println(gameData.getChosenHero().getKingName() + ": You can't take more than 150 HP!");
@@ -183,6 +189,7 @@ public class Game {
     }
 
     public void rabbit() {
+        //
         System.out.println("\n------------------------------------------------------------------\n");
         if (gameData.getNumberOfRabbits() < 3) {
             gameData.setNumberOfRabbits(gameData.getNumberOfRabbits() + 1);
@@ -202,7 +209,6 @@ public class Game {
             gameData.setNumberOfTrees(gameData.getNumberOfTrees() + 1);
             System.out.println("You chopped a tree. You have " + gameData.getNumberOfTrees() + " tree" + itemPlural(gameData.getNumberOfTrees()) + ".");
         } else {
-            System.out.println();
             System.err.println(gameData.getChosenHero().getKingName() + ": You can't take more than 3 trees!");
         }
         forest();
@@ -229,8 +235,7 @@ public class Game {
                 if (gameData.isCaveKey()) {
                     cave();
                 } else {
-                    System.out.println(gameData.getChosenHero().getKingName() + ":");
-                    System.err.println("The cave is locked! You have to kill the monster and get the key.");
+                    System.err.println(gameData.getChosenHero().getKingName() + ": The cave is locked! You have to kill the monster and get the key.");
                     city();
                 }
                 break;
@@ -340,8 +345,7 @@ public class Game {
             System.out.println("You sold a " + item + " and received 100 gold. You have " + numberOfItems + " " + item + itemPlural(numberOfItems) + " and your amount of gold is " +
                     gameData.getPlayerMoney() + ".");
         } else {
-            System.out.println(gameData.getChosenHero().getKingName() + ":");
-            System.err.println("You don't have any " + item + "s!");
+            System.err.println(gameData.getChosenHero().getKingName() + ": You don't have any " + item + "s!");
         }
         return numberOfItems;
     }
@@ -434,11 +438,10 @@ public class Game {
 
     private void buyWeapon(Weapon weapon) {
         if (gameData.getPlayerWeapon().getCurrentWeapon().equals(weapon)) {
-            System.out.println(gameData.getChosenHero().getKingName() + ":");
-            System.err.println("You already have a " + weapon.name + ".");
+            System.err.println(gameData.getChosenHero().getKingName() + ": You already have a " + weapon.name + ".");
             sorcerer();
         } else if (gameData.getPlayerMoney() >= weapon.price) {
-            gameData.setPlayerMoney(gameData.getPlayerMoney() + weapon.price);
+            gameData.setPlayerMoney(gameData.getPlayerMoney() - weapon.price);
             gameData.getPlayerWeapon().setCurrentWeapon(weapon);
             System.out.println("You have a " + weapon.name + " and " + gameData.getPlayerMoney() + " gold.");
             sorcerer();
@@ -450,8 +453,7 @@ public class Game {
 
     public void medicine() {
         if (gameData.getMedicine() >= 5) {
-            System.out.println(gameData.getChosenHero().getKingName() + ":");
-            System.err.println("You can't take more than 5 medicine");
+            System.err.println(gameData.getChosenHero().getKingName() + ": You can't take more than 5 medicine");
         } else if (gameData.getPlayerMoney() >= 10) {
             gameData.setPlayerMoney(gameData.getPlayerMoney() - 10);
             gameData.setMedicine(gameData.getMedicine() + 1);
@@ -510,22 +512,22 @@ public class Game {
         if (gameData.getMonsterHP() > 0) {
             switch (gameData.getPlayerWeapon().getCurrentWeapon()) {
                 case FIST:
-                    monsterDamage = ThreadLocalRandom.current().nextInt(0, 4);
+                    monsterDamage = ThreadLocalRandom.current().nextInt(2, 4);
                     break;
                 case SCANDINAVIAN_KNIFE:
                 case PERSIAN_KNIFE:
                 case OTTOMAN_AXE:
-                    monsterDamage = ThreadLocalRandom.current().nextInt(4, 15);
+                    monsterDamage = ThreadLocalRandom.current().nextInt(4, 9);
                     break;
                 case SCANDINAVIAN_AXE:
                 case PERSIAN_CROSSBOW:
                 case OTTOMAN_CROSSBOW:
-                    monsterDamage = ThreadLocalRandom.current().nextInt(15, 25);
+                    monsterDamage = ThreadLocalRandom.current().nextInt(7, 12);
                     break;
                 case SCANDINAVIAN_CROSSBOW:
                 case PERSIAN_AXE:
                 case OTTOMAN_KNIFE:
-                    monsterDamage = ThreadLocalRandom.current().nextInt(25, 50);
+                    monsterDamage = ThreadLocalRandom.current().nextInt(10, 16);
                     break;
             }
 
@@ -541,7 +543,7 @@ public class Game {
             }
         } else {
             gameData.setCaveKey(true);
-            InstructionHelper.monsterKilled();
+            InstructionHelper.monsterKilled(gameData.getChosenHero().getKingName(),gameData.getChosenHero().getMonsterName());
 
             checkInput(() -> fight());
 
@@ -575,8 +577,7 @@ public class Game {
                     castle();
             }
         } else {
-            System.out.println(gameData.getChosenHero().getKingName() + ":");
-            System.err.println("Get the Quiz key first!");
+            System.err.println(gameData.getChosenHero().getKingName() + ": Get the Quiz key first!");
             city();
         }
     }
