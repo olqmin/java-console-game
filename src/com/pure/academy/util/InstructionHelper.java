@@ -1,6 +1,5 @@
 package com.pure.academy.util;
 
-import com.pure.academy.model.KingdomModel;
 import com.pure.academy.model.enums.Weapon;
 
 import java.util.List;
@@ -33,47 +32,47 @@ public class InstructionHelper {
         System.out.println("If correct: Doubles the money\n" + "If 5 tries are over - your money will be divided by 2.\n");
     }
 
-    public static void threeWayPathInstruction() {
+    public static void threeWayPathInstruction(String mountainName) {
         System.out.println("\n------------------------------------------------------------------\n");
         ASCIIArtHelper.drawThreeWayPath();
         System.out.println("\nYou are at a crossroad. Choose one of the following options:\n\n");
-        System.out.println("1: To the mountain");
+        System.out.println("1: To the " + mountainName + " mountain");
         System.out.println("2: To Pure City");
         System.out.println("3: To the gambling area");
         System.out.println("4: Check inventory");
         System.out.println("\n------------------------------------------------------------------\n");
     }
 
-    public static void mountainInstruction() {
+    public static void mountainInstruction(String mountainName, String riverName) {
         System.out.println("\n------------------------------------------------------------------\n");
         ASCIIArtHelper.drawMountain();
-        System.out.println("\nWelcome to the mountain! Here you can find tradable resources which can help you further in the game. Choose one of the following options:\n\n");
+        System.out.println("\nWelcome to the " + mountainName + " mountain! Here you can find tradable resources which can help you further in the game. Choose one of the following options:\n\n");
         System.out.println("1: To the forest");
-        System.out.println("2: To the river");
+        System.out.println("2: To the " + riverName + " river");
         System.out.println("3: Return to the three-way-path");
         System.out.println("4: Check inventory");
         System.out.println("\n------------------------------------------------------------------\n");
     }
 
-    public static void forestInstruction() {
+    public static void forestInstruction(String mountainName) {
         System.out.println("\n------------------------------------------------------------------\n");
         ASCIIArtHelper.drawForest();
         System.out.println("\nWelcome to the forest!Here you can add rabbits or trees to your inventory. Choose one of the following options:\n\n");
         System.out.println("1: Get a rabbit");
         System.out.println("2: Chop a tree");
-        System.out.println("3: Return to the mountain");
+        System.out.println("3: Return to the " + mountainName + " mountain");
         System.out.println("4: Check inventory");
         System.out.println("\n------------------------------------------------------------------\n");
     }
 
-    public static void cityInstruction() {
+    public static void cityInstruction(String kingdom) {
         System.out.println("\n------------------------------------------------------------------\n");
         ASCIIArtHelper.drawPureCity();
         System.out.println("\nWelcome to Pure City! You are at a crossroad. Choose one of the following options:\n\n");
         System.out.println("1: To the shop");
         System.out.println("2: To the Sorcerer");
         System.out.println("3: To the cave");
-        System.out.println("4: To the castle");
+        System.out.println("4: To the " + kingdom + " castle");
         System.out.println("5: Return to the three-way-path");
         System.out.println("6: Check inventory");
         System.out.println("\n------------------------------------------------------------------\n");
@@ -178,6 +177,4 @@ public class InstructionHelper {
         System.out.println("3. Persia");
         System.out.println("\n------------------------------------------------------------------\n");
     }
-
-
 }

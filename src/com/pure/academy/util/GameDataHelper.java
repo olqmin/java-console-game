@@ -17,6 +17,15 @@ public class GameDataHelper {
     private int playerDamage;
     private int medicine;
     private KingdomModel chosenHero;
+    private boolean weaponHintShown;
+
+    public boolean isWeaponHintShown() {
+        return weaponHintShown;
+    }
+
+    public void setWeaponHintShown(boolean weaponHintShown) {
+        this.weaponHintShown = weaponHintShown;
+    }
 
     public int getPlayerHP() {
         return playerHP;

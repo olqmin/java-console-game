@@ -55,8 +55,8 @@ public class Game {
     public void bestWeaponForMonster() {
         System.out.println("\n------------------------------------------------------------------\n");
         System.out.println(gameData.getChosenHero().getKingName() + ":");
-        System.out.println("It is time to give you an important advice. " + gameData.getChosenHero().getMonsterName() + " as every monster has it's weakness.");
-        System.out.println("You'll definitely have a better chance in battle if you use a " + gameData.getPlayerWeapon().getPurchasableWeapons().get(2) + " against him.");
+        System.out.println("It is time to give you an important advice. " + gameData.getChosenHero().getMonsterName() + " as every monster has its weakness.");
+        System.out.println("You'll definitely have a better chance in battle if you use the most proper weapon against it.");
     }
 
 
@@ -87,7 +87,7 @@ public class Game {
     }
 
     public void threeWayPath() {
-        InstructionHelper.threeWayPathInstruction();
+        InstructionHelper.threeWayPathInstruction(gameData.getChosenHero().getMountainName());
 
         checkInput(() -> threeWayPath());
 
@@ -123,7 +123,7 @@ public class Game {
     }
 
     public void mountain() {
-        InstructionHelper.mountainInstruction();
+        InstructionHelper.mountainInstruction(gameData.getChosenHero().getMountainName(), gameData.getChosenHero().getRiverName());
 
         checkInput(() -> mountain());
 
@@ -147,7 +147,7 @@ public class Game {
     }
 
     public void forest() {
-        InstructionHelper.forestInstruction();
+        InstructionHelper.forestInstruction(gameData.getChosenHero().getMountainName());
 
         checkInput(() -> forest());
 
@@ -176,8 +176,8 @@ public class Game {
             gameData.setPlayerHP(gameData.getPlayerHP() + 10);
             System.out.println("Welcome to " + gameData.getChosenHero().getRiverName() + " river! You get 10 HP. Now your HP are " + gameData.getPlayerHP() + ".");
         } else {
-            System.out.println(gameData.getChosenHero().getKingName() + ":");
-            System.err.println("You can't take more than 150 HP!");
+            System.out.println();
+            System.err.println(gameData.getChosenHero().getKingName() + ": You can't take more than 150 HP!");
         }
         mountain();
     }
@@ -191,8 +191,7 @@ public class Game {
 
             System.out.println("You got a rabbit. You have " + gameData.getNumberOfRabbits() + " rabbit" + itemPlural(gameData.getNumberOfRabbits()) + ".");
         } else {
-            System.out.println(gameData.getChosenHero().getKingName() + ":");
-            System.err.println("You can't take more than 3 rabbits!");
+            System.err.println(gameData.getChosenHero().getKingName() + ": You can't take more than 3 rabbits!");
         }
         forest();
     }
@@ -203,8 +202,8 @@ public class Game {
             gameData.setNumberOfTrees(gameData.getNumberOfTrees() + 1);
             System.out.println("You chopped a tree. You have " + gameData.getNumberOfTrees() + " tree" + itemPlural(gameData.getNumberOfTrees()) + ".");
         } else {
-            System.out.println(gameData.getChosenHero().getKingName() + ":");
-            System.err.println("You can't take more than 3 trees!");
+            System.out.println();
+            System.err.println(gameData.getChosenHero().getKingName() + ": You can't take more than 3 trees!");
         }
         forest();
     }
@@ -215,7 +214,7 @@ public class Game {
     }
 
     public void city() {
-        InstructionHelper.cityInstruction();
+        InstructionHelper.cityInstruction(gameData.getChosenHero().getKingdomName());
 
         checkInput(() -> city());
 
@@ -465,6 +464,11 @@ public class Game {
     }
 
     public void monster() {
+        if (!gameData.isWeaponHintShown()) {
+            bestWeaponForMonster();
+            gameData.setWeaponHintShown(true);
+        }
+
         InstructionHelper.monsterInstruction(gameData.getPlayerHP(), gameData.getMonsterHP());
 
         checkInput(() -> monster());
