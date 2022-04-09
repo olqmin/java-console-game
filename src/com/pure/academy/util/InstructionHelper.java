@@ -200,4 +200,12 @@ public class InstructionHelper {
         System.out.println("It is time to give you an important advice. " + monsterName + " as every monster has its weakness.");
         System.out.println("You'll definitely have a better chance in battle if you use the best weapon against it.");
     }
+
+    public static void showPlayerHP(String playerName, int playerHP) {
+        System.out.println(playerName + " HP: " + playerHP);
+    }
+
+    public static void showMonsterHP(int monsterHP) {
+        System.out.println("Monster HP: " + monsterHP);
+    }
 }

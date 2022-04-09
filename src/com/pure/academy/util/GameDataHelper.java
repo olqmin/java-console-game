@@ -7,7 +7,7 @@ public class GameDataHelper {
     private int playerHP;
     private String playerName;
     private int choice;
-    public int monsterHP;
+    private int monsterHP;
     private boolean quizKey;
     private boolean caveKey;
     private int playerMoney;

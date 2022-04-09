@@ -12,6 +12,7 @@ import com.pure.academy.model.weapons.ScandinavianWeapon;
 import com.pure.academy.util.*;
 import java.io.PrintStream;
 import static java.nio.charset.StandardCharsets.UTF_8;
+
 public class Game {
     Scanner scanner = new Scanner(System.in);
     GameDataHelper gameData = new GameDataHelper();
@@ -20,8 +21,6 @@ public class Game {
 
         Game pureAcademy = new Game();
         pureAcademy.playerSetup();
-
-
 
     }
 
@@ -97,8 +96,6 @@ public class Game {
             default:
                 threeWayPath();
         }
-
-
     }
 
     private void checkInput(Runnable function) {
@@ -391,7 +388,6 @@ public class Game {
     }
 
     public void sorcerer() {
-
         InstructionHelper.sorcererMenu(gameData.getPlayerMoney(), gameData.getPlayerWeapon().getCurrentWeapon().name, gameData.getPlayerWeapon().getPurchasableWeapons());
 
         checkInput(() -> sorcerer());
@@ -407,7 +403,8 @@ public class Game {
                 buyWeapon(gameData.getPlayerWeapon().getPurchasableWeapons().get(2));
                 break;
             case 4:
-                medicine();
+                buyMedicine();
+                sorcerer();
                 break;
             case 5:
                 city();
@@ -436,7 +433,7 @@ public class Game {
         }
     }
 
-    public void medicine() {
+    public void buyMedicine() {
         if (gameData.getMedicine() >= 5) {
             System.err.println(gameData.getChosenHero().getKingName() + ": You can't take more than 5 medicine");
         } else if (gameData.getPlayerMoney() >= 10) {
@@ -468,7 +465,11 @@ public class Game {
                 if (gameData.getMedicine() > 0) {
                     if (gameData.getPlayerHP() < gameData.getMAX_PLAYER_HP()) {
                         gameData.setMedicine(gameData.getMedicine() - 1);
-                        gameData.setPlayerHP(gameData.getPlayerHP() + 10);
+                        if (gameData.getPlayerHP() < gameData.getMAX_PLAYER_HP() - 9) {
+                            gameData.setPlayerHP(gameData.getPlayerHP() + 10);
+                        } else {
+                            gameData.setPlayerHP(gameData.getMAX_PLAYER_HP());
+                        }
                         System.out.println("Your HP are " + gameData.getPlayerHP() + ".");
                         monster();
                     } else {
@@ -497,7 +498,7 @@ public class Game {
         if (gameData.getMonsterHP() < 0) {
             gameData.setMonsterHP(0);
         }
-        System.out.println("Monster HP: " + gameData.getMonsterHP());
+        InstructionHelper.showMonsterHP(gameData.getMonsterHP());
 
         if (gameData.getMonsterHP() > 0) {
             switch (gameData.getPlayerWeapon().getCurrentWeapon()) {
@@ -525,10 +526,10 @@ public class Game {
             gameData.setPlayerHP(gameData.getPlayerHP() - monsterDamage);
             if (gameData.getPlayerHP() < 1) {
                 gameData.setPlayerHP(0);
-                System.out.println("Player HP: " + gameData.getPlayerHP());
+                InstructionHelper.showPlayerHP(gameData.getPlayerName(), gameData.getPlayerHP());
                 InstructionHelper.dead();
             } else {
-                System.out.println("Player HP: " + gameData.getPlayerHP());
+                InstructionHelper.showPlayerHP(gameData.getPlayerName(), gameData.getPlayerHP());
                 monster();
             }
         } else {
