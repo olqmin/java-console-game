@@ -5,7 +5,7 @@ import com.pure.academy.model.enums.Weapon;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PersianWeapon implements WeaponInterface {
+public class BulgarianWeapon implements WeaponInterface {
     Weapon weapon = Weapon.FIST;
 
     @Override
@@ -21,9 +21,9 @@ public class PersianWeapon implements WeaponInterface {
     @Override
     public List<Weapon> getPurchasableWeapons() {
         List<Weapon> listOfWeapons = new ArrayList<>();
-        listOfWeapons.add(Weapon.PERSIAN_KNIFE);
-        listOfWeapons.add(Weapon.PERSIAN_CROSSBOW);
-        listOfWeapons.add(Weapon.PERSIAN_AXE);
+        listOfWeapons.add(Weapon.BULGARIAN_KNIFE);
+        listOfWeapons.add(Weapon.BULGARIAN_CROSSBOW);
+        listOfWeapons.add(Weapon.BULGARIAN_AXE);
         return listOfWeapons;
     }
 }

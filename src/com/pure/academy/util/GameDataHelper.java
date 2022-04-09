@@ -18,6 +18,7 @@ public class GameDataHelper {
     private int medicine;
     private KingdomModel chosenHero;
     private boolean weaponHintShown;
+    private final int MAX_PLAYER_HP = 150;
 
     public boolean isWeaponHintShown() {
         return weaponHintShown;
@@ -129,5 +130,9 @@ public class GameDataHelper {
 
     public void setChosenHero(KingdomModel chosenHero) {
         this.chosenHero = chosenHero;
+    }
+
+    public int getMAX_PLAYER_HP() {
+        return MAX_PLAYER_HP;
     }
 }

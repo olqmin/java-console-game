@@ -1,11 +1,11 @@
 package com.pure.academy.game;
 
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.pure.academy.model.*;
 import com.pure.academy.model.enums.Weapon;
+import com.pure.academy.model.weapons.BulgarianWeapon;
 import com.pure.academy.model.weapons.OttomanWeapon;
 import com.pure.academy.model.weapons.PersianWeapon;
 import com.pure.academy.model.weapons.ScandinavianWeapon;
@@ -44,25 +44,6 @@ public class Game {
         threeWayPath();
     }
 
-
-    public void greetingFromTheKing() {
-        System.out.println("\n------------------------------------------------------------------\n");
-        System.out.println(gameData.getChosenHero().getKingName() + ":");
-        System.out.println("Thank goodness you've arrived in " + gameData.getChosenHero().getKingdomName() + "! All was peaceful until this terrible monster " + gameData.getChosenHero().getMonsterName() + " came. \n" +
-                "Our homes are destroyed, the children and women are frightened. The screams that echo in the night are inhuman.\n" +
-                "Even my best men and soldiers are incapable to overcome his strength. \n" +
-                "Follow the path and keep in mind that " + gameData.getChosenHero().getMonsterName() + " is strong and it would be easier to kill it with weapons, which you can find in the city. \n" +
-                "Last but not least, defeating the monster will save my imprisoned daughter - " + gameData.getChosenHero().getPrincesName() + ". Perhaps I can tell you more if we speak again. Good luck.");
-    }
-
-    public void bestWeaponForMonster() {
-        System.out.println("\n------------------------------------------------------------------\n");
-        System.out.println(gameData.getChosenHero().getKingName() + ":");
-        System.out.println("It is time to give you an important advice. " + gameData.getChosenHero().getMonsterName() + " as every monster has its weakness.");
-        System.out.println("You'll definitely have a better chance in battle if you use the most proper weapon against it.");
-    }
-
-
     public void chooseKingdom() {
         InstructionHelper.choseKingdomInstruction();
         checkInput(() -> chooseKingdom());
@@ -83,10 +64,15 @@ public class Game {
                 gameData.setChosenHero(persian);
                 gameData.setPlayerWeapon(new PersianWeapon());
                 break;
+            case 4:
+                KingdomModel bulgarian = new KingdomModel("Simeon I The Great", "Maria-Irina", "Baba Yaga", "Rhodope", "Arda", "Bulgaria");
+                gameData.setChosenHero(bulgarian);
+                gameData.setPlayerWeapon(new BulgarianWeapon());
+                break;
             default:
                 chooseKingdom();
         }
-        greetingFromTheKing();
+        InstructionHelper.greetingFromTheKing(gameData.getChosenHero().getKingName(), gameData.getChosenHero().getKingdomName(), gameData.getChosenHero().getMonsterName(), gameData.getChosenHero().getPrincessName());
     }
 
     public void threeWayPath() {
@@ -178,18 +164,17 @@ public class Game {
         PrintStream out = new PrintStream(System.out, true, UTF_8); // true = autoflush
 
         System.out.println("\n------------------------------------------------------------------\n");
-        if (gameData.getPlayerHP() < 150) {
+        if (gameData.getPlayerHP() < gameData.getMAX_PLAYER_HP()) {
             gameData.setPlayerHP(gameData.getPlayerHP() + 10);
             out.println("Welcome to " + gameData.getChosenHero().getRiverName() + " river! You get 10 HP. Now your HP are " + gameData.getPlayerHP() + ".");
         } else {
             System.out.println();
-            System.err.println(gameData.getChosenHero().getKingName() + ": You can't take more than 150 HP!");
+            InstructionHelper.hpLimitReached(gameData.getChosenHero().getKingName());
         }
         mountain();
     }
 
     public void rabbit() {
-        //
         System.out.println("\n------------------------------------------------------------------\n");
         if (gameData.getNumberOfRabbits() < 3) {
             gameData.setNumberOfRabbits(gameData.getNumberOfRabbits() + 1);
@@ -467,7 +452,7 @@ public class Game {
 
     public void monster() {
         if (!gameData.isWeaponHintShown()) {
-            bestWeaponForMonster();
+            InstructionHelper.bestWeaponForMonster(gameData.getChosenHero().getKingName(), gameData.getChosenHero().getMonsterName());
             gameData.setWeaponHintShown(true);
         }
 
@@ -481,12 +466,17 @@ public class Game {
                 break;
             case 2:
                 if (gameData.getMedicine() > 0) {
-                    gameData.setMedicine(gameData.getMedicine() - 1);
-                    gameData.setPlayerHP(gameData.getPlayerHP() + 10);
-                    System.out.println("Your HP are " + gameData.getPlayerHP() + ".");
-                    monster();
+                    if (gameData.getPlayerHP() < gameData.getMAX_PLAYER_HP()) {
+                        gameData.setMedicine(gameData.getMedicine() - 1);
+                        gameData.setPlayerHP(gameData.getPlayerHP() + 10);
+                        System.out.println("Your HP are " + gameData.getPlayerHP() + ".");
+                        monster();
+                    } else {
+                        InstructionHelper.hpLimitReached(gameData.getChosenHero().getKingName());
+                        monster();
+                    }
                 } else {
-                    InstructionHelper.noMedicine();
+                    InstructionHelper.noMedicine(gameData.getChosenHero().getKingName());
                     monster();
                 }
                 break;

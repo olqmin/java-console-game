@@ -165,8 +165,8 @@ public class InstructionHelper {
         System.err.println("You don't have enough money!");
     }
 
-    public static void noMedicine() {
-        System.err.println("You don't have any medicine!");
+    public static void noMedicine(String kingName) {
+        System.err.println(kingName + ": You don't have any medicine!");
     }
 
     public static void choseKingdomInstruction() {
@@ -175,6 +175,29 @@ public class InstructionHelper {
         System.out.println("1. Ottoman land");
         System.out.println("2. Scandinavia");
         System.out.println("3. Persia");
+        System.out.println("4. Bulgaria");
         System.out.println("\n------------------------------------------------------------------\n");
+    }
+
+    public static void hpLimitReached(String kingName) {
+        System.err.println(kingName + ": You can't take more than 150 HP!");
+    }
+
+    public static void greetingFromTheKing(String kingName, String kingdomName, String monsterName, String princessName) {
+        System.out.println("\n------------------------------------------------------------------\n");
+        System.out.println(kingName + ":");
+        System.out.println("Thank goodness you've arrived in " + kingdomName + "! All was peaceful until this terrible monster " + monsterName + " came. \n" +
+                "Our homes are destroyed, the children and women are frightened. The screams that echo in the night are inhuman.\n" +
+                "Even my best men and soldiers are incapable to overcome his strength. \n" +
+                "Follow the path and keep in mind that " + monsterName + " is strong and it would be easier to kill it with weapons, which you can find in the city. \n" +
+                "Last but not least, defeating the monster will save my imprisoned daughter - " + princessName + ". Perhaps I can tell you more if we speak again. Good luck.");
+    }
+
+    public static void bestWeaponForMonster(String kingName, String monsterName) {
+        System.out.println("\n------------------------------------------------------------------\n");
+        System.out.println(kingName + ":");
+        //todo: Opisanie na monster ot sheet-a
+        System.out.println("It is time to give you an important advice. " + monsterName + " as every monster has its weakness.");
+        System.out.println("You'll definitely have a better chance in battle if you use the best weapon against it.");
     }
 }
