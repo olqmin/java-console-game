@@ -1,7 +1,6 @@
 package com.pure.academy.model.weapons;
 
 import com.pure.academy.model.enums.Weapon;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,7 +1,6 @@
 package com.pure.academy.util;
 
 import com.pure.academy.model.enums.Weapon;
-
 import java.util.List;
 
 public class InstructionHelper {
@@ -88,7 +87,6 @@ public class InstructionHelper {
         System.out.println("\n------------------------------------------------------------------\n");
     }
 
-
     public static void gamblingAreaWarning(String playerName) {
         System.out.println("\n------------------------------------------------------------------\n");
         System.err.println("Hey, " + playerName + ", you don't have enough money to gamble. Choose one of the following options:");
@@ -122,7 +120,6 @@ public class InstructionHelper {
         System.out.println("3: Run");
         System.out.println("\n------------------------------------------------------------------\n");
     }
-
 
     public static void monsterKilled(String kingName,String monsterName) {
         System.out.println(kingName + ": You killed " + monsterName + " and got the key for the cave! Choose one of the following options:");

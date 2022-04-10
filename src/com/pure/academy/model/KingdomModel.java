@@ -2,13 +2,12 @@ package com.pure.academy.model;
 
 public class KingdomModel {
 
-    private String kingName;
-    private String princessName;
-    private String monsterName;
-    private String mountainName;
-    private String riverName;
-    private String kingdomName;
-    
+    private final String kingName;
+    private final String princessName;
+    private final String monsterName;
+    private final String mountainName;
+    private final String riverName;
+    private final String kingdomName;
 
     public KingdomModel(String kingName, String princessName, String monsterName, String mountainName, String riverName, String kingdomName) {
         this.kingName = kingName;
@@ -23,47 +22,23 @@ public class KingdomModel {
         return kingName;
     }
 
-    public void setKingName(String kingName) {
-        this.kingName = kingName;
-    }
-
     public String getPrincessName() {
         return princessName;
-    }
-
-    public void setPrincesName(String princesName) {
-        this.princessName = princesName;
     }
 
     public String getMonsterName() {
         return monsterName;
     }
 
-    public void setMonsterName(String monsterName) {
-        this.monsterName = monsterName;
-    }
-
     public String getMountainName() {
         return mountainName;
-    }
-
-    public void setMountainName(String mountainName) {
-        this.mountainName = mountainName;
     }
 
     public String getRiverName() {
         return riverName;
     }
 
-    public void setRiverName(String riverName) {
-        this.riverName = riverName;
-    }
-
     public String getKingdomName() {
         return kingdomName;
-    }
-
-    public void setKingdomName(String kingdomName) {
-        this.kingdomName = kingdomName;
     }
 }

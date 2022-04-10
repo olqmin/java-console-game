@@ -12,13 +12,13 @@ public enum Weapon {
     OTTOMAN_AXE("axe", 100, 2, 7),
     OTTOMAN_CROSSBOW("crossbow", 500, 7, 12),
 
-    PERSIAN_KNIFE("knife", 100, 2, 7),
+    PERSIAN_KNIFE("knife", 500, 7, 12),
     PERSIAN_AXE("axe", 1000, 12, 20),
-    PERSIAN_CROSSBOW("crossbow", 500, 7, 12),
+    PERSIAN_CROSSBOW("crossbow", 100, 2, 7),
 
-    BULGARIAN_KNIFE("knife", 100, 2, 7),
+    BULGARIAN_KNIFE("knife", 500, 7, 12),
     BULGARIAN_AXE("axe", 1000, 12, 20),
-    BULGARIAN_CROSSBOW("crossbow", 500, 7, 12);
+    BULGARIAN_CROSSBOW("crossbow", 100, 2, 7);
 
     public final String name;
     public final int price;
@@ -31,6 +31,4 @@ public enum Weapon {
         this.minDamage = minDamage;
         this.maxDamage = maxDamage;
     }
-
-
 }

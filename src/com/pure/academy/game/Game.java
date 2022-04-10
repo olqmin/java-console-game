@@ -196,7 +196,6 @@ public class Game {
         forest();
     }
 
-
     private String itemPlural(int numberOfItems) {
         return numberOfItems > 1 ? "s" : "";
     }
@@ -331,7 +330,6 @@ public class Game {
         }
         return numberOfItems;
     }
-
 
     public void cave() {
         if (gameData.getPlayerMoney() >= -10) {
@@ -506,18 +504,21 @@ public class Game {
                     monsterDamage = ThreadLocalRandom.current().nextInt(2, 4);
                     break;
                 case SCANDINAVIAN_KNIFE:
-                case PERSIAN_KNIFE:
                 case OTTOMAN_AXE:
+                case PERSIAN_CROSSBOW:
+                case BULGARIAN_CROSSBOW:
                     monsterDamage = ThreadLocalRandom.current().nextInt(4, 9);
                     break;
                 case SCANDINAVIAN_AXE:
-                case PERSIAN_CROSSBOW:
                 case OTTOMAN_CROSSBOW:
+                case PERSIAN_KNIFE:
+                case BULGARIAN_KNIFE:
                     monsterDamage = ThreadLocalRandom.current().nextInt(7, 12);
                     break;
                 case SCANDINAVIAN_CROSSBOW:
-                case PERSIAN_AXE:
                 case OTTOMAN_KNIFE:
+                case PERSIAN_AXE:
+                case BULGARIAN_AXE:
                     monsterDamage = ThreadLocalRandom.current().nextInt(10, 16);
                     break;
             }
