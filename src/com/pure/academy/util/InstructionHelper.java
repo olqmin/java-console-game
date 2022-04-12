@@ -13,7 +13,6 @@ public class InstructionHelper {
         System.out.println("4: Buy medicine - 10 gold");
         System.out.println("5: Return to the city");
         System.out.println("6: Check inventory");
-
         System.out.println("\n------------------------------------------------------------------\n");
     }
 
@@ -121,7 +120,7 @@ public class InstructionHelper {
         System.out.println("\n------------------------------------------------------------------\n");
     }
 
-    public static void monsterKilled(String kingName,String monsterName) {
+    public static void monsterKilled(String kingName, String monsterName) {
         System.out.println(kingName + ": You killed " + monsterName + " and got the key for the cave! Choose one of the following options:");
         System.out.println("1. Go to the castle");
         System.out.println("2. Return to the city");
@@ -142,9 +141,11 @@ public class InstructionHelper {
         System.out.println("\n------------------------------------------------------------------\n");
     }
 
-    public static void dead() {
+    public static void dead(String kingName) {
         System.err.println("\n------------------------------------------------------------------\n");
-        System.err.println("You are dead! The game is over!");
+        System.err.println(kingName + ":");
+        System.err.println("You are dead! The game is over! ");
+        System.err.println("Don't get disappointed! The key to overcoming the monster is in exploring the map.");
         System.err.println("\n------------------------------------------------------------------\n");
     }
 
@@ -172,7 +173,7 @@ public class InstructionHelper {
         System.out.println("1. Ottoman land");
         System.out.println("2. Scandinavia");
         System.out.println("3. Persia");
-        System.out.println("4. Bulgaria");
+        System.out.println("4. Great Bulgaria");
         System.out.println("\n------------------------------------------------------------------\n");
     }
 
@@ -190,11 +191,12 @@ public class InstructionHelper {
                 "Last but not least, defeating the monster will save my imprisoned daughter - " + princessName + ". Perhaps I can tell you more if we speak again. Good luck.");
     }
 
-    public static void bestWeaponForMonster(String kingName, String monsterName) {
+    public static void bestWeaponForMonster(String kingName, String monsterName, String monsterDesc) {
         System.out.println("\n------------------------------------------------------------------\n");
         System.out.println(kingName + ":");
-        //todo: Opisanie na monster ot sheet-a
-        System.out.println("It is time to give you an important advice. " + monsterName + " as every monster has its weakness.");
+        System.out.println("It is time to give you an important advice. " + monsterName + " as every monster has its weakness.\n");
+        System.out.println(monsterDesc);
+        System.out.println();
         System.out.println("You'll definitely have a better chance in battle if you use the best weapon against it.");
     }
 
@@ -206,39 +208,42 @@ public class InstructionHelper {
         System.out.println("Monster HP: " + monsterHP);
     }
 
-    public static void babaYagaDesc(){
-        System.out.println("Monster: Baba Yaga\n" +
+    public static String babaYagaDesc() {
+        return
                 "In Slavic mythology Baba Yaga is an old witch with long nose,\n" +
-                "crooked legs and gets around with a magic broomstick.\n" +
-                "Young children are afraid of her because she eats them in big pots.\n" +
-                "Elders are afraid of her because they think she can cast devious\n" +
-                "spells and curses on them. When she meets a person, she either blesses\n" +
-                "them or curses them, depending on the approach to her.");
+                        "crooked legs and gets around with a magic broomstick.\n" +
+                        "Young children are afraid of her because she eats them in big pots.\n" +
+                        "Elders are afraid of her because they think she can cast devious\n" +
+                        "spells and curses on them. When she meets a person, she either blesses\n" +
+                        "them or curses them, depending on the approach to her.";
     }
-    public static void fenrirDesc() {
-        System.out.println("Monster: Fenrir\n" +
+
+    public static String fenrirDesc() {
+        return
                 "A monstrous wolf.\n" +
-                "The Aesir gods raised Fenrir themselves in order to\n" +
-                "keep him under their control and prevent him from wreaking\n" +
-                "havoc throughout the Nine Worlds. He grew at an astonishingly fast pace,\n" +
-                "however, and eventually the troubled gods decided to chain him up.\n" +
-                "Fenrir refused to be bound and run throughout the world with his lower jaw\n" +
-                "against the ground and his upper jaw in the sky, devouring everything in his path.");
+                        "The Aesir gods raised Fenrir themselves in order to\n" +
+                        "keep him under their control and prevent him from wreaking\n" +
+                        "havoc throughout the Nine Worlds. He grew at an astonishingly fast pace,\n" +
+                        "however, and eventually the troubled gods decided to chain him up.\n" +
+                        "Fenrir refused to be bound and run throughout the world with his lower jaw\n" +
+                        "against the ground and his upper jaw in the sky, devouring everything in his path.";
     }
-    public static void ubirDesc(){
-        System.out.println("Monster: Ubir \n" +
+
+    public static String ubirDesc() {
+        return
                 "A monster like vampire. It is a mythological or\n" +
-                "folkloric being in Turkic mythology who subsist by\n" +
-                "feeding on the life essence (generally in the form of blood of)\n" +
-                "living creatures, regardless of whether it is undead person or being.");
+                        "folkloric being in Turkic mythology who subsist by\n" +
+                        "feeding on the life essence (generally in the form of blood of)\n" +
+                        "living creatures, regardless of whether it is undead person or being.";
     }
-    public static void manticoreDesc(){
-        System.out.println("Monster: Manticore\n" +
-                "The Manticore is a highly dangerous beast with the head of a man,\n" +
-                "the body of a lion and the tail of a scorpion,\n" +
-                "which can shoot out venomous spines or hairs to incapacitate prey.\n" +
-                "The venom he secretes from his tail is highly toxic and fast acting.\n" +
-                "The manticore is able to shoot its spines either in front or behind,\n" +
-                "curving its tail over its body to shoot forwards, or straightening it tail to shoot them backwards.");
+
+    public static String manticoreDesc() {
+        return
+                "It is a highly dangerous beast with the head of a man,\n" +
+                        "the body of a lion and the tail of a scorpion,\n" +
+                        "which can shoot out venomous spines or hairs to incapacitate prey.\n" +
+                        "The venom he secretes from his tail is highly toxic and fast acting.\n" +
+                        "The manticore is able to shoot its spines either in front or behind,\n" +
+                        "curving its tail over its body to shoot forwards, or straightening it tail to shoot them backwards.";
     }
 }

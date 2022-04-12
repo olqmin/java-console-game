@@ -8,6 +8,7 @@ public class KingdomModel {
     private final String mountainName;
     private final String riverName;
     private final String kingdomName;
+    private String monsterDesc;
 
     public KingdomModel(String kingName, String princessName, String monsterName, String mountainName, String riverName, String kingdomName) {
         this.kingName = kingName;
@@ -41,4 +42,13 @@ public class KingdomModel {
     public String getKingdomName() {
         return kingdomName;
     }
+
+    public String getMonsterDesc() {
+        return monsterDesc;
+    }
+
+    public void setMonsterDesc(String monsterDesc) {
+        this.monsterDesc = monsterDesc;
+    }
+
 }

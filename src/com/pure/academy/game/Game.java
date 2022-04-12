@@ -25,7 +25,7 @@ public class Game {
     }
 
     public void playerSetup() {
-        gameData.setPlayerHP(100);
+        gameData.setPlayerHP(5);
         gameData.setMonsterHP(100);
 
         ASCIIArtHelper.drawCharacter();
@@ -52,21 +52,25 @@ public class Game {
                 KingdomModel ottoman = new KingdomModel("Abdul Hamid II", "Zeynep", "Ubir", "Ararat", "Seydisuyu", "Ottoman land");
                 gameData.setChosenHero(ottoman);
                 gameData.setPlayerWeapon(new OttomanWeapon());
+                gameData.getChosenHero().setMonsterDesc(InstructionHelper.ubirDesc());
                 break;
             case 2:
                 KingdomModel scandinavian = new KingdomModel("Ragnar Lothbrok", "Aslaug", "Fenrir", "Uppsala", "Klaralven", "Scandinavia");
                 gameData.setChosenHero(scandinavian);
                 gameData.setPlayerWeapon(new ScandinavianWeapon());
+                gameData.getChosenHero().setMonsterDesc(InstructionHelper.fenrirDesc());
                 break;
             case 3:
                 KingdomModel persian = new KingdomModel("Artaxerxes I", "Damaspia", "Manticore", "Siah-Kaman", "Karkheh", "Persia");
                 gameData.setChosenHero(persian);
                 gameData.setPlayerWeapon(new PersianWeapon());
+                gameData.getChosenHero().setMonsterDesc(InstructionHelper.manticoreDesc());
                 break;
             case 4:
                 KingdomModel bulgarian = new KingdomModel("Simeon I The Great", "Maria-Irina", "Baba Yaga", "Rhodope", "Arda", "Bulgaria");
                 gameData.setChosenHero(bulgarian);
                 gameData.setPlayerWeapon(new BulgarianWeapon());
+                gameData.getChosenHero().setMonsterDesc(InstructionHelper.babaYagaDesc());
                 break;
             default:
                 chooseKingdom();
@@ -362,7 +366,7 @@ public class Game {
                         gameData.setQuizKey(true);
                         city();
                     } else {
-                        InstructionHelper.dead();
+                        InstructionHelper.dead(gameData.getChosenHero().getKingName());
                     }
                 } else {
                     gameData.setPlayerHP(gameData.getPlayerHP() / 2);
@@ -447,7 +451,7 @@ public class Game {
 
     public void monster() {
         if (!gameData.isWeaponHintShown()) {
-            InstructionHelper.bestWeaponForMonster(gameData.getChosenHero().getKingName(), gameData.getChosenHero().getMonsterName());
+            InstructionHelper.bestWeaponForMonster(gameData.getChosenHero().getKingName(), gameData.getChosenHero().getMonsterName(), gameData.getChosenHero().getMonsterDesc());
             gameData.setWeaponHintShown(true);
         }
 
@@ -528,7 +532,7 @@ public class Game {
             if (gameData.getPlayerHP() < 1) {
                 gameData.setPlayerHP(0);
                 InstructionHelper.showPlayerHP(gameData.getPlayerName(), gameData.getPlayerHP());
-                InstructionHelper.dead();
+                InstructionHelper.dead(gameData.getChosenHero().getKingName());
             } else {
                 InstructionHelper.showPlayerHP(gameData.getPlayerName(), gameData.getPlayerHP());
                 monster();
