@@ -25,7 +25,7 @@ public class Game {
     }
 
     public void playerSetup() {
-        gameData.setPlayerHP(5);
+        gameData.setPlayerHP(100);
         gameData.setMonsterHP(100);
 
         ASCIIArtHelper.drawCharacter();
@@ -107,7 +107,7 @@ public class Game {
         try {
             gameData.setChoice(Integer.valueOf(input));
         } catch (NumberFormatException e) {
-            System.err.println("Please enter only numbers!");
+            System.err.println("\nPlease enter only numbers!");
             function.run();
         }
     }
@@ -255,7 +255,11 @@ public class Game {
         }
         System.out.println("\nInput your answer: 1/2/3 or 4");
 
-        gameData.setChoice(scanner.nextInt());
+        try {
+            gameData.setChoice(scanner.nextInt());
+        } catch (Exception e) {
+            checkInput(() -> askQuestion(firstQuestion, numberOfQuestion));
+        }
         String givenAnswer = questionVisualisedMap.get(gameData.getChoice());
         return givenAnswer;
     }
@@ -264,10 +268,15 @@ public class Game {
         if (gameData.getPlayerMoney() >= 10) {
             System.out.println("\n------------------------------------------------------------------\n");
             InstructionHelper.gamblingAreaRules();
+            System.out.print("Input a number from 0 to 100:");
             guessTheNumber();
         } else {
             InstructionHelper.gamblingAreaWarning(gameData.getPlayerName());
-            gameData.setChoice(scanner.nextInt());
+            try {
+                gameData.setChoice(scanner.nextInt());
+            } catch (Exception e) {
+                checkInput(() -> gamblingArea());
+            }
             while (gameData.getChoice() != 1) {
                 InstructionHelper.gamblingAreaWarning(gameData.getPlayerName());
                 gameData.setChoice(scanner.nextInt());
@@ -278,9 +287,12 @@ public class Game {
 
     public void guessTheNumber() {
         int random = new Random().nextInt(101);
-        System.out.print("Input a number from 0 to 100:");
         for (int i = 0; i < 5; i++) {
-            gameData.setChoice(scanner.nextInt());
+            try {
+                gameData.setChoice(scanner.nextInt());
+            } catch (Exception e) {
+                checkInput(() -> guessTheNumber());
+            }
 
             if (gameData.getChoice() == random) {
                 gameData.setPlayerMoney(gameData.getPlayerMoney() * 2);
@@ -336,7 +348,7 @@ public class Game {
     }
 
     public void cave() {
-        if (gameData.getPlayerMoney() >= -10) {
+        if (gameData.getPlayerMoney() >= 100) {
             System.out.println("\n------------------------------------------------------------------\n");
             InstructionHelper.quizGameRules();
             List<QuestionModel> questionList = QuestionGeneratorHelper.getThreeRandomQuestions();
@@ -380,7 +392,11 @@ public class Game {
             }
         } else {
             InstructionHelper.quizWarning(gameData.getPlayerName());
-            gameData.setChoice(scanner.nextInt());
+            try {
+                gameData.setChoice(scanner.nextInt());
+            } catch (Exception e) {
+                checkInput(() -> cave());
+            }
             while (gameData.getChoice() != 1) {
                 InstructionHelper.quizWarning(gameData.getPlayerName());
                 gameData.setChoice(scanner.nextInt());

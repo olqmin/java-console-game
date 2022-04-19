@@ -186,7 +186,7 @@ public class InstructionHelper {
         System.out.println(kingName + ":");
         System.out.println("Thank goodness you've arrived in " + kingdomName + "! All was peaceful until this terrible monster " + monsterName + " came. \n" +
                 "Our homes are destroyed, the children and women are frightened. The screams that echo in the night are inhuman.\n" +
-                "Even my best men and soldiers are incapable to overcome his strength. \n" +
+                "Even my best men and soldiers are incapable to overcome its strength. \n" +
                 "Follow the path and keep in mind that " + monsterName + " is strong and it would be easier to kill it with weapons, which you can find in the city. \n" +
                 "Last but not least, defeating the monster will save my imprisoned daughter - " + princessName + ". Perhaps I can tell you more if we speak again. Good luck.");
     }
