@@ -10,10 +10,11 @@
 - Our knowledge was sufficient at the time to improve the game, so we decided to create this one with similar mechanics.
 - Feel free to use the game as you see fit.
 
-# Information about us #
+# Information about us: #
 
-Tihomir Chobanov   (tihomir.chobanov@gmail.com)
-Viktor Vasilev     (viki_dan@abv.bg)
-Georgi Popov       (popov.george@outlook.com)
+- Tihomir Chobanov   (tihomir.chobanov@gmail.com)
+- Viktor Vasilev     (viki_dan@abv.bg)
+- Georgi Popov       (popov.george@outlook.com)
+- Dobrina Ivanova    
 
 This game wouldn't be possible without our mentor Plamen Tenev (plamen.tenev.tenev@gmail.com)
