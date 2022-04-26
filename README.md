@@ -3,6 +3,7 @@
 # What is this repo? #
 - This repository might be helpful to everyone who is interested in learning Java programming language. 
 - It contains game which leverages java standard console for input and output, thus no advanced knowledge is needed to further enhance the game.
+- High level overview of the game design is available - game-design-document.png
 
 # Where is the game inspired from?
 - We have studied the game from the link below:
