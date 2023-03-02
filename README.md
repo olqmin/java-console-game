@@ -17,4 +17,4 @@
 - Viktor Vasilev     (viktor.vasilev@puretechnologies.digital)
 - Georgi Popov       (georgi.popov@puretechnologies.digital)  
 
-This game wouldn't be possible without our mentor Plamen Tenev (plamen.tenev.tenev@gmail.com)
+This game wouldn't be possible without our mentor Plamen Tenev (plamen.tenev@puretechnologies.digital)
