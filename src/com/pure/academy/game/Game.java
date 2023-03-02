@@ -217,19 +217,10 @@ public class Game {
                 sorcerer();
                 break;
             case 3:
-                if (gameData.isCaveKey()) {
-                    cave();
-                } else {
-                    System.err.println(gameData.getChosenHero().getKingName() + ": The cave is locked! You have to kill the monster and get the key.");
-                    city();
-                }
+                getInCaveIfYouHaveCaveKey();
                 break;
             case 4:
-                if (gameData.getMonsterHP() < 1) {
-                    castle();
-                } else {
-                    monster();
-                }
+                checkIfMonsterIsKilled();
                 break;
             case 5:
                 threeWayPath();
@@ -240,6 +231,23 @@ public class Game {
                 break;
             default:
                 city();
+        }
+    }
+
+    private void checkIfMonsterIsKilled() {
+        if (gameData.getMonsterHP() < 1) {
+            castle();
+        } else {
+            monster();
+        }
+    }
+
+    private void getInCaveIfYouHaveCaveKey() {
+        if (gameData.isCaveKey()) {
+            cave();
+        } else {
+            System.err.println(gameData.getChosenHero().getKingName() + ": The cave is locked! You have to kill the monster and get the key.");
+            city();
         }
     }
 
@@ -342,7 +350,7 @@ public class Game {
             System.out.println("You sold a " + item + " and received 100 gold. You have " + numberOfItems + " " + item + itemPlural(numberOfItems) + " and your amount of gold is " +
                     gameData.getPlayerMoney() + ".");
         } else {
-            System.err.println(gameData.getChosenHero().getKingName() + ": You don't have any " + item + "s!");
+            System.err.println("You don't have any " + item + "s!");
         }
         return numberOfItems;
     }
@@ -379,6 +387,7 @@ public class Game {
                         city();
                     } else {
                         InstructionHelper.dead(gameData.getChosenHero().getKingName());
+                        System.exit(0);
                     }
                 } else {
                     gameData.setPlayerHP(gameData.getPlayerHP() / 2);
@@ -549,6 +558,7 @@ public class Game {
                 gameData.setPlayerHP(0);
                 InstructionHelper.showPlayerHP(gameData.getPlayerName(), gameData.getPlayerHP());
                 InstructionHelper.dead(gameData.getChosenHero().getKingName());
+                System.exit(0);
             } else {
                 InstructionHelper.showPlayerHP(gameData.getPlayerName(), gameData.getPlayerHP());
                 monster();
@@ -581,6 +591,7 @@ public class Game {
             switch (gameData.getChoice()) {
                 case 1:
                     InstructionHelper.princess(gameData.getPlayerName());
+                    System.exit(0);
                     break;
                 case 2:
                     city();
