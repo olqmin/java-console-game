@@ -14,7 +14,7 @@
 # Information about us: #
 
 - Tihomir Chobanov   (tihomir.chobanov@puretechnologies.digital)
-- Viktor Vasilev     (viktor.vasilev@puretechnologies.digital)
+- Viktor Vasilev     (victor.vasilev@puretechnologies.digital)
 - Georgi Popov       (georgi.popov@puretechnologies.digital)  
 
 This game wouldn't be possible without our mentor Plamen Tenev (plamen.tenev@puretechnologies.digital)
